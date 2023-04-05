@@ -22,3 +22,12 @@ export function onLoginFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export const onGetAllUsers = (): AnyAction => (
+  { type: constants.EVENT_ON_GET_ALL_USERS_REQUESTED });
+
+export const onGetAllUsersSucceeded = (data: unknown): AnyAction => (
+  { type: constants.EVENT_ON_GET_ALL_USERS_SUCCEEDED, data });
+
+export const onGetAllUsersFailed = (error: unknown): AnyAction => (
+  { type: constants.EVENT_ON_GET_ALL_USERS_FAILED, error });
