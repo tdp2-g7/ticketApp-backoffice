@@ -1,5 +1,5 @@
 import { IUser } from '../../types/user.types';
 
-export interface IUsersList {
+export interface IUsersListProps {
   users: IUser[];
 }

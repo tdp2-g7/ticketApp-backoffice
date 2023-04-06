@@ -5,8 +5,6 @@ export interface IUser {
   
 export interface IUserDefaultState {
   loading: boolean;
-  users: IUser[];
   data: any;
-  maxPage: number;
 }
   
