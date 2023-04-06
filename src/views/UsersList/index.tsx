@@ -4,70 +4,34 @@ import { DataGrid } from '@mui/x-data-grid';
 const UsersList: FunctionComponent = () => {
   const rows = [
     {
-      id: 1, name: 'Juan', lastName: 'Lopez', age: 32,
+      id: 1, name: 'Juan Vercellino', events: 32,
     },
     {
-      id: 2, name: 'Maria', lastName: 'Gutierrez', age: 27,
+      id: 2, name: 'Lourdes Lopez Nastri', events: 27,
     },
     {
-      id: 3, name: 'Lucas', lastName: 'Gutierrez', age: 45,
+      id: 3, name: 'Lucas Romero', events: 8,
     },
     {
-      id: 4, name: 'Lucas', lastName: 'Gutierrez', age: 45,
+      id: 4, name: 'Jose Pedro Varela', events: 1,
     },
     {
-      id: 5, name: 'Lucas', lastName: 'Lopez', age: 45,
+      id: 5, name: 'Luis Salmeron', events: 11,
     },
     {
-      id: 6, name: 'Lucas', lastName: 'Lopez', age: 45,
-    },
-    {
-      id: 7, name: 'Lucas', lastName: 'Lopez', age: 45,
-    },
-    {
-      id: 8, name: 'Lucas', lastName: 'Lopez', age: 45,
-    },
-    {
-      id: 9, name: 'Lucas', lastName: 'Lopez', age: 45,
-    },
-    {
-      id: 10, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 11, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 12, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 13, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 14, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 15, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 16, name: 'Lucas', lastName: 'Gutierrez', age: 45,
-    },
-    {
-      id: 17, name: 'Lucas', lastName: 'Gutierrez', age: 45,
+      id: 6, name: 'Agustin Marchesin', events: 2,
     },
   ];
 
   const columns = [
     {
-      field: 'id', headerName: 'ID', width: 90,
+      field: 'id', headerName: 'ID', width: 100,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 300,
+      field: 'name', headerName: 'Name', width: 550,
     },
     {
-      field: 'lastName', headerName: 'Apellido', width: 300,
-    },
-    {
-      field: 'age', headerName: 'Edad', width: 300,
+      field: 'events', headerName: 'Events', width: 350,
     },
   ];
 
