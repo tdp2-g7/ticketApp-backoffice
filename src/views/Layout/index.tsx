@@ -4,7 +4,7 @@ import LogoImg from '../../assets/logo-sin-fondo.png';
 import * as styles from './styles';
 
 const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
-  const { children } = props;
+  const { children, title } = props;
 
   return (
       <>
@@ -14,14 +14,15 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
                 <img style={styles.Logo} src={LogoImg} alt='logo' />
               </div>
               <div style={styles.linksContainer}>
-                <a style={styles.SidebarLink} href='/createEvent'>Dashboard</a> <br/>
-                <a style={styles.SidebarLink} href='/agenda'>Users</a> <br/>
+                <a style={styles.SidebarLink} href='/dashboard'>Dashboard</a> <br/>
+                <a style={styles.SidebarLink} href='/'>Users</a> <br/>
+                <a style={styles.SidebarLink} href='/organizers'>Organizers</a> <br/>
                 <a style={styles.SidebarLink} href='/metrics'>Metrics</a> <br/>
-                <a style={styles.SidebarLink} href='/profile'>Moderation of users</a> <br />
+                <a style={styles.SidebarLink} href='/moderation'>Moderation of users</a> <br />
               </div>
             </div>
             <div style={styles.contentStyles}>
-              <div style={styles.headerStyles}>Users</div>
+              <div style={styles.headerStyles}>{title}</div>
               <div style={styles.searchStyles}>
                 {children}
               </div>

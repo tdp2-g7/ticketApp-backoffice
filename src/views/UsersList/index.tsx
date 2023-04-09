@@ -15,9 +15,6 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
     {
       field: 'name', headerName: 'Name', width: 600,
     },
-    {
-      field: 'number_of_events', headerName: 'Events', width: 450,
-    },
   ];
 
   const addRowIds = (r: IUser[]): IUser[] => r.map((row, index) => ({ ...row, id: index + 1 }));
@@ -28,8 +25,7 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
 
   return (
     <div style={{ height: 600, width: 1100 }}>
-      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id }
-/>
+      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id }/>
     </div>
   );
 };

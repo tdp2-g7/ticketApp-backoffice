@@ -1,8 +1,9 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { IUserDefaultState } from '../types/user.types';
+import { IUserDefaultState, IOrganizerDefaultState } from '../types/user.types';
 
 interface IRootState {
   user: IUserDefaultState;
+  organizer: IOrganizerDefaultState;
 }
 
 const useTypedSelector: TypedUseSelectorHook<IRootState> = useSelector;
