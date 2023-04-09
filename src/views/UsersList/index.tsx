@@ -1,43 +1,35 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { IUsersListProps } from './types';
+import { IUser } from '../../types/user.types';
 
-const UsersList: FunctionComponent = () => {
-  const rows = [
-    {
-      id: 1, name: 'Juan Vercellino', events: 32,
-    },
-    {
-      id: 2, name: 'Lourdes Lopez Nastri', events: 27,
-    },
-    {
-      id: 3, name: 'Lucas Romero', events: 8,
-    },
-    {
-      id: 4, name: 'Jose Pedro Varela', events: 1,
-    },
-    {
-      id: 5, name: 'Luis Salmeron', events: 11,
-    },
-    {
-      id: 6, name: 'Agustin Marchesin', events: 2,
-    },
-  ];
+const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
+  const { users } = props;
+
+  const rows: IUser[] = users;
 
   const columns = [
     {
-      field: 'id', headerName: 'ID', width: 100,
+      field: 'id', headerName: 'id', width: 50,
     },
     {
-      field: 'name', headerName: 'Name', width: 550,
+      field: 'name', headerName: 'Name', width: 600,
     },
     {
-      field: 'events', headerName: 'Events', width: 350,
+      field: 'number_of_events', headerName: 'Events', width: 450,
     },
   ];
 
+  const addRowIds = (r: IUser[]): IUser[] => r.map((row, index) => ({ ...row, id: index + 1 }));
+
+  const rowsWithIds: IUser[] = addRowIds(rows);
+
+  console.log(users);
+
   return (
-    <div style={{ height: 500, width: 1100, marginLeft: '-40px' }}>
-      <DataGrid rows={rows} columns={columns}/>
+    <div style={{ height: 600, width: 1100 }}>
+      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id }
+/>
     </div>
   );
 };

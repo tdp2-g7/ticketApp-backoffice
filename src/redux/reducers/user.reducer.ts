@@ -1,9 +1,11 @@
 import { Reducer } from 'redux';
+import { IUserDefaultState } from '../../types/user.types';
 import * as constants from '../constants/user.constants';
 
-const initialState = {
+const initialState: IUserDefaultState = {
   loading: false,
   data: null,
+  users: [],
 };
 
 const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -27,7 +29,23 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         ...state,
         loading: false,
       };
-
+    case constants.EVENT_ON_GET_ALL_USERS_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case constants.EVENT_ON_GET_ALL_USERS_SUCCEEDED:
+      return {
+        ...state,
+        loading: false,
+        data,
+        users: data,
+      };
+    case constants.EVENT_ON_GET_ALL_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }

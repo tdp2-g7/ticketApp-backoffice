@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import TextField from '@mui/material/TextField';
 import { ILayoutProps } from './types';
 import LogoImg from '../../assets/logo-sin-fondo.png';
 import * as styles from './styles';
@@ -22,15 +21,8 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
               </div>
             </div>
             <div style={styles.contentStyles}>
-              <div style={styles.headerStyles}>Usuarios</div>
+              <div style={styles.headerStyles}>Users</div>
               <div style={styles.searchStyles}>
-                <div style={styles.textFieldStyles}>
-                  <TextField
-                    label="Buscar usuario"
-                    variant="outlined"
-                    size="small"
-                  />
-                </div>
                 {children}
               </div>
             </div>

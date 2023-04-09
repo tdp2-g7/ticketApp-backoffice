@@ -27,5 +27,6 @@ export async function getAllUsers(): Promise<any> {
       number_of_events: 3,
     },
   ];
+
   return data;
 }

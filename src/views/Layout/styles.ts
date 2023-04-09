@@ -19,11 +19,11 @@ export const contentStyles: CSSProperties = {
 
 export const headerStyles: CSSProperties = {
   fontWeight: 'bold',
-  fontSize: '24px',
+  fontSize: '28px',
   margin: 0,
-  marginTop: '100px',
+  marginTop: '50px',
   marginBottom: '0px',
-  marginLeft: '52px',
+  marginLeft: '75px',
   padding: '10px',
   display: 'flex',
   justifyContent: 'left',
@@ -38,14 +38,6 @@ export const searchStyles: CSSProperties = {
   alignItems: 'center',
   padding: '10px',
   boxSizing: 'border-box',
-};
-
-export const textFieldStyles: CSSProperties = {
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'left',
-  marginBottom: '10px',
-  marginLeft: '53px',
 };
 
 export const SidebarLink: CSSProperties = {
