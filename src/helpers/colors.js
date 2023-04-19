@@ -7,6 +7,8 @@ const COLORS = {
   gray: '#808080',
   violetScampi: '#6C61AF',
   white: '#ffffff',
+  violetRed: '#c02fac',
+  violetPigment: '#871e79',
 };
 
 export default COLORS;

@@ -8,6 +8,7 @@ const LoginContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
 
   const onLoginClick = (formData: ILoginFormData) => {
+    console.log('🚀 ~ onLoginClick ~ formData:', formData);
     dispatch(onLoginRequested(formData));
   };
 

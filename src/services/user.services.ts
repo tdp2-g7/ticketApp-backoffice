@@ -1,9 +1,9 @@
-import { AxiosResponse } from 'axios';
 import { ILoginFormData } from '../views/Login/types';
-import { post } from './api';
 
-export async function login(formData: ILoginFormData): Promise<AxiosResponse> {
-  const response = await post('/user/login', formData);
+export async function login(formData: ILoginFormData): Promise<any> {
+  console.log('🚀 ~ login ~ formData:', formData);
+  // const response = await post('/users/administrator/login', formData);
+  const response = { email: 'admin@admin.com', password: 'admin' };
   return response;
 }
 
