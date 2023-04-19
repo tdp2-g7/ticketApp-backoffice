@@ -85,3 +85,18 @@ export const linksContainer: CSSProperties = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+export const LogoutContainer: CSSProperties = {
+  border: `1px solid ${COLORS.white}`,
+  borderRadius: '25px',
+  padding: '10px 20px',
+};
+
+export const LogoutLink: CSSProperties = {
+  textDecoration: 'none',
+  fontSize: '18px',
+  border: 'none',
+  cursor: 'pointer',
+  backgroundColor: 'transparent',
+  color: `${COLORS.white}`,
+};

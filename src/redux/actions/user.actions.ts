@@ -23,6 +23,13 @@ export function onLoginFailed(error: unknown): AnyAction {
   };
 }
 
+// onLogout
+export function onLogout(): AnyAction {
+  return {
+    type: constants.USER_ON_LOGOUT,
+  };
+}
+
 export const onGetAllUsers = (): AnyAction => (
   { type: constants.EVENT_ON_GET_ALL_USERS_REQUESTED });
 
