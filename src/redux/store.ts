@@ -3,6 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import reducers from './reducers';
 import rootSaga from './sagas';
+import redirectMiddleware from './middlewares/redirect.middleware';
+import storageMiddleware from './middlewares/storage.middleware';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +16,8 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(
       sagaMiddleware,
+      redirectMiddleware,
+      storageMiddleware,
     ),
   ),
 );

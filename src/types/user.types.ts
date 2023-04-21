@@ -1,6 +1,6 @@
 export interface IUser {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
 
 export interface IOrganizer {
@@ -8,11 +8,12 @@ export interface IOrganizer {
   name: string;
   number_of_events: number;
 }
-  
+
 export interface IUserDefaultState {
   users: IUser[];
   loading: boolean;
   data: any;
+  administrator: IAdminsitrator | null;
 }
 
 export interface IOrganizerDefaultState {
@@ -20,4 +21,8 @@ export interface IOrganizerDefaultState {
   loading: boolean;
   data: any;
 }
-  
+
+export interface IAdminsitrator {
+  email: string;
+  password: string;
+}
