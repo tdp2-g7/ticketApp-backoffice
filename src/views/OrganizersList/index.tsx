@@ -25,8 +25,6 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
 
   const rowsWithIds: IOrganizer[] = addIds(rows);
 
-  console.log(organizers);
-
   return (
     <div style={{ height: 600, width: 1100 }}>
       <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id }/>

@@ -21,8 +21,6 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
 
   const rowsWithIds: IUser[] = addRowIds(rows);
 
-  console.log(users);
-
   return (
     <div style={{ height: 600, width: 1100 }}>
       <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id }/>
