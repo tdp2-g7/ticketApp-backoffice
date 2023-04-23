@@ -9,7 +9,6 @@ import * as constants from '../constants/user.constants';
 export function* userLogin(action: AnyAction): Generator {
   try {
     const data : any = yield call(login, action.formData);
-    console.log('🚀 ~ function*userLogin ~ data:', data);
     yield put(actions.onLoginSucceeded(data));
   } catch (error) {
     yield put(actions.onLoginFailed(error));

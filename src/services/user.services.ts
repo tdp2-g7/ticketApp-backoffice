@@ -1,9 +1,9 @@
+import { USERS_API_URL } from '../configs/configs';
 import { ILoginFormData } from '../views/Login/types';
+import { post } from './api';
 
 export async function login(formData: ILoginFormData): Promise<any> {
-  console.log('🚀 ~ login ~ formData:', formData);
-  // const response = await post('/users/administrator/login', formData);
-  const response = { email: 'admin@admin.com', password: 'admin' };
+  const response = await post(`${USERS_API_URL}/users/administrator/login`, formData);
   return response;
 }
 
