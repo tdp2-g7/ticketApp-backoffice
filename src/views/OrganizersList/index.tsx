@@ -5,11 +5,6 @@ import { IOrganizer } from '../../types/user.types';
 
 const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) => {
   const { organizers } = props;
-
-  console.log('#######');
-  console.log(organizers);
-  console.log('#######');
-
   const rows: IOrganizer[] = organizers;
 
   const columns = [

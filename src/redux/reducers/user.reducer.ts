@@ -13,6 +13,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
   const { type, data } = action;
   switch (type) {
     case constants.USER_ON_LOGIN_REQUESTED:
+    case constants.USER_ON_INITIALIZE_REQUESTED:
     case constants.EVENT_ON_GET_ALL_USERS_REQUESTED:
       return {
         ...state,
@@ -20,6 +21,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
       };
 
     case constants.USER_ON_LOGIN_SUCCEEDED:
+    case constants.USER_ON_INITIALIZE_SUCCEEDED:
       return {
         ...state,
         loading: false,
@@ -35,6 +37,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
       };
 
     case constants.USER_ON_LOGIN_FAILED:
+    case constants.USER_ON_INITIALIZE_FAILED:
     case constants.EVENT_ON_GET_ALL_USERS_FAILED:
       return {
         ...state,

@@ -6,10 +6,6 @@ import { IUser } from '../../types/user.types';
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   const { users } = props;
 
-  console.log('&&&&&&&&&&&&');
-  console.log(users);
-  console.log('&&&&&&&&&&&&');
-
   const rows: IUser[] = users;
 
   const columns = [
