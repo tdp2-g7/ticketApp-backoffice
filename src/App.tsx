@@ -6,7 +6,7 @@ import UsersListContainer from './containers/UsersListContainer';
 import OrganizersListContainer from './containers/OrganizersListContainer';
 import { GlobalHistory } from './helpers/history';
 import PrivateRoute from './containers/PrivateRoute';
-import { onLoginRequested } from './redux/actions/user.actions';
+import { onInitialize } from './redux/actions/user.actions';
 import { getCookie } from './helpers/cookies';
 
 const App: FunctionComponent = () => {
@@ -16,7 +16,7 @@ const App: FunctionComponent = () => {
   const password = getCookie('password');
   const cookieObject = { email, password };
   if (email && password) {
-    dispatch(onLoginRequested(cookieObject));
+    dispatch(onInitialize(cookieObject));
   }
   return (
     <>

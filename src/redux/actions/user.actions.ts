@@ -2,6 +2,27 @@ import { AnyAction } from 'redux';
 import { ILoginFormData } from '../../views/Login/types';
 import * as constants from '../constants/user.constants';
 
+export function onInitialize(formData: ILoginFormData): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_REQUESTED,
+    formData,
+  };
+}
+
+export function onInitializeSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_SUCCEEDED,
+    data,
+  };
+}
+
+export function onInitializeFailed(error: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_FAILED,
+    error,
+  };
+}
+
 export function onLoginRequested(formData: ILoginFormData): AnyAction {
   return {
     type: constants.USER_ON_LOGIN_REQUESTED,
