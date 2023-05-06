@@ -6,14 +6,24 @@ import { IUser } from '../../types/user.types';
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   const { users } = props;
 
+  console.log('&&&&&&&&&&&&');
+  console.log(users);
+  console.log('&&&&&&&&&&&&');
+
   const rows: IUser[] = users;
 
   const columns = [
     {
-      field: 'id', headerName: 'id', width: 50,
+      field: 'userId', headerName: 'id', width: 50,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 600,
+      field: 'name', headerName: 'Nombre', width: 300,
+    },
+    {
+      field: 'lastName', headerName: 'Apellido', width: 300,
+    },
+    {
+      field: 'email', headerName: 'Correo electronico', width: 350,
     },
   ];
 

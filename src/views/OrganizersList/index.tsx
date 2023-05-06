@@ -6,6 +6,10 @@ import { IOrganizer } from '../../types/user.types';
 const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) => {
   const { organizers } = props;
 
+  console.log('#######');
+  console.log(organizers);
+  console.log('#######');
+
   const rows: IOrganizer[] = organizers;
 
   const columns = [
@@ -13,12 +17,14 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
       field: 'id', headerName: 'id', width: 50,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 600,
+      field: 'name', headerName: 'Nombre', width: 300,
     },
     {
-      field: 'number_of_events', headerName: 'Cantidad de eventos', width: 400,
+      field: 'lastName', headerName: 'Apellido', width: 300,
     },
-
+    {
+      field: 'email', headerName: 'Correo electronico', width: 350,
+    },
   ];
 
   const addIds = (r: IOrganizer[]): IOrganizer[] => r.map((row, idx) => ({ ...row, id: idx + 1 }));
