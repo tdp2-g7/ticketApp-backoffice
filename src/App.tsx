@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import LoginContainer from './containers/LoginContainer';
 import UsersListContainer from './containers/UsersListContainer';
 import OrganizersListContainer from './containers/OrganizersListContainer';
+import MainPageContainer from './containers/MainPageContainer';
 import { GlobalHistory } from './helpers/history';
 import PrivateRoute from './containers/PrivateRoute';
 import { onInitialize } from './redux/actions/user.actions';
@@ -23,8 +24,16 @@ const App: FunctionComponent = () => {
       <BrowserRouter>
         <GlobalHistory />
         <Routes>
-          <Route
+        <Route
             path='/'
+            element={
+              <PrivateRoute>
+                <MainPageContainer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/users'
             element={
               <PrivateRoute>
                 <UsersListContainer />

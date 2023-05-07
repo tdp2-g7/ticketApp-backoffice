@@ -9,6 +9,7 @@ const COLORS = {
   white: '#ffffff',
   violetRed: '#c02fac',
   violetPigment: '#871e79',
+  violet: '#6638D1',
 };
 
 export default COLORS;

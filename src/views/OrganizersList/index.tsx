@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IOrganizersListProps } from './types';
 import { IOrganizer } from '../../types/user.types';
+import { TableContainer } from './styles';
 
 const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) => {
   const { organizers } = props;
@@ -28,7 +29,7 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
 
   /* eslint-disable */
   return (
-    <div style={{ height: 600, width: 1100 }}>
+    <TableContainer>
       <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id } hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                 columnMenuSortAsc: 'Ordenar ASC',
@@ -66,7 +67,7 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
                 columnsPanelHideAllButton: 'Ocultar todas',
                }}
       />
-    </div>
+    </TableContainer>
   );
   /* eslint-enable */
 };
