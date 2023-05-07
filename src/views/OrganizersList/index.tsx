@@ -20,6 +20,18 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
     {
       field: 'email', headerName: 'Correo electronico', width: 350,
     },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 400,
+      renderCell: (params: any) => (
+        <button
+          onClick={(e) => console.log(e, params.row)}
+        >
+          Delete
+        </button>
+      ),
+    },
   ];
 
   const addIds = (r: IOrganizer[]): IOrganizer[] => r.map((row, idx) => ({ ...row, id: idx + 1 }));
