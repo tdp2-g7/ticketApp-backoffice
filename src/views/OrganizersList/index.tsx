@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IOrganizersListProps } from './types';
 import { IOrganizer } from '../../types/user.types';
-import { TableContainer, Title } from './styles';
+import { BlockButton, TableContainer, Title } from './styles';
 
 const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) => {
-  const { organizers } = props;
+  const { organizers, onChangeBlock } = props;
   const rows: IOrganizer[] = organizers;
 
   const columns = [
@@ -20,6 +20,18 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
     },
     {
       field: 'email', headerName: 'Correo electronico', width: 350,
+    },
+    {
+      field: 'actions',
+      headerName: '',
+      width: 400,
+      renderCell: (params: any) => (
+        <BlockButton
+          onClick={() => onChangeBlock(params.row.id)}
+        >
+          {params.row.isBlocked ? 'Desbloquear' : 'Bloquear'}
+        </BlockButton>
+      ),
     },
   ];
 

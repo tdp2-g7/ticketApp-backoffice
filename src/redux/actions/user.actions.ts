@@ -51,20 +51,51 @@ export function onLogout(): AnyAction {
   };
 }
 
-export const onGetAllUsers = (): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_USERS_REQUESTED });
+export function onChangeBlockRequested(organizerId: string): AnyAction {
+  return {
+    type: constants.ON_CHANGE_BLOCK_REQUESTED,
+    organizerId,
+  };
+}
 
-export const onGetAllUsersSucceeded = (data: unknown): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_USERS_SUCCEEDED, data });
+export function onChangeBlockSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.ON_CHANGE_BLOCK_SUCCEEDED,
+    data,
+  };
+}
 
-export const onGetAllUsersFailed = (error: unknown): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_USERS_FAILED, error });
+export function onChangeBlockFailed(error: unknown): AnyAction {
+  return {
+    type: constants.ON_CHANGE_BLOCK_FAILED,
+    error,
+  };
+}
 
-export const onGetAllOrganizers = (): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_ORGANIZERS_REQUESTED });
+export const onGetAllUsers = (): AnyAction => ({
+  type: constants.ON_GET_ALL_USERS_REQUESTED,
+});
 
-export const onGetAllOrganizersSucceeded = (data: unknown): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_ORGANIZERS_SUCCEEDED, data });
+export const onGetAllUsersSucceeded = (data: unknown): AnyAction => ({
+  type: constants.ON_GET_ALL_USERS_SUCCEEDED,
+  data,
+});
 
-export const onGetAllOrganizersFailed = (error: unknown): AnyAction => (
-  { type: constants.EVENT_ON_GET_ALL_ORGANIZERS_FAILED, error });
+export const onGetAllUsersFailed = (error: unknown): AnyAction => ({
+  type: constants.ON_GET_ALL_USERS_FAILED,
+  error,
+});
+
+export const onGetAllOrganizers = (): AnyAction => ({
+  type: constants.ON_GET_ALL_ORGANIZERS_REQUESTED,
+});
+
+export const onGetAllOrganizersSucceeded = (data: unknown): AnyAction => ({
+  type: constants.ON_GET_ALL_ORGANIZERS_SUCCEEDED,
+  data,
+});
+
+export const onGetAllOrganizersFailed = (error: unknown): AnyAction => ({
+  type: constants.ON_GET_ALL_ORGANIZERS_FAILED,
+  error,
+});

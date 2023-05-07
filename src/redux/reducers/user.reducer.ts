@@ -14,7 +14,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
   switch (type) {
     case constants.USER_ON_LOGIN_REQUESTED:
     case constants.USER_ON_INITIALIZE_REQUESTED:
-    case constants.EVENT_ON_GET_ALL_USERS_REQUESTED:
+    case constants.ON_GET_ALL_USERS_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -28,7 +28,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         administrator: data,
       };
 
-    case constants.EVENT_ON_GET_ALL_USERS_SUCCEEDED:
+    case constants.ON_GET_ALL_USERS_SUCCEEDED:
       return {
         ...state,
         loading: false,
@@ -38,7 +38,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
 
     case constants.USER_ON_LOGIN_FAILED:
     case constants.USER_ON_INITIALIZE_FAILED:
-    case constants.EVENT_ON_GET_ALL_USERS_FAILED:
+    case constants.ON_GET_ALL_USERS_FAILED:
       return {
         ...state,
         loading: false,
