@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IUsersListProps } from './types';
 import { IUser } from '../../types/user.types';
-import { TableContainer } from './styles';
+import { TableContainer, Title } from './styles';
 
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   const { users } = props;
@@ -31,6 +31,7 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   /* eslint-disable */
   return (
     <TableContainer>
+      <Title>Usuarios</Title>
       <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id } hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                               columnMenuSortAsc: 'Ordenar ASC',
