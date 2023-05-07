@@ -5,6 +5,7 @@ import LoginContainer from './containers/LoginContainer';
 import UsersListContainer from './containers/UsersListContainer';
 import OrganizersListContainer from './containers/OrganizersListContainer';
 import MainPageContainer from './containers/MainPageContainer';
+import EventListContainer from './containers/EventListContainer';
 import { GlobalHistory } from './helpers/history';
 import PrivateRoute from './containers/PrivateRoute';
 import { onInitialize } from './redux/actions/user.actions';
@@ -45,6 +46,14 @@ const App: FunctionComponent = () => {
             element={
               <PrivateRoute>
                 <OrganizersListContainer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/events'
+            element={
+              <PrivateRoute>
+                <EventListContainer />
               </PrivateRoute>
             }
           />
