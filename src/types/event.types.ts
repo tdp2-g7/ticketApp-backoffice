@@ -21,10 +21,6 @@ export interface IEventDefaultState {
   loading: boolean;
   events: IEvent[];
   data: any;
-  maxPage: number;
-  eventData: IEvent | null;
-  drafts: IEvent[];
-  locations: ILocationMap[];
 }
 
 export interface ISchedule {

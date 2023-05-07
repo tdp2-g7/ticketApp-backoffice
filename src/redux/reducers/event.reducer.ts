@@ -6,10 +6,6 @@ const initialState: IEventDefaultState = {
   loading: false,
   events: [],
   data: null,
-  maxPage: 0,
-  eventData: null,
-  drafts: [],
-  locations: [],
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -24,7 +20,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
       return {
         ...state,
         loading: false,
-        data,
         events: data,
       };
     case constants.ON_GET_ALL_EVENTS_FAILED:

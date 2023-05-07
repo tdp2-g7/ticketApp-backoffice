@@ -8,9 +8,9 @@ import * as constants from '../constants/event.constants';
 export function* getAllEvents(): Generator {
   try {
     const data : any = yield call(getEvents);
-    yield put(actions.onGetAllOrganizersSucceeded(data));
+    yield put(actions.onGetAllEventsSucceeded(data));
   } catch (error) {
-    yield put(actions.onGetAllOrganizersFailed(error));
+    yield put(actions.onGetAllEventsFailed(error));
   }
 }
 
