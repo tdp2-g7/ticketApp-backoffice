@@ -16,7 +16,7 @@ const UsersListContainer: FunctionComponent = () => {
 
   return (
     <>
-      <Layout title = 'Organizers'>
+      <Layout>
         {(
           <OrganizersList organizers={organizers}/>
         )}

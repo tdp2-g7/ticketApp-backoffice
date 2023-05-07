@@ -1,37 +1,46 @@
 import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { IOrganizersListProps } from './types';
-import { IOrganizer } from '../../types/user.types';
+import { IEventListProps } from './types';
+import { IEventTable } from '../../types/event.types';
 import { TableContainer, Title } from './styles';
+import { handleTime, handleDate } from '../../helpers/time';
 
-const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) => {
-  const { organizers } = props;
-  const rows: IOrganizer[] = organizers;
+const EventList: FC<IEventListProps> = (props: IEventListProps) => {
+  const { events } = props;
 
   const columns = [
     {
-      field: 'id', headerName: 'id', width: 50,
+      field: 'eventId', headerName: 'id', width: 50,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 300,
+      field: 'title', headerName: 'Titulo', width: 300,
     },
     {
-      field: 'lastName', headerName: 'Apellido', width: 300,
+      field: 'date', headerName: 'Fecha', width: 300,
     },
     {
-      field: 'email', headerName: 'Correo electronico', width: 350,
+      field: 'startTime', headerName: 'Hora de inicio', width: 350,
     },
   ];
 
-  const addIds = (r: IOrganizer[]): IOrganizer[] => r.map((row, idx) => ({ ...row, id: idx + 1 }));
-
-  const rowsWithIds: IOrganizer[] = addIds(rows);
-
   /* eslint-disable */
+  const rows: IEventTable[] = events.map(event => {
+    const { eventId, title, date, startTime } = event;
+    
+    const stringDate = handleDate(date);
+    let stringStartTime = ' - '
+    if (startTime) stringStartTime = handleTime(startTime);
+    
+    return { eventId, title, date: stringDate, startTime: stringStartTime};
+  });
+
+  const addRowIds = (r: IEventTable[]): IEventTable[] => r.map((row, index) => ({ ...row, id: index + 1 }));
+  const rowsWithIds: IEventTable[] = addRowIds(rows);
+
   return (
     <TableContainer>
-      <Title>Organizadores</Title>
-      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id } hideFooter={true}
+      <Title>Eventos</Title>
+      <DataGrid rows={rowsWithIds} columns={columns} hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                 columnMenuSortAsc: 'Ordenar ASC',
                 columnMenuFilter: 'Filtrar',
@@ -73,4 +82,4 @@ const OrganizersList: FC<IOrganizersListProps> = (props: IOrganizersListProps) =
   /* eslint-enable */
 };
 
-export default OrganizersList;
+export default EventList;

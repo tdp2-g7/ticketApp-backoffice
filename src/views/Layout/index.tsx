@@ -2,11 +2,21 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { ILayoutProps } from './types';
 import LogoImg from '../../assets/logo-sin-fondo.png';
-import * as styles from './styles';
+import { globalNavigate } from '../../helpers/history';
 import { onLogout } from '../../redux/actions/user.actions';
+import {
+  TopNav,
+  Logo,
+  RowDiv,
+  RightContainer,
+  HeaderLink,
+  LogoutContainer,
+  CreateEventLink,
+  LogoutLink,
+} from './styles';
 
 const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
-  const { children, title } = props;
+  const { children } = props;
   const dispatch = useDispatch();
 
   const onClickLogout = () => {
@@ -15,43 +25,36 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
 
   return (
     <>
-      <div style={styles.containerStyles}>
-        <div style={styles.sidebarStyles}>
-          <div style={styles.logoContainer}>
-            <img style={styles.Logo} src={LogoImg} alt='logo' />
-          </div>
-          <div style={styles.linksContainer}>
-            <a style={styles.SidebarLink} href='/dashboard'>
-              Inicio
-            </a>{' '}
-            <br />
-            <a style={styles.SidebarLink} href='/'>
-              Usuarios
-            </a>{' '}
-            <br />
-            <a style={styles.SidebarLink} href='/organizers'>
-              Organizadores
-            </a>{' '}
-            <br />
-            <a style={styles.SidebarLink} href='/metrics'>
-              Metricas
-            </a>{' '}
-            <br />
-            <a style={styles.SidebarLink} href='/moderation'>
-              Moderacion de usuarios
-            </a>{' '}
-            <br />
-            <div style={styles.LogoutContainer}>
-              <div style={styles.LogoutLink} onClick={() => onClickLogout()}>Salir</div>
-            </div>
-          </div>
-        </div>
-        <div style={styles.contentStyles}>
-          <div style={styles.headerStyles}>{title}</div>
-          <div style={styles.searchStyles}>{children}</div>
-        </div>
-      </div>
-    </>
+    <TopNav>
+      <RowDiv onClick={() => globalNavigate('/')}>
+        <Logo src={LogoImg} alt='logo' />
+      </RowDiv>
+      <RightContainer>
+        <CreateEventLink onClick={() => globalNavigate('/')}>
+          Inicio
+        </CreateEventLink>
+        <HeaderLink onClick={() => globalNavigate('/users')}>
+          Usuarios
+        </HeaderLink>
+        <HeaderLink onClick={() => globalNavigate('/organizers')}>
+          Organizadores
+        </HeaderLink>
+        <HeaderLink onClick={() => globalNavigate('/events')}>
+          Eventos
+        </HeaderLink>
+        <HeaderLink onClick={() => globalNavigate('/metrics')}>
+          Metricas
+        </HeaderLink>
+        <HeaderLink onClick={() => globalNavigate('/moderation')}>
+          Moderacion
+        </HeaderLink>
+        <LogoutContainer>
+          <LogoutLink onClick={() => onClickLogout()}>Salir</LogoutLink>
+        </LogoutContainer>
+      </RightContainer>
+    </TopNav>
+    {children}
+  </>
   );
 };
 
