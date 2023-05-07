@@ -17,3 +17,10 @@ export async function getAllOrganizers(): Promise<AxiosResponse> {
   const response = await get(`${USERS_API_URL}/users/organizers`);
   return response;
 }
+
+export async function changeBlock(organizerId: string): Promise<any> {
+  console.log('🚀 ~ changeBlock ~ organizerId:', organizerId);
+  // const response = await post(`${USERS_API_URL}/users/organizers/block/${organizerId}`);
+  // return response;
+  return organizerId;
+}

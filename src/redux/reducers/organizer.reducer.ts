@@ -11,19 +11,24 @@ const initialState: IOrganizerDefaultState = {
 const organizerReducer: Reducer = (state = initialState, action = { type: '' }) => {
   const { type, data } = action;
   switch (type) {
-    case constants.EVENT_ON_GET_ALL_ORGANIZERS_REQUESTED:
+    case constants.ON_GET_ALL_ORGANIZERS_REQUESTED:
+    case constants.ON_CHANGE_BLOCK_REQUESTED:
       return {
         ...state,
         loading: true,
       };
-    case constants.EVENT_ON_GET_ALL_ORGANIZERS_SUCCEEDED:
+    case constants.ON_GET_ALL_ORGANIZERS_SUCCEEDED:
+    case constants.ON_CHANGE_BLOCK_SUCCEEDED:
       return {
         ...state,
         loading: false,
-        data,
-        organizers: data,
+        organizers: data.map((organizer: any) => ({
+          ...organizer,
+          isBlocked: Boolean(Math.round(Math.random())),
+        })),
       };
-    case constants.EVENT_ON_GET_ALL_ORGANIZERS_FAILED:
+    case constants.ON_GET_ALL_ORGANIZERS_FAILED:
+    case constants.ON_CHANGE_BLOCK_FAILED:
       return {
         ...state,
         loading: false,

@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import {
+  Route, Routes, BrowserRouter, Navigate,
+} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginContainer from './containers/LoginContainer';
 import UsersListContainer from './containers/UsersListContainer';
@@ -49,6 +51,7 @@ const App: FunctionComponent = () => {
             }
           />
           <Route path='/login' element={<LoginContainer />} />
+          <Route path='*' element={<Navigate to='/users' replace />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -4,8 +4,8 @@ import COLORS from '../../helpers/colors';
 export const TableContainer = styled.div`
     margin-top: 1%;
     margin-left: 3%;
-    height: 600px;
-    width: 1100px;
+    height: 800px;
+    width: 90%;
 `;
 
 export const Title = styled.p`
@@ -13,4 +13,17 @@ export const Title = styled.p`
     font-weight: 700;
     font-size: 30px;
     color: ${COLORS.darkViolet};
+`;
+
+export const BlockButton = styled.div`
+  text-align: center;
+  margin: 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.violetScampi};
+  color: ${COLORS.black};
+  font-weight: bold;
+  width: 100px;
+  padding: 8px;
+  cursor: pointer;
 `;

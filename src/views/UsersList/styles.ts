@@ -4,8 +4,8 @@ import COLORS from '../../helpers/colors';
 export const TableContainer = styled.div`
     margin-top: 1%;
     margin-left: 3%;
-    height: 600px;
-    width: 1100px;
+    height: 800px;
+    width: 90%;
 `;
 
 export const Title = styled.p`
