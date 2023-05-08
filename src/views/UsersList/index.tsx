@@ -32,7 +32,7 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   return (
     <TableContainer>
       <Title>Usuarios</Title>
-      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.id } hideFooter={true}
+      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.userId } hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                               columnMenuSortAsc: 'Ordenar ASC',
                               columnMenuFilter: 'Filtrar',

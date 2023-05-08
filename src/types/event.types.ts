@@ -1,22 +1,22 @@
 export interface IEvent {
-    title: string;
-    description: string;
-    location: ILocation;
-    type: string;
-    date: Date;
-    startTime: Date | null;
-    endTime: Date | null;
-    images: any;
-    mainImage?: any;
-    vacancies: number;
-    ticketsPerPerson: number;
-    faqs: string;
-    schedule?: ISchedule[];
-    userId?: string;
-    eventId: string;
-    ticketsSold?: number;
-  }
-  
+  title: string;
+  description: string;
+  location: ILocation;
+  type: string;
+  date: Date;
+  startTime: Date | null;
+  endTime: Date | null;
+  images: any;
+  mainImage?: any;
+  vacancies: number;
+  ticketsPerPerson: number;
+  faqs: string;
+  schedule?: ISchedule[];
+  userId?: string;
+  eventId: string;
+  ticketsSold?: number;
+}
+
 export interface IEventDefaultState {
   loading: boolean;
   events: IEvent[];
@@ -40,9 +40,9 @@ export interface ILocationMap {
   name: string;
 }
 
-export interface IEventTable{
-  eventId: string,
-  title: string,
-  date: string,
-  startTime: string,
+export interface IEventTable {
+  eventId: string;
+  title: string;
+  date: string;
+  startTime: string;
 }
