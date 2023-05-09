@@ -7,6 +7,7 @@ const initialState: IUserDefaultState = {
   data: null,
   users: [],
   administrator: null,
+  reports: [],
 };
 
 const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -19,7 +20,11 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         ...state,
         loading: true,
       };
-
+    case constants.ON_GET_REPORTS_BY_ID_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
     case constants.USER_ON_LOGIN_SUCCEEDED:
     case constants.USER_ON_INITIALIZE_SUCCEEDED:
       return {
@@ -35,10 +40,20 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         data,
         users: data,
       };
-
+    case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
+      return {
+        ...state,
+        loading: false,
+        reports: data,
+      };
     case constants.USER_ON_LOGIN_FAILED:
     case constants.USER_ON_INITIALIZE_FAILED:
     case constants.ON_GET_ALL_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+    case constants.ON_GET_REPORTS_BY_ID_FAILED:
       return {
         ...state,
         loading: false,

@@ -3,7 +3,7 @@ import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import {
-  login, getAllUsers, getAllOrganizers, changeBlock,
+  login, getAllUsers, getAllOrganizers, changeBlock, getAllReports,
 } from '../../services/user.services';
 import * as actions from '../actions/user.actions';
 import * as constants from '../constants/user.constants';
@@ -53,6 +53,15 @@ export function* onChangeBlock(action: AnyAction): Generator {
   }
 }
 
+export function* getAllReportsById(action: AnyAction): Generator {
+  try {
+    const data : any = yield call(getAllReports, action.data);
+    yield put(actions.onGetReportsByIdSucceeded(data));
+  } catch (error) {
+    yield put(actions.onGetReportsByIdFailed(error));
+  }
+}
+
 export function* watchUsers(): Generator {
   yield all([
     takeLatest(constants.USER_ON_INITIALIZE_REQUESTED, userInitialize),
@@ -60,5 +69,6 @@ export function* watchUsers(): Generator {
     takeLatest(constants.ON_GET_ALL_USERS_REQUESTED, eventsGetAllUsers),
     takeLatest(constants.ON_GET_ALL_ORGANIZERS_REQUESTED, eventsGetAllOrganizers),
     takeLatest(constants.ON_CHANGE_BLOCK_REQUESTED, onChangeBlock),
+    takeLatest(constants.ON_GET_REPORTS_BY_ID_REQUESTED, getAllReportsById),
   ]);
 }
