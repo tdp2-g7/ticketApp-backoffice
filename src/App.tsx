@@ -52,7 +52,7 @@ const App: FunctionComponent = () => {
             }
           />
           <Route
-            path='/reports/:id'
+            path='/reportsByUser/:id'
             element={
               <PrivateRoute>
                 <ReportsByUserContainer />
