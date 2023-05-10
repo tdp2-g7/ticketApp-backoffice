@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IUsersListProps } from './types';
 import { IUser } from '../../types/user.types';
-import { TableContainer, Title } from './styles';
+import { BlockButton, TableContainer, Title } from './styles';
 
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
-  const { users } = props;
+  const { users, getReportsById } = props;
 
   const rows: IUser[] = users;
 
@@ -21,6 +21,16 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
     },
     {
       field: 'email', headerName: 'Correo electronico', width: 350,
+    },
+    {
+      field: 'actions',
+      headerName: '',
+      width: 350,
+      renderCell: (params: any) => (
+        <BlockButton onClick={() => getReportsById(params.row.userId)}>
+          Ver denuncias
+        </BlockButton>
+      ),
     },
   ];
 

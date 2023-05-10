@@ -11,6 +11,7 @@ const COLORS = {
   violetPigment: '#871e79',
   violet: '#6638D1',
   darkViolet: '#242565',
+  linkBlue: '#0000FF',
 };
 
 export default COLORS;

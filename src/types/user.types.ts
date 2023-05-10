@@ -19,6 +19,7 @@ export interface IUserDefaultState {
   loading: boolean;
   data: any;
   administrator: IAdminsitrator | null;
+  reports: IReport[]
 }
 
 export interface IOrganizerDefaultState {
@@ -30,4 +31,14 @@ export interface IOrganizerDefaultState {
 export interface IAdminsitrator {
   email: string;
   password: string;
+}
+
+export interface IReport {
+  id: string,
+  eventId: string,
+  userId: string,
+  description: string,
+  reason: string,
+  date: Date,
+  open: boolean,
 }
