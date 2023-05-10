@@ -2,7 +2,7 @@ import { useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import EventList from '../views/EventList';
-import { onGetAllEvents, onGetEventsFilteredBy } from '../redux/actions/event.actions';
+import { onGetEventsFilteredBy } from '../redux/actions/event.actions';
 import useTypedSelector from '../hooks/useTypedSelector';
 
 import Layout from '../views/Layout';
@@ -30,7 +30,7 @@ const EventListContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
       };
-      dispatch(onGetAllEvents(data));
+      dispatch(onGetEventsFilteredBy(data));
     }
   }, [dispatch]);
 
