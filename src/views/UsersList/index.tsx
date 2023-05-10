@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IUsersListProps } from './types';
 import { IUser } from '../../types/user.types';
-import { BlockButton, TableContainer, Title } from './styles';
+import { ReportsButton, TableContainer, Title } from './styles';
 
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   const { users, getReportsById } = props;
@@ -27,9 +27,9 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
       headerName: '',
       width: 350,
       renderCell: (params: any) => (
-        <BlockButton onClick={() => getReportsById(params.row.userId)}>
+        <ReportsButton onClick={() => getReportsById(params.row.userId)}>
           Ver denuncias
-        </BlockButton>
+        </ReportsButton>
       ),
     },
   ];

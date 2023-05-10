@@ -1,5 +1,6 @@
 import { globalNavigate } from '../../helpers/history';
 import * as userConstants from '../constants/user.constants';
+import * as eventConstants from '../constants/event.constants';
 
 const redirectMiddleware = () => (next: any) => (action: any) => {
   const { type, data } = action;
@@ -12,6 +13,9 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
       break;
     case userConstants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
       globalNavigate(`/reportsByUser/${data.userId}`);
+      break;
+    case eventConstants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
+      globalNavigate(`/reportsByEvent/${data.eventId}`);
       break;
     default:
       break;

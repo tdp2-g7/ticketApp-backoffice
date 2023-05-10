@@ -6,3 +6,9 @@ export async function getEvents(): Promise<AxiosResponse> {
   const response = await get(`${EVENTS_API_URL}/events`);
   return response.data;
 }
+
+export async function getAllReports(userId: string): Promise<AxiosResponse> {
+  // ESTE ENDPOINT TODAVIA NO EXISTE
+  const response = await get(`${EVENTS_API_URL}/event-report/${userId}`);
+  return response.data;
+}

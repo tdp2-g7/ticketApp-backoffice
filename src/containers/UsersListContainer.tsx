@@ -8,7 +8,7 @@ import Layout from '../views/Layout';
 
 const UsersListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { users, reports } = useTypedSelector((state) => state.user);
+  const { users } = useTypedSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(onGetAllUsers());
@@ -19,8 +19,6 @@ const UsersListContainer: FunctionComponent = () => {
       dispatch(onGetReportsById(userId));
     }
   };
-
-  console.log('LOS REPORTS SON ===)', reports);
 
   return (
     <>

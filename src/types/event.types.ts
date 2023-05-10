@@ -11,16 +11,19 @@ export interface IEvent {
     vacancies: number;
     ticketsPerPerson: number;
     faqs: string;
-    schedule?: ISchedule[];
+    chedule?: ISchedule[];
     userId?: string;
     eventId: string;
     ticketsSold?: number;
+    reports_nr: string;
+    state: number;
   }
   
 export interface IEventDefaultState {
   loading: boolean;
   events: IEvent[];
   data: any;
+  reports: IReport[];
 }
 
 export interface ISchedule {
@@ -45,4 +48,14 @@ export interface IEventTable{
   title: string,
   date: string,
   startTime: string,
+}
+
+export interface IReport {
+  id: string,
+  eventId: string,
+  userId: string,
+  description: string,
+  reason: string,
+  date: Date,
+  open: boolean,
 }

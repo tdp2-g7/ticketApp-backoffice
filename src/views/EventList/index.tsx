@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IEventListProps } from './types';
 import { IEventTable } from '../../types/event.types';
-import { TableContainer, Title } from './styles';
+import { TableContainer, Title, ReportsButton } from './styles';
 import { handleTime, handleDate } from '../../helpers/time';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
-  const { events } = props;
+  const { events, getReportsById } = props;
 
   const columns = [
     {
@@ -20,6 +20,16 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     },
     {
       field: 'startTime', headerName: 'Hora de inicio', width: 350,
+    },
+    {
+      field: 'actions',
+      headerName: '',
+      width: 350,
+      renderCell: (params: any) => (
+        <ReportsButton onClick={() => getReportsById(params.row.eventId)}>
+          Ver denuncias
+        </ReportsButton>
+      ),
     },
   ];
 
