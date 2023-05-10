@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { USERS_API_URL } from '../configs/configs';
+import { USERS_API_URL, EVENTS_API_URL } from '../configs/configs';
 import { ILoginFormData } from '../views/Login/types';
 import { get, post } from './api';
 
@@ -23,4 +23,9 @@ export async function changeBlock(organizerId: string): Promise<any> {
   // const response = await post(`${USERS_API_URL}/users/organizers/block/${organizerId}`);
   // return response;
   return organizerId;
+}
+
+export async function getAllReports(userId: string): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-report/${userId}`);
+  return response.data;
 }
