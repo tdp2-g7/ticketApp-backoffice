@@ -3,7 +3,7 @@ import { EVENTS_API_URL } from '../configs/configs';
 import { get } from './api';
 
 export async function getEvents(): Promise<AxiosResponse> {
-  const response = await get(`${EVENTS_API_URL}/events`);
+  const response = await get(`${EVENTS_API_URL}/event-report/reports-amount`);
   return response.data;
 }
 

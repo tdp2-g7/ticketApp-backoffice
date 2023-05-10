@@ -26,7 +26,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
       return {
         ...state,
         loading: false,
-        events: data,
+        events: data.events,
       };
     case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
       return {
