@@ -1,6 +1,9 @@
 export interface IUser {
-  id: number;
+  userId: number;
   name: string;
+  lastName: string;
+  email: string;
+  reports_nr: string;
 }
 
 export interface IOrganizer {

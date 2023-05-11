@@ -9,7 +9,7 @@ export async function login(formData: ILoginFormData): Promise<AxiosResponse> {
 }
 
 export async function getAllUsers(): Promise<AxiosResponse> {
-  const response = await get(`${USERS_API_URL}/users/clients`);
+  const response = await get(`${EVENTS_API_URL}/event-report/clients-reports-amount`);
   return response;
 }
 
