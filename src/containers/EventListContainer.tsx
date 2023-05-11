@@ -20,8 +20,6 @@ const EventListContainer: FunctionComponent = () => {
     }
   };
 
-  console.log(events);
-
   return (
     <>
       <Layout>

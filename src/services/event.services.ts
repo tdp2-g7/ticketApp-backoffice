@@ -7,8 +7,7 @@ export async function getEvents(): Promise<AxiosResponse> {
   return response.data;
 }
 
-export async function getAllReports(userId: string): Promise<AxiosResponse> {
-  // ESTE ENDPOINT TODAVIA NO EXISTE
-  const response = await get(`${EVENTS_API_URL}/event-report/${userId}`);
+export async function getAllReports(eventId: string): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
   return response.data;
 }

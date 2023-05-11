@@ -27,6 +27,6 @@ export function* getAllReportsById(action: AnyAction): Generator {
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_GET_ALL_EVENTS_REQUESTED, getAllEvents),
-    takeLatest(constants.ON_GET_REPORTS_BY_ID_REQUESTED, getAllReportsById),
+    takeLatest(constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED, getAllReportsById),
   ]);
 }

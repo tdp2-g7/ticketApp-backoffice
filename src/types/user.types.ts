@@ -36,4 +36,5 @@ export interface IReport {
   reason: string,
   date: Date,
   open: boolean,
+  user: IUser;
 }

@@ -9,8 +9,6 @@ import { handleStateText } from '../../helpers/state';
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   const { events, getReportsById } = props;
 
-  console.log('-------', events);
-
   const columns = [
     {
       field: 'eventId', headerName: 'id', width: 50,
@@ -56,13 +54,10 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     return { eventId, title, date: stringDate, startTime: stringStartTime, reports_nr: stringReportsAmount, state: stringState};
   });
 
-  const addRowIds = (r: IEventTable[]): IEventTable[] => r.map((row, index) => ({ ...row, id: index + 1 }));
-  const rowsWithIds: IEventTable[] = addRowIds(rows);
-
   return (
     <TableContainer>
       <Title>Eventos</Title>
-      <DataGrid rows={rowsWithIds} columns={columns} hideFooter={true}
+      <DataGrid rows={rows} columns={columns} getRowId={(row) => row.eventId} hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                 columnMenuSortAsc: 'Ordenar ASC',
                 columnMenuFilter: 'Filtrar',

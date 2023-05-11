@@ -14,7 +14,7 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
     case userConstants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
       globalNavigate(`/reportsByUser/${data.userId}`);
       break;
-    case eventConstants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
+    case eventConstants.ON_GET_EVENT_REPORTS_BY_ID_SUCCEEDED:
       globalNavigate(`/reportsByEvent/${data.eventId}`);
       break;
     default:

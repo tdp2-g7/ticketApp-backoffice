@@ -4,7 +4,7 @@ import ReportsByEventList from '../views/ReportsByEventList';
 import Layout from '../views/Layout';
 
 const ReportsByEventContainer: FunctionComponent = () => {
-  const { reports } = useTypedSelector((state) => state.event);
+  const { reports, event } = useTypedSelector((state) => state.event);
   const [showDescription, setShowDescription] = useState(false);
   const [description, setDescription] = useState('');
 
@@ -13,7 +13,7 @@ const ReportsByEventContainer: FunctionComponent = () => {
         {(
           <ReportsByEventList reports={reports} showDescription={showDescription}
           setShowDescription={setShowDescription} description={description}
-          setDescription={setDescription}/>
+          setDescription={setDescription} eventInfo={event}/>
         )}
     </Layout>
   );

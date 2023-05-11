@@ -1,3 +1,5 @@
+import { IReport } from "./user.types";
+
 export interface IEvent {
     title: string;
     description: string;
@@ -24,6 +26,7 @@ export interface IEventDefaultState {
   events: IEvent[];
   data: any;
   reports: IReport[];
+  event: IEvent | null;
 }
 
 export interface ISchedule {
@@ -50,14 +53,4 @@ export interface IEventTable{
   startTime: string,
   reports_nr: string,
   state: string,
-}
-
-export interface IReport {
-  id: string,
-  eventId: string,
-  userId: string,
-  description: string,
-  reason: string,
-  date: Date,
-  open: boolean,
 }

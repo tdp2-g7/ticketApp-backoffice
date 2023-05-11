@@ -12,11 +12,11 @@ export const onGetAllEventsFailed = (error: unknown): AnyAction => (
   { type: constants.ON_GET_ALL_EVENTS_FAILED, error });
 
 export function onGetReportsById(data: any): AnyAction {
-  return { type: constants.ON_GET_REPORTS_BY_ID_REQUESTED, data };
+  return { type: constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED, data };
 }
 
 export const onGetReportsByIdSucceeded = (data: unknown): AnyAction => (
-  { type: constants.ON_GET_REPORTS_BY_ID_SUCCEEDED, data });
+  { type: constants.ON_GET_EVENT_REPORTS_BY_ID_SUCCEEDED, data });
 
 export const onGetReportsByIdFailed = (error: unknown): AnyAction => (
-  { type: constants.ON_GET_REPORTS_BY_ID_FAILED, error });
+  { type: constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED, error });

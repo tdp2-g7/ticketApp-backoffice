@@ -7,6 +7,7 @@ const initialState: IEventDefaultState = {
   events: [],
   data: null,
   reports: [],
+  event: null,
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -17,7 +18,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         ...state,
         loading: true,
       };
-    case constants.ON_GET_REPORTS_BY_ID_REQUESTED:
+    case constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -28,18 +29,19 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         loading: false,
         events: data.events,
       };
-    case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
+    case constants.ON_GET_EVENT_REPORTS_BY_ID_SUCCEEDED:
       return {
         ...state,
         loading: false,
-        reports: data,
+        reports: data.reports,
+        event: data.event,
       };
     case constants.ON_GET_ALL_EVENTS_FAILED:
       return {
         ...state,
         loading: false,
       };
-    case constants.ON_GET_REPORTS_BY_ID_FAILED:
+    case constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED:
       return {
         ...state,
         loading: false,
