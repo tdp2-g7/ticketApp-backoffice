@@ -1,9 +1,10 @@
+import { IEvent } from "./event.types";
+
 export interface IUser {
   userId: number;
   name: string;
   lastName: string;
   email: string;
-  reports_nr: string;
 }
 
 export interface IOrganizer {
@@ -18,6 +19,7 @@ export interface IUserDefaultState {
   data: any;
   administrator: IAdminsitrator | null;
   reports: IReport[]
+  user: IUser | null;
 }
 
 export interface IOrganizerDefaultState {
@@ -39,4 +41,5 @@ export interface IReport {
   reason: string,
   date: Date,
   open: boolean,
+  event: IEvent;
 }

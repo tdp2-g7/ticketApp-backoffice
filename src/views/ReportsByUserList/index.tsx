@@ -1,34 +1,37 @@
 import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { IReportsByUserListProps } from './types';
-import { IReport } from '../../types/user.types';
+import { IReportsByUserListProps, IReportsTable } from './types';
 import { TableContainer, Title, ViewDescriptionButton } from './styles';
 import { handleDate } from '../../helpers/time';
 import { Modal } from '../../components/Modal/Modal';
 
 /* eslint-disable */
 const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserListProps) => {
-  const { reports, showDescription, setShowDescription, setDescription, description } = props;
-  const rows: IReport[] = reports;
-  const rowsWithDateString = rows.map((report) => ({
-    ...report,
-    date: handleDate(report.date),
-  }));
+  const { reports, showDescription, setShowDescription, setDescription, description, userInfo } = props;
+  
+  const rows: IReportsTable[] = reports.map(e => {
+    const { eventId, event , date, description, reason } = e;
+    
+    const eventTitle = event.title;
+    const dateHandled = handleDate(date);
+
+    return { eventId, eventName: eventTitle, date: dateHandled, description, reason };
+  });
 
   const columns = [
     {
-      field: 'id', headerName: 'id', width: 50,
+      field: 'eventId', headerName: 'id', width: 75,
     },
     {
-      field: 'eventId', headerName: 'id evento', width: 50,
+      field: 'eventName', headerName: 'id evento', width: 400,
     },
     {
-      field: 'date', headerName: 'Fecha', width: 400,
+      field: 'date', headerName: 'Fecha', width: 200,
     },
     {
       field: 'actions',
       headerName: 'Descripcion',
-      width: 350,
+      width: 250,
       renderCell: (params: any) => (
         <ViewDescriptionButton onClick={() => { 
           setShowDescription(true);
@@ -39,7 +42,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       ),
     },
     {
-      field: 'reason', headerName: 'Razon', width: 400,
+      field: 'reason', headerName: 'Razon', width: 350,
     },
   ];
 
@@ -51,8 +54,8 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
         </Modal>
       ) : (
       <TableContainer>
-        <Title>Denuncias</Title>
-        <DataGrid rows={rowsWithDateString} columns={columns} getRowId={(row) => row.id } hideFooter={true}
+        <Title>Denuncias realizadas por {userInfo?.name} {userInfo?.lastName}</Title>
+        <DataGrid rows={rows} columns={columns} getRowId={(row) => row.eventId } hideFooter={true}
                   localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                   columnMenuSortAsc: 'Ordenar ASC',
                   columnMenuFilter: 'Filtrar',
