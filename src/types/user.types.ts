@@ -1,12 +1,21 @@
+import { IEvent } from "./event.types";
+
 export interface IUser {
-  id: number;
+  userId: number;
   name: string;
+  lastName: string;
+  email: string;
 }
 
 export interface IOrganizer {
-  id: number;
+  userId: string;
   name: string;
-  number_of_events: number;
+  last_name: string;
+  email: string;
+  description: string;
+  image: any;
+  isBlocked: boolean;
+  number_of_events?: number;
 }
 
 export interface IUserDefaultState {
@@ -15,6 +24,7 @@ export interface IUserDefaultState {
   data: any;
   administrator: IAdminsitrator | null;
   reports: IReport[]
+  user: IUser | null;
 }
 
 export interface IOrganizerDefaultState {
@@ -37,4 +47,5 @@ export interface IReport {
   date: Date,
   open: boolean,
   user: IUser;
+  event: IEvent;
 }

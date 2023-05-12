@@ -5,8 +5,10 @@ export function onGetAllEvents(): AnyAction {
   return { type: constants.ON_GET_ALL_EVENTS_REQUESTED };
 }
 
-export const onGetAllEventsSucceeded = (data: unknown): AnyAction => (
-  { type: constants.ON_GET_ALL_EVENTS_SUCCEEDED, data });
+export const onGetEventsFilteredBySucceeded = (data: unknown): AnyAction => ({
+  type: constants.ON_GET_EVENTS_FILTERED_BY_SUCCEEDED,
+  data,
+});
 
 export const onGetAllEventsFailed = (error: unknown): AnyAction => (
   { type: constants.ON_GET_ALL_EVENTS_FAILED, error });

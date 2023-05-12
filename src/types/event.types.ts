@@ -53,4 +53,3 @@ export interface IEventTable{
   startTime: string,
   reports_nr: string,
   state: string,
-}

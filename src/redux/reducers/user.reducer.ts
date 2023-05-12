@@ -8,6 +8,7 @@ const initialState: IUserDefaultState = {
   users: [],
   administrator: null,
   reports: [],
+  user: null,
 };
 
 const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -38,13 +39,14 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         ...state,
         loading: false,
         data,
-        users: data,
+        users: data.users,
       };
     case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
       return {
         ...state,
         loading: false,
-        reports: data,
+        reports: data.reports,
+        user: data.user,
       };
     case constants.USER_ON_LOGIN_FAILED:
     case constants.USER_ON_INITIALIZE_FAILED:

@@ -105,15 +105,6 @@ export const HeaderLink = styled.div`
   padding: 20px;
 `;
 
-export const CreateEventLink = styled.div`
-  text-decoration: none;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  color: ${COLORS.white};
-`;
-
 export const LogoutContainer = styled.div`
   border: 1px solid ${COLORS.white};
   border-radius: 25px;

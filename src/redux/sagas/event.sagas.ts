@@ -6,12 +6,12 @@ import { getEvents, getAllReports } from '../../services/event.services';
 import * as actions from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
 
-export function* getAllEvents(): Generator {
+export function* onGetEventsFilteredBy(action: AnyAction): Generator {
   try {
-    const data : any = yield call(getEvents);
-    yield put(actions.onGetAllEventsSucceeded(data));
+    const { data } : any = yield call(getEventsFilteredBy, action.data);
+    yield put(actions.onGetEventsFilteredBySucceeded(data));
   } catch (error) {
-    yield put(actions.onGetAllEventsFailed(error));
+    yield put(actions.onGetEventsFilteredByFailed(error));
   }
 }
 
