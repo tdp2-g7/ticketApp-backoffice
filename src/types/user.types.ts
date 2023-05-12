@@ -8,9 +8,14 @@ export interface IUser {
 }
 
 export interface IOrganizer {
-  id: number;
+  userId: string;
   name: string;
-  number_of_events: number;
+  last_name: string;
+  email: string;
+  description: string;
+  image: any;
+  isBlocked: boolean;
+  number_of_events?: number;
 }
 
 export interface IUserDefaultState {

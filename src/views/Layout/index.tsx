@@ -11,7 +11,6 @@ import {
   RightContainer,
   HeaderLink,
   LogoutContainer,
-  CreateEventLink,
   LogoutLink,
 } from './styles';
 
@@ -30,9 +29,6 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
         <Logo src={LogoImg} alt='logo' />
       </RowDiv>
       <RightContainer>
-        <CreateEventLink onClick={() => globalNavigate('/')}>
-          Inicio
-        </CreateEventLink>
         <HeaderLink onClick={() => globalNavigate('/users')}>
           Usuarios
         </HeaderLink>
