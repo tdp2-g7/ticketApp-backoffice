@@ -7,25 +7,26 @@ import { BlockButton, TableContainer, Title } from './styles';
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
   const { users, getReportsById } = props;
 
-  const rows: IUser[] = users;
-
   const columns = [
     {
       field: 'userId', headerName: 'id', width: 50,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 300,
+      field: 'name', headerName: 'Nombre', width: 250,
     },
     {
-      field: 'lastName', headerName: 'Apellido', width: 300,
+      field: 'lastName', headerName: 'Apellido', width: 250,
     },
     {
-      field: 'email', headerName: 'Correo electronico', width: 350,
+      field: 'email', headerName: 'Correo electronico', width: 250,
+    },
+    {
+      field: 'reports_nr', headerName: 'Cantidad denuncias', width: 150,
     },
     {
       field: 'actions',
       headerName: '',
-      width: 350,
+      width: 200,
       renderCell: (params: any) => (
         <BlockButton onClick={() => getReportsById(params.row.userId)}>
           Ver denuncias
@@ -34,15 +35,15 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
     },
   ];
 
+  const rows: IUser[] = users;
   const addRowIds = (r: IUser[]): IUser[] => r.map((row, index) => ({ ...row, id: index + 1 }));
-
   const rowsWithIds: IUser[] = addRowIds(rows);
 
   /* eslint-disable */
   return (
     <TableContainer>
       <Title>Usuarios</Title>
-      <DataGrid rows={rowsWithIds} columns={columns} getRowId={(row) => row.userId } hideFooter={true}
+      <DataGrid rows={rowsWithIds} columns={columns} hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                               columnMenuSortAsc: 'Ordenar ASC',
                               columnMenuFilter: 'Filtrar',
