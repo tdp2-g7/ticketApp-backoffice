@@ -17,7 +17,7 @@ export interface IEvent {
     userId?: string;
     eventId: string;
     ticketsSold?: number;
-    reports_nr: string;
+    reports_nr: number;
     state: number;
   }
   
@@ -53,3 +53,4 @@ export interface IEventTable{
   startTime: string,
   reports_nr: string,
   state: string,
+}
