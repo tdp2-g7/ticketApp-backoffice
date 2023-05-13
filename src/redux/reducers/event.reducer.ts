@@ -37,6 +37,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         event: data.event,
       };
     case constants.ON_GET_EVENTS_FILTERED_BY_FAILED:
+    case constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED:
       return {
         ...state,
         loading: false,
