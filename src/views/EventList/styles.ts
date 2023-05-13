@@ -14,3 +14,16 @@ export const Title = styled.p`
     font-size: 30px;
     color: ${COLORS.darkViolet};
 `;
+
+export const BlockButton = styled.div`
+  text-align: center;
+  margin: 0 10px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.violetScampi};
+  color: ${COLORS.black};
+  font-weight: bold;
+  width: 100px;
+  padding: 8px;
+  cursor: pointer;
+`;

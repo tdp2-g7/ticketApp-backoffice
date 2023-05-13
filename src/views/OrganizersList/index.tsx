@@ -30,7 +30,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 350,
+      width: 250,
     },
     {
       field: 'block',

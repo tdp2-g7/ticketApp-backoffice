@@ -15,12 +15,14 @@ export interface IEvent {
   userId?: string;
   eventId: string;
   ticketsSold?: number;
+  state: number;
 }
 
 export interface IEventDefaultState {
   loading: boolean;
   events: IEvent[];
   data: any;
+  eventBlock: boolean
 }
 
 export interface ISchedule {

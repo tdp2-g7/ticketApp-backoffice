@@ -2,11 +2,12 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IEventListProps } from './types';
 import { IEventTable } from '../../types/event.types';
-import { TableContainer, Title } from './styles';
+import { BlockButton, TableContainer, Title } from './styles';
 import { handleTime, handleDate } from '../../helpers/time';
+import { State } from '../../helpers/state';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
-  const { events, organizerData } = props;
+  const { events, organizerData, onChangeBlock } = props;
 
   const columns = [
     {
@@ -27,19 +28,31 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     {
       field: 'startTime',
       headerName: 'Hora de inicio',
-      width: 350,
+      width: 150,
+    },
+    {
+      field: 'block',
+      headerName: '',
+      width: 400,
+      renderCell: (params: any) => (
+        <>
+          <BlockButton onClick={() => onChangeBlock(params.row.eventId)}>
+            {params.row.state === State.BLOCKED ? 'Desbloquear' : 'Bloquear'}
+          </BlockButton>
+        </>
+      ),
     },
   ];
 
   /* eslint-disable */
   const rows: IEventTable[] = events.map((event) => {
-    const { eventId, title, date, startTime } = event;
+    const { eventId, title, date, startTime, state } = event;
 
     const stringDate = handleDate(date);
     let stringStartTime = ' - ';
     if (startTime) stringStartTime = handleTime(startTime);
 
-    return { eventId, title, date: stringDate, startTime: stringStartTime };
+    return { eventId, title, date: stringDate, startTime: stringStartTime, state };
   });
 
   const addRowIds = (r: IEventTable[]): IEventTable[] =>
