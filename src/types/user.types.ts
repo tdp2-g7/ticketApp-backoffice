@@ -5,6 +5,7 @@ export interface IUser {
   name: string;
   lastName: string;
   email: string;
+  reports_nr: string;
 }
 
 export interface IOrganizer {

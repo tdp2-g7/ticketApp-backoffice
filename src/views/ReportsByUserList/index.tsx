@@ -49,7 +49,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
   return (
     <>
       {showDescription ? (
-        <Modal onClose={() => { setShowDescription(false) }} isOpen={true}>
+        <Modal onClose={() => { setShowDescription(false) }} isOpen={true} title={'Descripcion de la denuncia'}>
           {description}
         </Modal>
       ) : (

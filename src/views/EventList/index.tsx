@@ -5,9 +5,12 @@ import { IEventTable } from '../../types/event.types';
 import { TableContainer, Title, ReportsButton } from './styles';
 import { handleTime, handleDate } from '../../helpers/time';
 import { handleStateText } from '../../helpers/state';
+import { Modal } from '../../components/Modal/Modal';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
-  const { events, getReportsById, organizerData } = props;
+  const {
+    events, getReportsById, organizerData, showModal, setShowModal,
+  } = props;
 
   const columns = [
     {
@@ -37,7 +40,13 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
       headerName: '',
       width: 350,
       renderCell: (params: any) => (
-        <ReportsButton onClick={() => getReportsById(params.row.eventId)}>
+        <ReportsButton onClick={() => {
+          if (params.row.reports_nr !== 0) {
+            getReportsById(params.row.eventId);
+          } else {
+            setShowModal(true);
+          }
+        }}>
           Ver denuncias
         </ReportsButton>
       ),
@@ -60,6 +69,12 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   });
 
   return (
+    <>
+      {showModal ? (
+        <Modal onClose={() => { setShowModal(false) }} isOpen={true} title={'Solicitud invalida'}>
+          El evento que ha seleccionado no tiene denuncias.
+        </Modal>
+    ) : (
     <TableContainer>
       <Title>
         {organizerData && organizerData[0].name ? `Eventos de ${organizerData[0].name}` : 'Eventos'}{' '}
@@ -102,6 +117,8 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
                }}
       />
     </TableContainer>
+    )}
+    </>
   );
   /* eslint-enable */
 };

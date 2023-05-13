@@ -1,4 +1,4 @@
-import { useEffect, FunctionComponent } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import UsersList from '../views/UsersList';
 import { onGetAllUsers, onGetReportsById } from '../redux/actions/user.actions';
@@ -9,6 +9,7 @@ import Layout from '../views/Layout';
 const UsersListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { users } = useTypedSelector((state) => state.user);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(onGetAllUsers());
@@ -20,13 +21,12 @@ const UsersListContainer: FunctionComponent = () => {
     }
   };
 
-  console.log('users', users);
-
   return (
     <>
       <Layout>
         {(
-          <UsersList users={users} getReportsById={getReportsById}/>
+          <UsersList users={users} getReportsById={getReportsById}
+          setShowModal={setShowModal} showModal={showModal}/>
         )}
       </Layout>
     </>

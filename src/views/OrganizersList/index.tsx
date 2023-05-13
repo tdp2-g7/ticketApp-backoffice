@@ -4,11 +4,14 @@ import { IOrganizersListProps } from './types';
 import { IOrganizer } from '../../types/user.types';
 import { BlockButton, TableContainer, Title } from './styles';
 import { globalNavigate } from '../../helpers/history';
+import { Modal } from '../../components/Modal/Modal';
 
 const OrganizersList: FC<IOrganizersListProps> = (
   props: IOrganizersListProps,
 ) => {
-  const { organizers, onChangeBlock } = props;
+  const {
+    organizers, onChangeBlock, showModal, setShowModal,
+  } = props;
   const rows: IOrganizer[] = organizers;
 
   const columns = [
@@ -38,7 +41,13 @@ const OrganizersList: FC<IOrganizersListProps> = (
       width: 400,
       renderCell: (params: any) => (
         <>
-          <BlockButton onClick={() => globalNavigate(`/events?organizerId=${params.row.userId}`)}>
+          <BlockButton onClick={() => {
+            if (params.row.reports_nr !== 0) {
+              globalNavigate(`/events?organizerId=${params.row.userId}`);
+            } else {
+              setShowModal(true);
+            }
+          }}>
             Ver eventos
           </BlockButton>
 
@@ -56,6 +65,12 @@ const OrganizersList: FC<IOrganizersListProps> = (
 
   /* eslint-disable */
   return (
+    <>
+      {showModal ? (
+        <Modal onClose={() => { setShowModal(false) }} isOpen={true} title={'Solicitud invalida'}>
+          El organizador que ha seleccionado no tiene eventos.
+        </Modal>
+    ) : (
     <TableContainer>
       <Title>Organizadores</Title>
       <DataGrid
@@ -101,6 +116,8 @@ const OrganizersList: FC<IOrganizersListProps> = (
         }}
       />
     </TableContainer>
+    )}
+    </>
   );
   /* eslint-enable */
 };

@@ -1,4 +1,4 @@
-import { useEffect, FunctionComponent } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import EventList from '../views/EventList';
@@ -13,6 +13,8 @@ const EventListContainer: FunctionComponent = () => {
   const [searchParams] = useSearchParams();
   const organizerId = searchParams.get('organizerId');
   const { organizers } = useTypedSelector((state) => state.organizer);
+  const [showModal, setShowModal] = useState(false);
+
   let organizerData;
 
   useEffect(() => {
@@ -49,7 +51,8 @@ const EventListContainer: FunctionComponent = () => {
     <>
       <Layout>
         {(
-          <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}/>
+          <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
+          setShowModal={setShowModal} showModal={showModal}/>
         )}
       </Layout>
     </>
