@@ -20,7 +20,7 @@ export async function getAllOrganizers(): Promise<AxiosResponse> {
 }
 
 export async function changeBlock(organizerId: string): Promise<any> {
-  console.log('🚀 ~ changeBlock ~ organizerId:', organizerId);
+  console.log('organizerId:', organizerId);
   // const response = await post(`${USERS_API_URL}/users/organizers/block/${organizerId}`);
   // return response;
   return organizerId;

@@ -15,12 +15,30 @@ export const onGetEventsFilteredByFailed = (error: unknown): AnyAction => ({
   error,
 });
 
+export function onChangeBlockEventRequested(data: any): AnyAction {
+  return { type: constants.ON_CHANGE_BLOCK_EVENT_REQUESTED, data };
+}
+
+export const onChangeBlockEventBySucceeded = (data: unknown): AnyAction => ({
+  type: constants.ON_CHANGE_BLOCK_EVENT_SUCCEEDED,
+  data,
+});
+
+export const onChangeBlockEventByFailed = (error: unknown): AnyAction => ({
+  type: constants.ON_CHANGE_BLOCK_EVENT_FAILED,
+  error,
+});
+
 export function onGetReportsById(data: any): AnyAction {
   return { type: constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED, data };
 }
 
-export const onGetReportsByIdSucceeded = (data: unknown): AnyAction => (
-  { type: constants.ON_GET_EVENT_REPORTS_BY_ID_SUCCEEDED, data });
+export const onGetReportsByIdSucceeded = (data: unknown): AnyAction => ({
+  type: constants.ON_GET_EVENT_REPORTS_BY_ID_SUCCEEDED,
+  data,
+});
 
-export const onGetReportsByIdFailed = (error: unknown): AnyAction => (
-  { type: constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED, error });
+export const onGetReportsByIdFailed = (error: unknown): AnyAction => ({
+  type: constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED,
+  error,
+});
