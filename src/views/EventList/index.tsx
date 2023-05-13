@@ -2,11 +2,15 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IEventListProps } from './types';
 import { IEventTable } from '../../types/event.types';
-import { TableContainer, Title } from './styles';
+import { TableContainer, Title, ReportsButton } from './styles';
 import { handleTime, handleDate } from '../../helpers/time';
+import { handleStateText } from '../../helpers/state';
+import { Modal } from '../../components/Modal/Modal';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
-  const { events, organizerData } = props;
+  const {
+    events, getReportsById, organizerData, showModal, setShowModal,
+  } = props;
 
   const columns = [
     {
@@ -20,79 +24,97 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
       width: 300,
     },
     {
-      field: 'date',
-      headerName: 'Fecha',
-      width: 300,
+      field: 'date', headerName: 'Fecha', width: 150,
     },
     {
-      field: 'startTime',
-      headerName: 'Hora de inicio',
+      field: 'startTime', headerName: 'Hora de inicio', width: 150,
+    },
+    {
+      field: 'state', headerName: 'Estado', width: 100,
+    },
+    {
+      field: 'actions',
+      headerName: '',
       width: 350,
+      renderCell: (params: any) => (
+        <ReportsButton onClick={() => {
+          if (params.row.reports_nr !== 0) {
+            getReportsById(params.row.eventId);
+          } else {
+            setShowModal(true);
+          }
+        }}>
+          Ver denuncias
+        </ReportsButton>
+      ),
     },
   ];
 
   /* eslint-disable */
-  const rows: IEventTable[] = events.map((event) => {
-    const { eventId, title, date, startTime } = event;
 
+  const rows: IEventTable[] = events.map(event => {
+    const { eventId, title, date, startTime, state } = event;
+    
     const stringDate = handleDate(date);
     let stringStartTime = ' - ';
     if (startTime) stringStartTime = handleTime(startTime);
 
-    return { eventId, title, date: stringDate, startTime: stringStartTime };
+    const stringState = handleStateText(state);
+    
+    return { eventId, title, date: stringDate, startTime: stringStartTime, state: stringState};
   });
 
-  const addRowIds = (r: IEventTable[]): IEventTable[] =>
-    r.map((row, index) => ({ ...row, id: index + 1 }));
-  const rowsWithIds: IEventTable[] = addRowIds(rows);
-
   return (
+    <>
+      {showModal ? (
+        <Modal onClose={() => { setShowModal(false) }} isOpen={true} title={'Solicitud invalida'}>
+          El evento que ha seleccionado no tiene denuncias.
+        </Modal>
+    ) : (
     <TableContainer>
       <Title>
         {organizerData && organizerData[0].name ? `Eventos de ${organizerData[0].name}` : 'Eventos'}{' '}
       </Title>
-      <DataGrid
-        rows={rowsWithIds}
-        columns={columns}
-        hideFooter={true}
-        localeText={{
-          columnMenuSortDesc: 'Ordenar DESC',
-          columnMenuSortAsc: 'Ordenar ASC',
-          columnMenuFilter: 'Filtrar',
-          columnMenuHideColumn: 'Ocultar columna',
-          columnMenuManageColumns: 'Administrar columnas',
-          columnMenuUnsort: 'Desordenar',
-          filterPanelAddFilter: 'Agregar filtro',
-          filterPanelRemoveAll: 'Eliminar todos',
-          filterPanelDeleteIconLabel: 'Eliminar',
-          filterPanelLogicOperator: 'Operador logico',
-          filterPanelOperator: 'Operador',
-          filterPanelOperatorAnd: 'Y',
-          filterPanelOperatorOr: 'O',
-          filterPanelColumns: 'Columnas',
-          filterPanelInputLabel: 'Valor',
-          filterPanelInputPlaceholder: 'Valor del filtro',
-          filterOperatorContains: 'contiene',
-          filterOperatorEquals: 'igual a',
-          filterOperatorStartsWith: 'comienza por',
-          filterOperatorEndsWith: 'termina con',
-          filterOperatorIs: 'es',
-          filterOperatorNot: 'no es',
-          filterOperatorAfter: 'está despues de',
-          filterOperatorOnOrAfter: 'está en o está despues de',
-          filterOperatorBefore: 'está antes de',
-          filterOperatorOnOrBefore: 'está en o está antes de',
-          filterOperatorIsEmpty: 'es vacio',
-          filterOperatorIsNotEmpty: 'no está vacio',
-          filterOperatorIsAnyOf: 'contiene al menos',
-          columnsPanelTextFieldLabel: 'Encontrar columna',
-          columnsPanelTextFieldPlaceholder: 'Titulo de columna',
-          columnsPanelDragIconLabel: 'Reordenar columna',
-          columnsPanelShowAllButton: 'Mostrar todas',
-          columnsPanelHideAllButton: 'Ocultar todas',
-        }}
+      <DataGrid rows={rows} columns={columns} getRowId={(row) => row.eventId} hideFooter={true}
+                localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
+                columnMenuSortAsc: 'Ordenar ASC',
+                columnMenuFilter: 'Filtrar',
+                columnMenuHideColumn: 'Ocultar columna',
+                columnMenuManageColumns: 'Administrar columnas',
+                columnMenuUnsort: 'Desordenar',
+                filterPanelAddFilter: 'Agregar filtro',
+                filterPanelRemoveAll: 'Eliminar todos',
+                filterPanelDeleteIconLabel: 'Eliminar',
+                filterPanelLogicOperator: 'Operador logico',
+                filterPanelOperator: 'Operador',
+                filterPanelOperatorAnd: 'Y',
+                filterPanelOperatorOr: 'O',
+                filterPanelColumns: 'Columnas',
+                filterPanelInputLabel: 'Valor',
+                filterPanelInputPlaceholder: 'Valor del filtro',
+                filterOperatorContains: 'contiene',
+                filterOperatorEquals: 'igual a',
+                filterOperatorStartsWith: 'comienza por',
+                filterOperatorEndsWith: 'termina con',
+                filterOperatorIs: 'es',
+                filterOperatorNot: 'no es',
+                filterOperatorAfter: 'está despues de',
+                filterOperatorOnOrAfter: 'está en o está despues de',
+                filterOperatorBefore: 'está antes de',
+                filterOperatorOnOrBefore: 'está en o está antes de',
+                filterOperatorIsEmpty: 'es vacio',
+                filterOperatorIsNotEmpty: 'no está vacio',
+                filterOperatorIsAnyOf: 'contiene al menos',
+                columnsPanelTextFieldLabel: 'Encontrar columna',
+                columnsPanelTextFieldPlaceholder: 'Titulo de columna',
+                columnsPanelDragIconLabel: 'Reordenar columna',
+                columnsPanelShowAllButton: 'Mostrar todas',
+                columnsPanelHideAllButton: 'Ocultar todas',
+               }}
       />
     </TableContainer>
+    )}
+    </>
   );
   /* eslint-enable */
 };

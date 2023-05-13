@@ -5,6 +5,7 @@ export interface IUser {
   name: string;
   lastName: string;
   email: string;
+  reports_nr: string;
 }
 
 export interface IOrganizer {
@@ -46,5 +47,6 @@ export interface IReport {
   reason: string,
   date: Date,
   open: boolean,
+  user: IUser;
   event: IEvent;
 }

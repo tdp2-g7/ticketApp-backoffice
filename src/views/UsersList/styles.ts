@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import COLORS from '../../helpers/colors';
 
-export const BlockButton = styled.div`
+export const ReportsButton = styled.div`
   text-align: center;
   margin: 0;
   border-radius: 20px;

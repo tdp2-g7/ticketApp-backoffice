@@ -7,7 +7,7 @@ import {
 
 export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
   const {
-    children, onClose, isOpen, size = Sizes.medium,
+    children, onClose, isOpen, size = Sizes.medium, title,
   } = props;
 
   const customStyles = {
@@ -22,7 +22,7 @@ export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
             size={size}
         >
             <ModalHeader>
-                <Title>Descripcion de la denuncia</Title>
+                <Title>{title}</Title>
                 <CustomCloseIcon onClick={onClose} />
             </ModalHeader>
             {children}

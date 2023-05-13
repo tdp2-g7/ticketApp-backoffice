@@ -11,3 +11,8 @@ export async function getEventsFilteredBy(data: any): Promise<AxiosResponse> {
   const response = await get(url);
   return response;
 }
+
+export async function getAllReports(eventId: string): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
+  return response.data;
+}

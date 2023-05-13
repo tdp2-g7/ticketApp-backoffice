@@ -5,6 +5,7 @@ export interface ModalProps {
   onClose: () => void;
   isOpen: boolean;
   size?: Sizes;
+  title: string;
 }
 
 export interface IModalStyledProps {

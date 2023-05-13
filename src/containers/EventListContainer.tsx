@@ -1,10 +1,9 @@
-import { useEffect, FunctionComponent } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import EventList from '../views/EventList';
-import { onGetEventsFilteredBy } from '../redux/actions/event.actions';
+import { onGetReportsById, onGetEventsFilteredBy } from '../redux/actions/event.actions';
 import useTypedSelector from '../hooks/useTypedSelector';
-
 import Layout from '../views/Layout';
 import { IOrganizer } from '../types/user.types';
 
@@ -14,6 +13,8 @@ const EventListContainer: FunctionComponent = () => {
   const [searchParams] = useSearchParams();
   const organizerId = searchParams.get('organizerId');
   const { organizers } = useTypedSelector((state) => state.organizer);
+  const [showModal, setShowModal] = useState(false);
+
   let organizerData;
 
   useEffect(() => {
@@ -40,10 +41,19 @@ const EventListContainer: FunctionComponent = () => {
     );
   }
 
+  const getReportsById = (eventId: string) => {
+    if (eventId) {
+      dispatch(onGetReportsById(eventId));
+    }
+  };
+
   return (
     <>
       <Layout>
-        {<EventList events={events} organizerData={organizerData} />}
+        {(
+          <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
+          setShowModal={setShowModal} showModal={showModal}/>
+        )}
       </Layout>
     </>
   );
