@@ -7,23 +7,23 @@ import { Modal } from '../../components/Modal/Modal';
 
 /* eslint-disable */
 const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserListProps) => {
-  const { reports, showDescription, setShowDescription, setDescription, description, userInfo } = props;
+  const { reports, showDescription, setShowDescription, setDescription, description, eventInfo } = props;
   
   const rows: IReportsTable[] = reports.map(e => {
-    const { eventId, event , date, description, reason } = e;
-    
-    const eventTitle = event.title;
+    const { userId, user , date, description, reason } = e;
+
+    let userName = user.name;
     const dateHandled = handleDate(date);
 
-    return { eventId, eventName: eventTitle, date: dateHandled, description, reason };
+    return { userId, userName: userName, date: dateHandled, description, reason };
   });
 
   const columns = [
     {
-      field: 'eventId', headerName: 'id', width: 75,
+      field: 'userId', headerName: 'id', width: 50,
     },
     {
-      field: 'eventName', headerName: 'id evento', width: 400,
+      field: 'userName', headerName: 'Nombre denunciante', width: 350,
     },
     {
       field: 'date', headerName: 'Fecha', width: 200,
@@ -31,7 +31,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
     {
       field: 'actions',
       headerName: 'Descripcion',
-      width: 250,
+      width: 350,
       renderCell: (params: any) => (
         <ViewDescriptionButton onClick={() => { 
           setShowDescription(true);
@@ -42,20 +42,20 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       ),
     },
     {
-      field: 'reason', headerName: 'Razon', width: 350,
+      field: 'reason', headerName: 'Razon', width: 200,
     },
   ];
 
   return (
     <>
       {showDescription ? (
-        <Modal onClose={() => { setShowDescription(false) }} isOpen={true} title={'Descripcion de la denuncia'}>
+        <Modal onClose={() => { setShowDescription(false) }} isOpen={true} title={'Descripcion de la denuncia'}> 
           {description}
         </Modal>
       ) : (
       <TableContainer>
-        <Title>Denuncias realizadas por {userInfo?.name} {userInfo?.lastName}</Title>
-        <DataGrid rows={rows} columns={columns} getRowId={(row) => row.eventId } hideFooter={true}
+        <Title>Denuncias a {eventInfo?.title}</Title>
+        <DataGrid rows={rows} columns={columns} getRowId={(row) => row.userId } hideFooter={true}
                   localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                   columnMenuSortAsc: 'Ordenar ASC',
                   columnMenuFilter: 'Filtrar',

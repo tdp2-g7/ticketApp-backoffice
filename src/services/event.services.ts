@@ -16,3 +16,8 @@ export async function changeBlockEvent(eventId: string): Promise<AxiosResponse> 
   const response = await patch(`${EVENTS_API_URL}/events/block/${eventId}`);
   return response;
 }
+
+export async function getAllReports(eventId: string): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
+  return response.data;
+}

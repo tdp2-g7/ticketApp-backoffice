@@ -1,4 +1,4 @@
-import { useEffect, FunctionComponent } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import OrganizersList from '../views/OrganizersList';
 import { onChangeBlockRequested, onGetAllOrganizers } from '../redux/actions/user.actions';
@@ -9,6 +9,7 @@ import Layout from '../views/Layout';
 const UsersListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { organizers } = useTypedSelector((state) => state.organizer);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(onGetAllOrganizers());
@@ -24,8 +25,8 @@ const UsersListContainer: FunctionComponent = () => {
     <>
       <Layout>
         {(
-          <OrganizersList organizers={organizers}
-          onChangeBlock={onChangeBlock}/>
+          <OrganizersList organizers={organizers} onChangeBlock={onChangeBlock}
+          setShowModal={setShowModal} showModal={showModal}/>
         )}
       </Layout>
     </>

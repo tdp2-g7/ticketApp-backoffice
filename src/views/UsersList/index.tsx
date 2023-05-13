@@ -2,10 +2,13 @@ import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IUsersListProps } from './types';
 import { IUser } from '../../types/user.types';
-import { BlockButton, TableContainer, Title } from './styles';
+import { ReportsButton, TableContainer, Title } from './styles';
+import { Modal } from '../../components/Modal/Modal';
 
 const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
-  const { users, getReportsById } = props;
+  const {
+    users, getReportsById, showModal, setShowModal,
+  } = props;
 
   const columns = [
     {
@@ -28,9 +31,15 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
       headerName: '',
       width: 200,
       renderCell: (params: any) => (
-        <BlockButton onClick={() => getReportsById(params.row.userId)}>
-          Ver denuncias
-        </BlockButton>
+          <ReportsButton onClick={() => {
+            if (params.row.reports_nr !== 0) {
+              getReportsById(params.row.userId);
+            } else {
+              setShowModal(true);
+            }
+          }}>
+            Ver denuncias
+          </ReportsButton>
       ),
     },
   ];
@@ -41,46 +50,54 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
 
   /* eslint-disable */
   return (
-    <TableContainer>
-      <Title>Usuarios</Title>
-      <DataGrid rows={rowsWithIds} columns={columns} hideFooter={true}
-                localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
-                              columnMenuSortAsc: 'Ordenar ASC',
-                              columnMenuFilter: 'Filtrar',
-                              columnMenuHideColumn: 'Ocultar columna',
-                              columnMenuManageColumns: 'Administrar columnas',
-                              columnMenuUnsort: 'Desordenar',
-                              filterPanelAddFilter: 'Agregar filtro',
-                              filterPanelRemoveAll: 'Eliminar todos',
-                              filterPanelDeleteIconLabel: 'Eliminar',
-                              filterPanelLogicOperator: 'Operador logico',
-                              filterPanelOperator: 'Operador',
-                              filterPanelOperatorAnd: 'Y',
-                              filterPanelOperatorOr: 'O',
-                              filterPanelColumns: 'Columnas',
-                              filterPanelInputLabel: 'Valor',
-                              filterPanelInputPlaceholder: 'Valor del filtro',
-                              filterOperatorContains: 'contiene',
-                              filterOperatorEquals: 'igual a',
-                              filterOperatorStartsWith: 'comienza por',
-                              filterOperatorEndsWith: 'termina con',
-                              filterOperatorIs: 'es',
-                              filterOperatorNot: 'no es',
-                              filterOperatorAfter: 'está despues de',
-                              filterOperatorOnOrAfter: 'está en o está despues de',
-                              filterOperatorBefore: 'está antes de',
-                              filterOperatorOnOrBefore: 'está en o está antes de',
-                              filterOperatorIsEmpty: 'es vacio',
-                              filterOperatorIsNotEmpty: 'no está vacio',
-                              filterOperatorIsAnyOf: 'contiene al menos',
-                              columnsPanelTextFieldLabel: 'Encontrar columna',
-                              columnsPanelTextFieldPlaceholder: 'Titulo de columna',
-                              columnsPanelDragIconLabel: 'Reordenar columna',
-                              columnsPanelShowAllButton: 'Mostrar todas',
-                              columnsPanelHideAllButton: 'Ocultar todas',
-                             }}
-      />
-    </TableContainer>
+    <>
+      {showModal ? (
+        <Modal onClose={() => { setShowModal(false) }} isOpen={true} title={'Solicitud invalida'}>
+          El usuario que ha seleccionado no tiene denuncias.
+        </Modal>
+    ) : (
+      <TableContainer>
+        <Title>Usuarios</Title>
+        <DataGrid rows={rowsWithIds} columns={columns} hideFooter={true}
+                  localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
+                                columnMenuSortAsc: 'Ordenar ASC',
+                                columnMenuFilter: 'Filtrar',
+                                columnMenuHideColumn: 'Ocultar columna',
+                                columnMenuManageColumns: 'Administrar columnas',
+                                columnMenuUnsort: 'Desordenar',
+                                filterPanelAddFilter: 'Agregar filtro',
+                                filterPanelRemoveAll: 'Eliminar todos',
+                                filterPanelDeleteIconLabel: 'Eliminar',
+                                filterPanelLogicOperator: 'Operador logico',
+                                filterPanelOperator: 'Operador',
+                                filterPanelOperatorAnd: 'Y',
+                                filterPanelOperatorOr: 'O',
+                                filterPanelColumns: 'Columnas',
+                                filterPanelInputLabel: 'Valor',
+                                filterPanelInputPlaceholder: 'Valor del filtro',
+                                filterOperatorContains: 'contiene',
+                                filterOperatorEquals: 'igual a',
+                                filterOperatorStartsWith: 'comienza por',
+                                filterOperatorEndsWith: 'termina con',
+                                filterOperatorIs: 'es',
+                                filterOperatorNot: 'no es',
+                                filterOperatorAfter: 'está despues de',
+                                filterOperatorOnOrAfter: 'está en o está despues de',
+                                filterOperatorBefore: 'está antes de',
+                                filterOperatorOnOrBefore: 'está en o está antes de',
+                                filterOperatorIsEmpty: 'es vacio',
+                                filterOperatorIsNotEmpty: 'no está vacio',
+                                filterOperatorIsAnyOf: 'contiene al menos',
+                                columnsPanelTextFieldLabel: 'Encontrar columna',
+                                columnsPanelTextFieldPlaceholder: 'Titulo de columna',
+                                columnsPanelDragIconLabel: 'Reordenar columna',
+                                columnsPanelShowAllButton: 'Mostrar todas',
+                                columnsPanelHideAllButton: 'Ocultar todas',
+                               }}
+        />
+      </TableContainer>
+    )}
+    </>
   );
   /* eslint-enable */
 };
