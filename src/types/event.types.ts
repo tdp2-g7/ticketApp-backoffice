@@ -13,7 +13,7 @@ export interface IEvent {
     vacancies: number;
     ticketsPerPerson: number;
     faqs: string;
-    chedule?: ISchedule[];
+    schedule?: ISchedule[];
     userId?: string;
     eventId: string;
     ticketsSold?: number;
