@@ -20,6 +20,8 @@ const UsersListContainer: FunctionComponent = () => {
     }
   };
 
+  console.log('users', users);
+
   return (
     <>
       <Layout>

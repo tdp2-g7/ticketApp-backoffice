@@ -7,7 +7,7 @@ import { handleTime, handleDate } from '../../helpers/time';
 import { handleStateText } from '../../helpers/state';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
-  const { events, getReportsById } = props;
+  const { events, getReportsById, organizerData } = props;
 
   const columns = [
     {
@@ -26,9 +26,9 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     {
       field: 'startTime', headerName: 'Hora de inicio', width: 150,
     },
-    {
+    /* {
       field: 'reports_nr', headerName: 'Cantidad de denuncias', width: 200,
-    },
+    }, */
     {
       field: 'state', headerName: 'Estado', width: 100,
     },
@@ -47,21 +47,23 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   /* eslint-disable */
 
   const rows: IEventTable[] = events.map(event => {
-    const { eventId, title, date, startTime, reports_nr, state } = event;
+    const { eventId, title, date, startTime, /* reports_nr , */ state } = event;
     
     const stringDate = handleDate(date);
     let stringStartTime = ' - ';
     if (startTime) stringStartTime = handleTime(startTime);
 
-    const stringReportsAmount = reports_nr.toString();
+    // const stringReportsAmount = reports_nr.toString();
     const stringState = handleStateText(state);
     
-    return { eventId, title, date: stringDate, startTime: stringStartTime, reports_nr: stringReportsAmount, state: stringState};
+    return { eventId, title, date: stringDate, startTime: stringStartTime, /* reports_nr: stringReportsAmount ,*/ state: stringState};
   });
 
   return (
     <TableContainer>
-      <Title>Eventos</Title>
+      <Title>
+        {organizerData && organizerData[0].name ? `Eventos de ${organizerData[0].name}` : 'Eventos'}{' '}
+      </Title>
       <DataGrid rows={rows} columns={columns} getRowId={(row) => row.eventId} hideFooter={true}
                 localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                 columnMenuSortAsc: 'Ordenar ASC',
