@@ -8,12 +8,12 @@ import Layout from '../views/Layout';
 
 const UsersListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { organizers } = useTypedSelector((state) => state.organizer);
+  const { organizers, organizerBlock } = useTypedSelector((state) => state.organizer);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(onGetAllOrganizers());
-  }, [dispatch]);
+  }, [dispatch, organizerBlock]);
 
   const onChangeBlock = (organizerId: string) => {
     if (organizerId) {
