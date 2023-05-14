@@ -19,6 +19,15 @@ export interface IOrganizer {
   number_of_events?: number;
 }
 
+export interface IOrganizerTable {
+  userId: string;
+  name: string;
+  lastName: string;
+  email: string;
+  isBlocked: boolean;
+  stateText: string;
+}
+
 export interface IUserDefaultState {
   users: IUser[];
   loading: boolean;
@@ -32,6 +41,7 @@ export interface IOrganizerDefaultState {
   organizers: IOrganizer[];
   loading: boolean;
   data: any;
+  organizerBlock: boolean;
 }
 
 export interface IAdminsitrator {

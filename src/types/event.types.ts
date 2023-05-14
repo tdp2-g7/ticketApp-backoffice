@@ -1,30 +1,31 @@
-import { IReport } from "./user.types";
+import { IReport } from './user.types';
 
 export interface IEvent {
-    title: string;
-    description: string;
-    location: ILocation;
-    type: string;
-    date: Date;
-    startTime: Date | null;
-    endTime: Date | null;
-    images: any;
-    mainImage?: any;
-    vacancies: number;
-    ticketsPerPerson: number;
-    faqs: string;
-    schedule?: ISchedule[];
-    userId?: string;
-    eventId: string;
-    ticketsSold?: number;
-    reports_nr: number;
-    state: number;
-  }
-  
+  title: string;
+  description: string;
+  location: ILocation;
+  type: string;
+  date: Date;
+  startTime: Date | null;
+  endTime: Date | null;
+  images: any;
+  mainImage?: any;
+  vacancies: number;
+  ticketsPerPerson: number;
+  faqs: string;
+  schedule?: ISchedule[];
+  userId?: string;
+  eventId: string;
+  ticketsSold?: number;
+  reports_nr: number;
+  state: number;
+}
+
 export interface IEventDefaultState {
   loading: boolean;
   events: IEvent[];
   data: any;
+  eventBlock: boolean;
   reports: IReport[];
   event: IEvent | null;
 }
@@ -46,11 +47,11 @@ export interface ILocationMap {
   name: string;
 }
 
-export interface IEventTable{
-  eventId: string,
-  title: string,
-  date: string,
-  startTime: string,
-  reports_nr: string,
-  state: string,
+export interface IEventTable {
+  eventId: string;
+  title: string;
+  date: string;
+  startTime: string;
+  state: number;
+  stateText: string;
 }

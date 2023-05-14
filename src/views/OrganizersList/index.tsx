@@ -13,11 +13,20 @@ const OrganizersList: FC<IOrganizersListProps> = (
     organizers, onChangeBlock, showModal, setShowModal,
   } = props;
 
+  const rows: IOrganizerTable[] = organizers.map((organizer) => ({
+    userId: organizer.userId,
+    name: organizer.name,
+    lastName: organizer.lastName,
+    email: organizer.email,
+    isBlocked: organizer.isBlocked,
+    stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+  }));
+
   const columns = [
     {
       field: 'userId',
-      headerName: 'Id',
-      width: 50,
+      headerName: 'ID',
+      width: 100,
     },
     {
       field: 'name',
@@ -32,10 +41,10 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 275,
+      width: 250,
     },
     {
-      field: 'state',
+      field: 'stateText',
       headerName: 'Estado',
       width: 100,
     },
@@ -64,23 +73,6 @@ const OrganizersList: FC<IOrganizersListProps> = (
   ];
 
   /* eslint-disable */
-
-  const rows: IOrganizerTable[] = organizers.map(organizer => {
-    const { 
-      userId, name, lastName, email, isBlocked 
-    } = organizer;
-    
-    let auxState = '';
-
-    if (isBlocked) {
-      auxState = 'Bloqueado'
-    } else {
-      auxState = 'Activo'
-    }
-    
-    return { userId, name, lastName, email, state: auxState};
-  });
-
   return (
     <>
       {showModal ? (
