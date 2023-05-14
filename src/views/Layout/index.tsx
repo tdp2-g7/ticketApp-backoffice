@@ -41,8 +41,8 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
         <HeaderLink onClick={() => globalNavigate('/metrics')}>
           Metricas
         </HeaderLink>
-        <HeaderLink onClick={() => globalNavigate('/moderation')}>
-          Moderacion
+        <HeaderLink onClick={() => globalNavigate('/reports')}>
+          Denuncias
         </HeaderLink>
         <LogoutContainer>
           <LogoutLink onClick={() => onClickLogout()}>Salir</LogoutLink>

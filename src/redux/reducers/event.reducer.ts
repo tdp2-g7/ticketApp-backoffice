@@ -13,6 +13,11 @@ const initialState: IEventDefaultState = {
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
   const { type, data } = action;
   switch (type) {
+    case constants.ON_GET_ALL_EVENT_REPORTS_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
     case constants.ON_GET_EVENTS_FILTERED_BY_REQUESTED:
       return {
         ...state,
@@ -22,6 +27,13 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
       return {
         ...state,
         loading: true,
+      };
+    case constants.ON_GET_ALL_EVENT_REPORTS_SUCCEEDED:
+      console.log('ACA ESTOY EN EL REDUCER BOLUDO', data.reports);
+      return {
+        ...state,
+        loading: false,
+        events: data.reports,
       };
     case constants.ON_GET_EVENTS_FILTERED_BY_SUCCEEDED:
       return {
@@ -37,6 +49,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         event: data.event,
       };
     case constants.ON_GET_EVENTS_FILTERED_BY_FAILED:
+    case constants.ON_GET_ALL_EVENT_REPORTS_FAILED:
     case constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED:
       return {
         ...state,
