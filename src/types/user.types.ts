@@ -32,6 +32,7 @@ export interface IOrganizerDefaultState {
   organizers: IOrganizer[];
   loading: boolean;
   data: any;
+  organizerBlock: boolean;
 }
 
 export interface IAdminsitrator {

@@ -6,6 +6,7 @@ const initialState: IOrganizerDefaultState = {
   loading: false,
   data: null,
   organizers: [],
+  organizerBlock: false,
 };
 
 const organizerReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -18,14 +19,17 @@ const organizerReducer: Reducer = (state = initialState, action = { type: '' }) 
         loading: true,
       };
     case constants.ON_GET_ALL_ORGANIZERS_SUCCEEDED:
+      return {
+        ...state,
+        loading: false,
+        organizers: data,
+        organizerBlock: false,
+      };
     case constants.ON_CHANGE_BLOCK_SUCCEEDED:
       return {
         ...state,
         loading: false,
-        organizers: data.map((organizer: any) => ({
-          ...organizer,
-          isBlocked: Boolean(Math.round(Math.random())),
-        })),
+        organizerBlock: true,
       };
     case constants.ON_GET_ALL_ORGANIZERS_FAILED:
     case constants.ON_CHANGE_BLOCK_FAILED:
