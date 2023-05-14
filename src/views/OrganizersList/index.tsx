@@ -20,6 +20,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
     email: organizer.email,
     isBlocked: organizer.isBlocked,
     stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+    state: organizer.state,
   }));
 
   const columns = [

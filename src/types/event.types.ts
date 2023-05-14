@@ -52,6 +52,5 @@ export interface IEventTable {
   title: string;
   date: string;
   startTime: string;
-  state: number;
-  stateText: string;
+  state: string;
 }

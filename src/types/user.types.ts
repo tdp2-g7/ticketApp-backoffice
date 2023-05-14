@@ -13,10 +13,11 @@ export interface IOrganizer {
   name: string;
   lastName: string;
   email: string;
-  description: string;
-  image: any;
-  isBlocked: boolean;
+  description?: string;
+  image?: any;
+  isBlocked?: boolean;
   number_of_events?: number;
+  state: string;
 }
 
 export interface IOrganizerTable {
@@ -24,8 +25,9 @@ export interface IOrganizerTable {
   name: string;
   lastName: string;
   email: string;
-  isBlocked: boolean;
+  isBlocked?: boolean;
   stateText: string;
+  state: string;
 }
 
 export interface IUserDefaultState {
