@@ -11,12 +11,21 @@ export interface IUser {
 export interface IOrganizer {
   userId: string;
   name: string;
-  last_name: string;
+  lastName: string;
   email: string;
   description: string;
   image: any;
   isBlocked: boolean;
   number_of_events?: number;
+}
+
+export interface IOrganizerTable {
+  userId: string;
+  name: string;
+  lastName: string;
+  email: string;
+  isBlocked: boolean;
+  stateText: string;
 }
 
 export interface IUserDefaultState {

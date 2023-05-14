@@ -25,8 +25,12 @@ const UsersListContainer: FunctionComponent = () => {
     <>
       <Layout>
         {(
-          <OrganizersList organizers={organizers} onChangeBlock={onChangeBlock}
-          setShowModal={setShowModal} showModal={showModal}/>
+          <OrganizersList
+          organizers={organizers}
+          onChangeBlock={onChangeBlock}
+          setShowModal={setShowModal}
+          showModal={showModal}
+          />
         )}
       </Layout>
     </>
