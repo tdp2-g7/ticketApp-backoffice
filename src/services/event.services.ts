@@ -12,7 +12,8 @@ export async function getAllEvents(data: any): Promise<AxiosResponse> {
   /* eslint-enable */
   const response = await get(url);
 
-  console.log('ACA ESTA EL RESPONSE', response.data.reports);
+  console.log(url);
+  console.log('ACA ESTA EL RESPONSE', response.data);
 
   return response.data;
 }

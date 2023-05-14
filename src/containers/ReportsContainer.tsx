@@ -11,7 +11,7 @@ const ReportsContainer: FunctionComponent = () => {
   const { reports } = useTypedSelector((state) => state.event);
   const [eventName, setEventName] = useState('');
 
-  console.log(eventName);
+  console.log('no le doy bola', eventName);
 
   console.log('0000', reports);
 
