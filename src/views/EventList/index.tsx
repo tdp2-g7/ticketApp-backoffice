@@ -22,8 +22,8 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   const columns = [
     {
       field: 'eventId',
-      headerName: 'id',
-      width: 50,
+      headerName: 'ID',
+      width: 100,
     },
     {
       field: 'title',

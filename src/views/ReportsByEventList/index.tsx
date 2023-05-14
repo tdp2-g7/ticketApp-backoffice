@@ -20,7 +20,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
 
   const columns = [
     {
-      field: 'userId', headerName: 'id', width: 50,
+      field: 'userId', headerName: 'ID', width: 100,
     },
     {
       field: 'userName', headerName: 'Nombre denunciante', width: 350,
