@@ -2,6 +2,7 @@ import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import EventList from '../views/EventList';
+import EmptyPage from '../views/EmptyPage';
 import { onGetReportsById, onGetEventsFilteredBy } from '../redux/actions/event.actions';
 import useTypedSelector from '../hooks/useTypedSelector';
 import Layout from '../views/Layout';
@@ -47,14 +48,18 @@ const EventListContainer: FunctionComponent = () => {
     }
   };
 
+  const showTable = events.length > 0;
+
   return (
     <>
-      <Layout>
-        {(
-          <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
-          setShowModal={setShowModal} showModal={showModal}/>
-        )}
-      </Layout>
+    <Layout>
+      {showTable ? (
+        <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
+        setShowModal={setShowModal} showModal={showModal}/>
+      ) : (
+        <EmptyPage/>
+      )}
+    </Layout>
     </>
   );
 };

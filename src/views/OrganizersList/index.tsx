@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IOrganizersListProps } from './types';
-import { IOrganizer } from '../../types/user.types';
+import { IOrganizerTable } from '../../types/user.types';
 import { BlockButton, TableContainer, Title } from './styles';
 import { globalNavigate } from '../../helpers/history';
 import { Modal } from '../../components/Modal/Modal';
@@ -12,7 +12,6 @@ const OrganizersList: FC<IOrganizersListProps> = (
   const {
     organizers, onChangeBlock, showModal, setShowModal,
   } = props;
-  const rows: IOrganizer[] = organizers;
 
   const columns = [
     {
@@ -23,17 +22,22 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 300,
+      width: 250,
     },
     {
       field: 'lastName',
       headerName: 'Apellido',
-      width: 300,
+      width: 250,
     },
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 350,
+      width: 275,
+    },
+    {
+      field: 'state',
+      headerName: 'Estado',
+      width: 100,
     },
     {
       field: 'block',
@@ -59,11 +63,24 @@ const OrganizersList: FC<IOrganizersListProps> = (
     },
   ];
 
-  const addIds = (r: IOrganizer[]): IOrganizer[] => r.map((row, idx) => ({ ...row, id: idx + 1 }));
-
-  const rowsWithIds: IOrganizer[] = addIds(rows);
-
   /* eslint-disable */
+
+  const rows: IOrganizerTable[] = organizers.map(organizer => {
+    const { 
+      userId, name, lastName, email, isBlocked 
+    } = organizer;
+    
+    let auxState = '';
+
+    if (isBlocked) {
+      auxState = 'Bloqueado'
+    } else {
+      auxState = 'Activo'
+    }
+    
+    return { userId, name, lastName, email, state: auxState};
+  });
+
   return (
     <>
       {showModal ? (
@@ -74,7 +91,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
     <TableContainer>
       <Title>Organizadores</Title>
       <DataGrid
-        rows={rowsWithIds}
+        rows={rows}
         columns={columns}
         getRowId={(row) => row.userId}
         hideFooter={true}

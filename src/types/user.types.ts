@@ -11,7 +11,7 @@ export interface IUser {
 export interface IOrganizer {
   userId: string;
   name: string;
-  last_name: string;
+  lastName: string;
   email: string;
   description: string;
   image: any;
@@ -49,4 +49,12 @@ export interface IReport {
   open: boolean,
   user: IUser;
   event: IEvent;
+}
+
+export interface IOrganizerTable{
+  userId: string,
+  name: string,
+  lastName: string,
+  email: string,
+  state: string,
 }

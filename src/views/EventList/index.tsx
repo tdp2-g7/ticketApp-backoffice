@@ -14,20 +14,19 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
 
   const columns = [
     {
-      field: 'eventId',
-      headerName: 'id',
-      width: 50,
+      field: 'eventId', headerName: 'id', width: 50,
     },
     {
-      field: 'title',
-      headerName: 'Titulo',
-      width: 300,
+      field: 'title', headerName: 'Titulo', width: 300,
     },
     {
       field: 'date', headerName: 'Fecha', width: 150,
     },
     {
       field: 'startTime', headerName: 'Hora de inicio', width: 150,
+    },
+    {
+      field: 'reports_nr', headerName: 'Cantidad de denuncias', width: 200,
     },
     {
       field: 'state', headerName: 'Estado', width: 100,
@@ -38,7 +37,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
       width: 350,
       renderCell: (params: any) => (
         <ReportsButton onClick={() => {
-          if (params.row.reports_nr !== 0) {
+          if (params.row.reports_nr !== '0') {
             getReportsById(params.row.eventId);
           } else {
             setShowModal(true);
@@ -53,15 +52,16 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   /* eslint-disable */
 
   const rows: IEventTable[] = events.map(event => {
-    const { eventId, title, date, startTime, state } = event;
+    const { eventId, title, date, startTime, reports_nr, state } = event;
     
     const stringDate = handleDate(date);
     let stringStartTime = ' - ';
     if (startTime) stringStartTime = handleTime(startTime);
 
     const stringState = handleStateText(state);
+    const reports_nrText = reports_nr.toString();
     
-    return { eventId, title, date: stringDate, startTime: stringStartTime, state: stringState};
+    return { eventId, title, date: stringDate, startTime: stringStartTime, reports_nr: reports_nrText, state: stringState};
   });
 
   return (
