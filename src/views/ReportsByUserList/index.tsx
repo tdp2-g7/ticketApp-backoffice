@@ -9,13 +9,13 @@ import { Modal } from '../../components/Modal/Modal';
 const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserListProps) => {
   const { reports, showDescription, setShowDescription, setDescription, description, userInfo } = props;
   
-  const rows: IReportsTable[] = reports.map(e => {
-    const { eventId, event , date, description, reason } = e;
+  const rows: IReportsTable[] = reports.map(report => {
+    const { id, event , date, description, reason } = report;
     
     const eventTitle = event.title;
     const dateHandled = handleDate(date);
 
-    return { eventId, eventName: eventTitle, date: dateHandled, description, reason };
+    return { eventId: id, eventName: eventTitle, date: dateHandled, description, reason };
   });
 
   const columns = [
