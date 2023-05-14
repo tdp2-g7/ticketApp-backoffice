@@ -52,7 +52,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
         <>
           <ReportsButton
             onClick={() => {
-              if (params.row.reports_nr !== 0) {
+              if (params.row.reports_nr !== '0') {
                 getReportsById(params.row.eventId);
               } else {
                 setShowModal(true);
