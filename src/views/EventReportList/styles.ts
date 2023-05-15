@@ -21,14 +21,6 @@ export const Title = styled.p<ITitleProps>`
     color: ${color}
   `}
 
-  `;
-
-export const FormContainer = styled.div`
-  margin: 20px -0.5%;
-  border-color: ${COLORS.black};
-  width: 80%;
-  border-radius: 10px;
-  padding: 0 10px 10px 10px;
 `;
 
 export const RowContainer = styled.div`
@@ -46,21 +38,6 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 1rem;
-`;
-
-export const CustomCalendarForm = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-`;
-
-export const DatePickerWrapper = styled.div`
-  margin-right: 10px;
-`;
-
-export const FieldWrapper = styled.div`
-  margin-left: 10px;
 `;
 
 export const CustomDatePicker = styled(ReactDatePicker)`
@@ -107,4 +84,42 @@ export const FiltersButton = styled.button`
   border: 1px solid ${COLORS.darkViolet};
   color: ${COLORS.darkViolet};
   background-color: ${COLORS.white};
+`;
+
+export const FormContainer = styled.div`
+  margin: 20px -0.5%;
+  border-color: ${COLORS.black};
+  width: 80%;
+  border-radius: 10px;
+  padding: 0 10px 10px 10px;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  width: 100%;
+
+  > * {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  > :last-child {
+    margin-right: 0;
+  }
+`;
+
+export const CustomCalendarForm = styled(Flex)`
+  align-items: center;
+`;
+
+export const DatePickerWrapper = styled.div`
+  flex: 1;
+`;
+
+export const FieldWrapper = styled.div`
+  flex: 1;
+`;
+
+export const FormWrapper = styled.div`
+  flex: 1;
 `;
