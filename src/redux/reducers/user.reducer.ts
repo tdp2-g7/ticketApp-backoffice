@@ -54,8 +54,6 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         user: data.user,
       };
     case constants.ON_GET_ALL_ORGANIZER_REPORTS_SUCCEEDED:
-      console.log('00', data);
-      console.log('00', data.reports);
       return {
         ...state,
         loading: false,

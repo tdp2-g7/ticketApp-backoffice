@@ -71,7 +71,7 @@ export const CustomDatePicker = styled(ReactDatePicker)`
 `;
 
 export const CustomInput = styled.input`
-  width: 250%;
+  width: 1400%;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -91,4 +91,20 @@ export const OrganizerWrapper = styled.div`
 
 export const EventWrapper = styled.div`
   margin-left: 10px;
+`;
+
+export const ButtonWrapper = styled.div`
+  margin-left: 700px;
+`;
+
+export const FiltersButton = styled.button`
+  font-size: 20px;
+  width: 200%;
+  border-radius: 30px;
+  margin-top: 10px;
+  font-family: 'Poppins';
+  cursor: pointer;
+  border: 1px solid ${COLORS.darkViolet};
+  color: ${COLORS.darkViolet};
+  background-color: ${COLORS.white};
 `;

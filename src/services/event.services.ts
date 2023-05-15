@@ -3,6 +3,8 @@ import { EVENTS_API_URL } from '../configs/configs';
 import { get } from './api';
 
 export async function getAllEvents(data: any): Promise<AxiosResponse> {
+  console.log('ESTOY ACA, EN SERVICE ORGANIZER RESPORTS');
+  console.log(data);
   let url = `${EVENTS_API_URL}/event-report/all-reports?page=${data.page}&offset=${data.offset}`;
 
   /* eslint-disable */
@@ -11,6 +13,8 @@ export async function getAllEvents(data: any): Promise<AxiosResponse> {
   data.to_date && (url += `&to_date=${data.to_date}`);
   /* eslint-enable */
   const response = await get(url);
+
+  console.log(url);
 
   return response;
 }

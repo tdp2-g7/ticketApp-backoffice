@@ -3,31 +3,25 @@ import ReactDatePicker from 'react-datepicker';
 import { Field, Form } from 'react-final-form';
 import { DataGrid } from '@mui/x-data-grid';
 import {
-  IEventReportListProps, IFormData, IEventReportRowsTable, IOrganizerReportRowsTable,
+  IEventReportListProps, IEventReportRowsTable, IOrganizerReportRowsTable,
 } from './types';
 import {
   TableContainer, Title, FormContainer, RowContainer, FieldWrapper,
   CustomForm, Container, CustomInput, /* CustomDatePicker, */
   CustomCalendarForm, DatePickerWrapper, TitleContainer,
-  EventWrapper, OrganizerWrapper,
+  EventWrapper, OrganizerWrapper, ButtonWrapper, FiltersButton,
 } from './styles';
 import { handleDate } from '../../helpers/time';
 
 /* eslint-disable */
 const EventReportList: FC<IEventReportListProps> = (props: IEventReportListProps) => {
   const {
-    eventReports, userReports, setEventName, handleTableChange,
+    eventReports, userReports, setFilters, handleTableChange,
     organizerTitleColor, eventTitleColor, showOrganizerTable,
+    filters, handleFilters,
   } = props;
-
-  console.log(userReports, '00');
-
   const [formValues, setFormValues] = useState<any>({});
-
-  const setReserveDate = (data: any) => {
-    console.log(data);
-  };
-
+  
   const organizerColumns = [
     {
       field: 'id', headerName: 'id', width: 50,
@@ -88,12 +82,12 @@ const EventReportList: FC<IEventReportListProps> = (props: IEventReportListProps
     };
   });
 
-  const onSubmit = async (formData: IFormData) => {
-    console.log('================', formValues, formData);
+  const onSubmit = async () => {
+    handleFilters(showOrganizerTable);
   };
 
-  const onHandleSubmit = (formData: IFormData) => {
-    onSubmit(formData);
+  const onHandleSubmit = () => {
+    onSubmit();
   };
 
   return (
@@ -121,21 +115,26 @@ const EventReportList: FC<IEventReportListProps> = (props: IEventReportListProps
                     <RowContainer>
                       <CustomCalendarForm>
                         <DatePickerWrapper>
-                          <ReactDatePicker onChange={(date: any) => setReserveDate(date)} isClearable={true}
-                                           className='datePicker' dateFormat='dd/MM/yyyy' 
-                                           placeholderText='Seleccionar fecha'/>
+                          <ReactDatePicker onChange={(date: any) => setFilters({ ...filters, fromDate: date })} 
+                                           className='datePicker' dateFormat='dd/MM/yyyy'
+                                           placeholderText='Fecha de inicio' isClearable={true}/>
                         </DatePickerWrapper>
                         <DatePickerWrapper>                                           
-                          <ReactDatePicker onChange={(date: any) => setReserveDate(date)} 
+                          <ReactDatePicker onChange={(date: any) => setFilters({ ...filters, toDate: date })}
                                            className='datePicker' dateFormat='dd/MM/yyyy' 
-                                           placeholderText='Seleccionar fecha'/>
+                                           placeholderText='Fecha de finalizacion' isClearable={true}/>
                         </DatePickerWrapper>
                       </CustomCalendarForm>
                       <FieldWrapper>
-                        <Field component={CustomInput} label='Descripcion' name='description' 
+                        <Field component={CustomInput} label='Name' name='name' 
                                type='input' placeholder='Buscar por nombre'
-                               onChange={(date: any) => setEventName(date)}/>
+                               onChange={(event: any) => setFilters({ ...filters, name: event.target.value })}/>
                       </FieldWrapper>
+                      <ButtonWrapper>
+                        <FiltersButton type='submit'>
+                          Filtrar
+                        </FiltersButton>
+                      </ButtonWrapper>
                     </RowContainer>
                   </Container>
                 </CustomForm>

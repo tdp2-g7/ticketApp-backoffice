@@ -11,12 +11,14 @@ const ReportsContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { reports } = useTypedSelector((state) => state.event);
   const { userReports } = useTypedSelector((state) => state.user);
-  const [eventName, setEventName] = useState('');
-  const [organizerTitleColor, setOrganizerTitleColor] = useState('');
-  const [eventTitleColor, setEventTitleColor] = useState('');
+  const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.darkViolet);
+  const [eventTitleColor, setEventTitleColor] = useState(COLORS.gray);
   const [showOrganizerTable, setShowOrganizerTable] = useState(false);
-
-  console.log(eventName);
+  const [filters, setFilters] = useState({
+    name: '',
+    fromDate: null,
+    toDate: null,
+  });
 
   useEffect(() => {
     const data = {
@@ -35,7 +37,6 @@ const ReportsContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
       };
-      console.log('despacho on get all organizer...');
       dispatch(onGetAllOrganizerReports(data));
     } else {
       setOrganizerTitleColor(COLORS.gray);
@@ -49,14 +50,36 @@ const ReportsContainer: FunctionComponent = () => {
     }
   };
 
+  const handleFilters = (organizer: boolean) => {
+    if (organizer) {
+      const data = {
+        offset: 20,
+        page: 1,
+        name: filters.name,
+        to_date: filters.toDate,
+        from_date: filters.fromDate,
+      };
+      dispatch(onGetAllOrganizerReports(data));
+    } else {
+      const data = {
+        offset: 20,
+        page: 1,
+        title: filters.name,
+        to_date: filters.toDate,
+        from_date: filters.fromDate,
+      };
+      dispatch(onGetAllEventReports(data));
+    }
+  };
+
   return (
     <>
       <Layout>
         {(
           <EventReportList eventReports={reports} userReports={userReports}
-          setEventName={setEventName} organizerTitleColor={organizerTitleColor}
+          organizerTitleColor={organizerTitleColor} setFilters={setFilters}
           handleTableChange={handleTableChange} eventTitleColor={eventTitleColor}
-          showOrganizerTable={showOrganizerTable}/>
+          showOrganizerTable={showOrganizerTable} filters={filters} handleFilters={handleFilters}/>
         )}
       </Layout>
     </>
