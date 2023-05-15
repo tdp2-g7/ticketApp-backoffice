@@ -47,7 +47,6 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         users: data.users,
       };
     case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
-      console.log('DATA', data);
       return {
         ...state,
         loading: false,
