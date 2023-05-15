@@ -41,7 +41,7 @@ export const Container = styled.div`
 `;
 
 export const CustomDatePicker = styled(ReactDatePicker)`
-  width: 100%;
+  width: 600%;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -71,7 +71,7 @@ export const EventWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-left: 700px;
+  margin-left: 900px;
 `;
 
 export const FiltersButton = styled.button`
@@ -113,6 +113,7 @@ export const CustomCalendarForm = styled(Flex)`
 `;
 
 export const DatePickerWrapper = styled.div`
+  margin-right: 150px;
   flex: 1;
 `;
 

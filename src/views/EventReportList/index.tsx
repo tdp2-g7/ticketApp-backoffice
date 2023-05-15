@@ -1,5 +1,4 @@
 import { useState, FC } from 'react';
-import ReactDatePicker from 'react-datepicker';
 import { Field, Form } from 'react-final-form';
 import { DataGrid } from '@mui/x-data-grid';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,8 +15,8 @@ import {
   FieldWrapper,
   CustomForm,
   Container,
-  CustomInput /* CustomDatePicker, */,
-  // CustomCalendarForm,
+  CustomInput,
+  CustomDatePicker,
   FormWrapper,
   DatePickerWrapper,
   TitleContainer,
@@ -176,7 +175,7 @@ const EventReportList: FC<IEventReportListProps> = (
       <FormContainer>
         <RowContainer>
           <DatePickerWrapper>
-            <ReactDatePicker
+            <CustomDatePicker
               onChange={(date: any) => setFromDate(date)}
               selected={fromDate}
               className='datePicker'
@@ -186,7 +185,7 @@ const EventReportList: FC<IEventReportListProps> = (
             />
           </DatePickerWrapper>
           <DatePickerWrapper>
-            <ReactDatePicker
+            <CustomDatePicker
               onChange={(date: any) => setToDate(date)}
               selected={toDate}
               className='datePicker'
@@ -199,23 +198,23 @@ const EventReportList: FC<IEventReportListProps> = (
             <Form
               onSubmit={onHandleSubmit}
               render={({ handleSubmit }) => (
-                <CustomForm onSubmit={handleSubmit}>
-                  <Container>
-                      <FieldWrapper>
-                      <Field
-                        component={CustomInput}
-                        label='Name'
-                        name='name'
-                        type='input'
-                        placeholder='Buscar por nombre'
-                        onChange={(name: any) => setName(name)}
-                      />
-                      </FieldWrapper>
-                      <ButtonWrapper>
-                        <FiltersButton type='submit'>Filtrar</FiltersButton>
-                      </ButtonWrapper>
-                  </Container>
-                </CustomForm>
+              <CustomForm onSubmit={handleSubmit}>
+                <Container>
+                  <FieldWrapper>
+                    <Field
+                      component={CustomInput}
+                      label='Name'
+                      name='name'
+                      type='input'
+                      placeholder='Buscar por nombre'
+                      onChange={(name: any) => setName(name)}
+                    />
+                  </FieldWrapper>
+                  <ButtonWrapper>
+                    <FiltersButton type='submit'>Filtrar</FiltersButton>
+                  </ButtonWrapper>
+                </Container>
+              </CustomForm>
               )}
             />
           </FormWrapper>
