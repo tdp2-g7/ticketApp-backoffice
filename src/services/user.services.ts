@@ -32,8 +32,6 @@ export async function getAllReports(userId: string): Promise<AxiosResponse> {
 }
 
 export async function getOrganizerReports(data: any): Promise<AxiosResponse> {
-  console.log('ESTOY ACA, EN SERVICE ORGANIZER RESPORTS');
-  console.log(data);
   let url = `${USERS_API_URL}/organizer-report/all-reports?page=${data.page}&offset=${data.offset}`;
 
   /* eslint-disable */
@@ -42,7 +40,6 @@ export async function getOrganizerReports(data: any): Promise<AxiosResponse> {
   data.to_date && (url += `&to_date=${data.to_date}`);
   /* eslint-enable */
 
-  console.log(url);
   const response = await get(url);
 
   return response.data;
