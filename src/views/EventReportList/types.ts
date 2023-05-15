@@ -3,13 +3,16 @@ import { IReport } from '../../types/user.types';
 export interface IEventReportListProps {
   userReports: IReport[];
   eventReports: IReport[];
-  setFilters: (value: any) => void;
-  filters: any;
   organizerTitleColor: string;
   eventTitleColor: string;
   handleTableChange: (value: string) => void;
   showOrganizerTable: boolean;
   handleFilters: (value: boolean) => void;
+  setName: (value: string) => void;
+  toDate: Date;
+  setToDate: (value: Date) => void;
+  fromDate: Date;
+  setFromDate: (value: Date) => void;
 }
 
 export interface IFormData {

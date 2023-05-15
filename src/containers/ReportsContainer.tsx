@@ -14,11 +14,9 @@ const ReportsContainer: FunctionComponent = () => {
   const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.darkViolet);
   const [eventTitleColor, setEventTitleColor] = useState(COLORS.gray);
   const [showOrganizerTable, setShowOrganizerTable] = useState(false);
-  const [filters, setFilters] = useState({
-    name: '',
-    fromDate: null,
-    toDate: null,
-  });
+  const [name, setName] = useState('');
+  const [toDate, setToDate] = useState(new Date());
+  const [fromDate, setFromDate] = useState(new Date());
 
   useEffect(() => {
     const data = {
@@ -55,18 +53,18 @@ const ReportsContainer: FunctionComponent = () => {
       const data = {
         offset: 20,
         page: 1,
-        name: filters.name,
-        to_date: filters.toDate,
-        from_date: filters.fromDate,
+        name,
+        to_date: toDate.toISOString(),
+        from_date: fromDate.toISOString(),
       };
       dispatch(onGetAllOrganizerReports(data));
     } else {
       const data = {
         offset: 20,
         page: 1,
-        title: filters.name,
-        to_date: filters.toDate,
-        from_date: filters.fromDate,
+        title: name,
+        to_date: toDate.toISOString(),
+        from_date: fromDate.toISOString(),
       };
       dispatch(onGetAllEventReports(data));
     }
@@ -77,9 +75,10 @@ const ReportsContainer: FunctionComponent = () => {
       <Layout>
         {(
           <EventReportList eventReports={reports} userReports={userReports}
-          organizerTitleColor={organizerTitleColor} setFilters={setFilters}
-          handleTableChange={handleTableChange} eventTitleColor={eventTitleColor}
-          showOrganizerTable={showOrganizerTable} filters={filters} handleFilters={handleFilters}/>
+          organizerTitleColor={organizerTitleColor} eventTitleColor={eventTitleColor}
+          handleTableChange={handleTableChange} handleFilters={handleFilters}
+          showOrganizerTable={showOrganizerTable} setName={setName}
+          toDate={toDate} setToDate={setToDate} fromDate={fromDate} setFromDate={setFromDate}/>
         )}
       </Layout>
     </>

@@ -34,13 +34,16 @@ const EventReportList: FC<IEventReportListProps> = (
   const {
     eventReports,
     userReports,
-    setFilters,
     handleTableChange,
     organizerTitleColor,
     eventTitleColor,
     showOrganizerTable,
-    filters,
     handleFilters,
+    setName,
+    toDate,
+    setToDate, 
+    fromDate, 
+    setFromDate,
   } = props;
   const [formValues, setFormValues] = useState<any>({});
 
@@ -170,6 +173,28 @@ const EventReportList: FC<IEventReportListProps> = (
         </EventWrapper>
       </TitleContainer>
       <FormContainer>
+      <CustomCalendarForm>
+        <DatePickerWrapper>
+          <ReactDatePicker
+            onChange={(date: any) => setFromDate(date)}
+            selected={fromDate}
+            className='datePicker'
+            dateFormat='dd/MM/yyyy'
+            placeholderText='Fecha de inicio'
+            isClearable={true}
+          />
+        </DatePickerWrapper>
+        <DatePickerWrapper>
+          <ReactDatePicker
+            onChange={(date: any) => setToDate(date)}
+            selected={toDate}
+            className='datePicker'
+            dateFormat='dd/MM/yyyy'
+            placeholderText='Fecha de finalizacion'
+            isClearable={true}
+          />
+        </DatePickerWrapper>
+      </CustomCalendarForm>
         <Form
           onSubmit={onHandleSubmit}
           render={({ handleSubmit, form }) => {
@@ -178,32 +203,6 @@ const EventReportList: FC<IEventReportListProps> = (
               <CustomForm onSubmit={handleSubmit}>
                 <Container>
                   <RowContainer>
-                    <CustomCalendarForm>
-                      <DatePickerWrapper>
-                        <ReactDatePicker
-                          onChange={(date: any) =>
-                            setFilters({ ...filters, fromDate: date })
-                          }
-                          selected={filters.fromDate}
-                          className='datePicker'
-                          dateFormat='dd/MM/yyyy'
-                          placeholderText='Fecha de inicio'
-                          isClearable={true}
-                        />
-                      </DatePickerWrapper>
-                      <DatePickerWrapper>
-                        <ReactDatePicker
-                          onChange={(date: any) =>
-                            setFilters({ ...filters, toDate: date })
-                          }
-                          selected={filters.fromDate}
-                          className='datePicker'
-                          dateFormat='dd/MM/yyyy'
-                          placeholderText='Fecha de finalizacion'
-                          isClearable={true}
-                        />
-                      </DatePickerWrapper>
-                    </CustomCalendarForm>
                     <FieldWrapper>
                       <Field
                         component={CustomInput}
@@ -211,9 +210,7 @@ const EventReportList: FC<IEventReportListProps> = (
                         name='name'
                         type='input'
                         placeholder='Buscar por nombre'
-                        onChange={(event: any) =>
-                          setFilters({ ...filters, name: event.target.value })
-                        }
+                        onChange={(name: any) => setName(name)}
                       />
                     </FieldWrapper>
                     <ButtonWrapper>
