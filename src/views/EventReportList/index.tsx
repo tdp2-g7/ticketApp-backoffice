@@ -226,6 +226,7 @@ const EventReportList: FC<IEventReportListProps> = (
         getRowId={(row) => row.id}
         hideFooter={true}
         localeText={{
+          noRowsLabel: 'No hay filas que coincidan con la busqueda',
           columnMenuSortDesc: 'Ordenar DESC',
           columnMenuSortAsc: 'Ordenar ASC',
           columnMenuFilter: 'Filtrar',

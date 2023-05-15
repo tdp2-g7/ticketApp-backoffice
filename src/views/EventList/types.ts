@@ -7,4 +7,5 @@ export interface IEventListProps {
   onChangeBlock: (organizerId: string) => void;
   showModal: boolean;
   setShowModal: (value: boolean) => void;
+  loading: boolean;
 }

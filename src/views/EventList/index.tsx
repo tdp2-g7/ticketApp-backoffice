@@ -8,6 +8,7 @@ import {
 import { handleTime, handleDate } from '../../helpers/time';
 import { State, handleStateText } from '../../helpers/state';
 import { Modal } from '../../components/Modal/Modal';
+import Loading from '../../components/Loading/Loading';
 
 const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   const {
@@ -17,6 +18,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     showModal,
     setShowModal,
     onChangeBlock,
+    loading,
   } = props;
 
   const columns = [
@@ -87,66 +89,72 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
 
   return (
     <>
-      {showModal ? (
-        <Modal
-          onClose={() => {
-            setShowModal(false);
-          }}
-          isOpen={true}
-          title={'Solicitud invalida'}
-        >
-          El evento que ha seleccionado no tiene denuncias.
-        </Modal>
+      {loading ? (
+        <Loading />
       ) : (
-        <TableContainer>
-          <Title>
-            {organizerData && organizerData[0].name
-              ? `Eventos de ${organizerData[0].name}`
-              : 'Eventos'}{' '}
-          </Title>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            getRowId={(row) => row.eventId}
-            hideFooter={true}
-            localeText={{
-              columnMenuSortDesc: 'Ordenar DESC',
-              columnMenuSortAsc: 'Ordenar ASC',
-              columnMenuFilter: 'Filtrar',
-              columnMenuHideColumn: 'Ocultar columna',
-              columnMenuManageColumns: 'Administrar columnas',
-              columnMenuUnsort: 'Desordenar',
-              filterPanelAddFilter: 'Agregar filtro',
-              filterPanelRemoveAll: 'Eliminar todos',
-              filterPanelDeleteIconLabel: 'Eliminar',
-              filterPanelLogicOperator: 'Operador logico',
-              filterPanelOperator: 'Operador',
-              filterPanelOperatorAnd: 'Y',
-              filterPanelOperatorOr: 'O',
-              filterPanelColumns: 'Columnas',
-              filterPanelInputLabel: 'Valor',
-              filterPanelInputPlaceholder: 'Valor del filtro',
-              filterOperatorContains: 'contiene',
-              filterOperatorEquals: 'igual a',
-              filterOperatorStartsWith: 'comienza por',
-              filterOperatorEndsWith: 'termina con',
-              filterOperatorIs: 'es',
-              filterOperatorNot: 'no es',
-              filterOperatorAfter: 'está despues de',
-              filterOperatorOnOrAfter: 'está en o está despues de',
-              filterOperatorBefore: 'está antes de',
-              filterOperatorOnOrBefore: 'está en o está antes de',
-              filterOperatorIsEmpty: 'es vacio',
-              filterOperatorIsNotEmpty: 'no está vacio',
-              filterOperatorIsAnyOf: 'contiene al menos',
-              columnsPanelTextFieldLabel: 'Encontrar columna',
-              columnsPanelTextFieldPlaceholder: 'Titulo de columna',
-              columnsPanelDragIconLabel: 'Reordenar columna',
-              columnsPanelShowAllButton: 'Mostrar todas',
-              columnsPanelHideAllButton: 'Ocultar todas',
+      <>
+        {showModal ? (
+          <Modal
+            onClose={() => {
+              setShowModal(false);
             }}
-          />
-        </TableContainer>
+            isOpen={true}
+            title={'Solicitud invalida'}
+          >
+            El evento que ha seleccionado no tiene denuncias.
+          </Modal>
+        ) : (
+          <TableContainer>
+            <Title>
+              {organizerData && organizerData[0].name
+                ? `Eventos de ${organizerData[0].name}`
+                : 'Eventos'}{' '}
+            </Title>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              getRowId={(row) => row.eventId}
+              hideFooter={true}
+              localeText={{
+                columnMenuSortDesc: 'Ordenar DESC',
+                columnMenuSortAsc: 'Ordenar ASC',
+                columnMenuFilter: 'Filtrar',
+                columnMenuHideColumn: 'Ocultar columna',
+                columnMenuManageColumns: 'Administrar columnas',
+                columnMenuUnsort: 'Desordenar',
+                filterPanelAddFilter: 'Agregar filtro',
+                filterPanelRemoveAll: 'Eliminar todos',
+                filterPanelDeleteIconLabel: 'Eliminar',
+                filterPanelLogicOperator: 'Operador logico',
+                filterPanelOperator: 'Operador',
+                filterPanelOperatorAnd: 'Y',
+                filterPanelOperatorOr: 'O',
+                filterPanelColumns: 'Columnas',
+                filterPanelInputLabel: 'Valor',
+                filterPanelInputPlaceholder: 'Valor del filtro',
+                filterOperatorContains: 'contiene',
+                filterOperatorEquals: 'igual a',
+                filterOperatorStartsWith: 'comienza por',
+                filterOperatorEndsWith: 'termina con',
+                filterOperatorIs: 'es',
+                filterOperatorNot: 'no es',
+                filterOperatorAfter: 'está despues de',
+                filterOperatorOnOrAfter: 'está en o está despues de',
+                filterOperatorBefore: 'está antes de',
+                filterOperatorOnOrBefore: 'está en o está antes de',
+                filterOperatorIsEmpty: 'es vacio',
+                filterOperatorIsNotEmpty: 'no está vacio',
+                filterOperatorIsAnyOf: 'contiene al menos',
+                columnsPanelTextFieldLabel: 'Encontrar columna',
+                columnsPanelTextFieldPlaceholder: 'Titulo de columna',
+                columnsPanelDragIconLabel: 'Reordenar columna',
+                columnsPanelShowAllButton: 'Mostrar todas',
+                columnsPanelHideAllButton: 'Ocultar todas',
+              }}
+            />
+          </TableContainer>
+        )}
+      </>
       )}
     </>
   );
