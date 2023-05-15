@@ -109,3 +109,13 @@ export const onGetReportsByIdSucceeded = (data: unknown): AnyAction => (
 
 export const onGetReportsByIdFailed = (error: unknown): AnyAction => (
   { type: constants.ON_GET_REPORTS_BY_ID_FAILED, error });
+
+export function onGetAllOrganizerReports(data: any): AnyAction {
+  return { type: constants.ON_GET_ALL_ORGANIZER_REPORTS_REQUESTED, data };
+}
+
+export const onGetAllOrganizerReportsSucceeded = (data: unknown): AnyAction => (
+  { type: constants.ON_GET_ALL_ORGANIZER_REPORTS_SUCCEEDED, data });
+
+export const onGetAllOrganizerReportsFailed = (error: unknown): AnyAction => (
+  { type: constants.ON_GET_ALL_ORGANIZER_REPORTS_FAILED, error });

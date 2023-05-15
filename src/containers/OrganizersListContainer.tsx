@@ -6,7 +6,7 @@ import useTypedSelector from '../hooks/useTypedSelector';
 
 import Layout from '../views/Layout';
 
-const UsersListContainer: FunctionComponent = () => {
+const OrganizerListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { organizers, organizerBlock } = useTypedSelector((state) => state.organizer);
   const [showModal, setShowModal] = useState(false);
@@ -37,4 +37,4 @@ const UsersListContainer: FunctionComponent = () => {
   );
 };
 
-export default UsersListContainer;
+export default OrganizerListContainer;

@@ -35,7 +35,7 @@ export interface IUserDefaultState {
   loading: boolean;
   data: any;
   administrator: IAdminsitrator | null;
-  reports: IReport[]
+  userReports: IReport[]
   user: IUser | null;
 }
 
@@ -61,6 +61,7 @@ export interface IReport {
   open: boolean,
   user: IUser;
   event: IEvent;
+  organizer: IOrganizer;
 }
 
 export interface IOrganizerTable{
