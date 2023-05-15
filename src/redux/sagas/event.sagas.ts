@@ -2,7 +2,9 @@ import { AnyAction } from 'redux';
 import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
-import { changeBlockEvent, getEventsFilteredBy, getAllReports, getAllEvents } from '../../services/event.services';
+import {
+  changeBlockEvent, getEventsFilteredBy, getAllReports, getAllEvents,
+} from '../../services/event.services';
 import * as actions from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
 

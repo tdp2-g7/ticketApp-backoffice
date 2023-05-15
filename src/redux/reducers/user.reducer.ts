@@ -47,10 +47,11 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
         users: data.users,
       };
     case constants.ON_GET_REPORTS_BY_ID_SUCCEEDED:
+      console.log('DATA', data);
       return {
         ...state,
         loading: false,
-        reports: data.reports,
+        userReports: data.reports,
         user: data.user,
       };
     case constants.ON_GET_ALL_ORGANIZER_REPORTS_SUCCEEDED:
