@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
 import COLORS from '../../helpers/colors';
+import { ITitleProps } from './types';
 
 export const TableContainer = styled.div`
   margin-top: 1%;
@@ -9,12 +10,18 @@ export const TableContainer = styled.div`
   width: 90%;
 `;
 
-export const Title = styled.p`
+export const Title = styled.p<ITitleProps>`
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
-  color: ${COLORS.darkViolet};
-`;
+  cursor: pointer;
+
+  ${({ color }) => color
+  && css`
+    color: ${color}
+  `}
+
+  `;
 
 export const FormContainer = styled.div`
   margin: 20px -0.5%;
@@ -68,4 +75,20 @@ export const CustomInput = styled.input`
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const OrganizerWrapper = styled.div`
+  margin-right: 10px;
+`;
+
+export const EventWrapper = styled.div`
+  margin-left: 10px;
 `;

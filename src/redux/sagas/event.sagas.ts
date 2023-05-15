@@ -10,7 +10,6 @@ import * as constants from '../constants/event.constants';
 export function* onGetAllEventReports(action: AnyAction): Generator {
   try {
     const { data } : any = yield call(getAllEvents, action.data);
-    console.log('ACA HAY DATA CHE', data);
     yield put(actions.onGetAllEventReportsSucceeded(data));
   } catch (error) {
     yield put(actions.onGetAllEventReportsFailed(error));

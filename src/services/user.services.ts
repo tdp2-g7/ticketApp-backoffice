@@ -30,3 +30,20 @@ export async function getAllReports(userId: string): Promise<AxiosResponse> {
   const response = await get(`${EVENTS_API_URL}/event-report/${userId}`);
   return response.data;
 }
+
+export async function getOrganizerReports(data: any): Promise<AxiosResponse> {
+  console.log('llegue aca...');
+  let url = `${USERS_API_URL}/organizer-report/all-reports?page=${data.page}&offset=${data.offset}`;
+
+  /* eslint-disable */
+  data.title && (url += `&title=${data.title}`);
+  data.from_date && (url += `&from_date=${data.from_date}`);
+  data.to_date && (url += `&to_date=${data.to_date}`);
+  /* eslint-enable */
+
+  const response = await get(url);
+
+  console.log('aca en el endpoint', response);
+
+  return response.data;
+}

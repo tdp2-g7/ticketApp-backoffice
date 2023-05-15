@@ -11,7 +11,7 @@ export interface IUser {
 export interface IOrganizer {
   userId: string;
   name: string;
-  last_name: string;
+  lastName: string;
   email: string;
   description: string;
   image: any;
@@ -24,7 +24,7 @@ export interface IUserDefaultState {
   loading: boolean;
   data: any;
   administrator: IAdminsitrator | null;
-  reports: IReport[]
+  userReports: IReport[]
   user: IUser | null;
 }
 
@@ -49,4 +49,5 @@ export interface IReport {
   open: boolean,
   user: IUser;
   event: IEvent;
+  organizer: IOrganizer;
 }

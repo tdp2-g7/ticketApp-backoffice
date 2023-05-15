@@ -12,10 +12,7 @@ export async function getAllEvents(data: any): Promise<AxiosResponse> {
   /* eslint-enable */
   const response = await get(url);
 
-  console.log(url);
-  console.log('ACA ESTA EL RESPONSE', response.data);
-
-  return response.data;
+  return response;
 }
 
 export async function getEventsFilteredBy(data: any): Promise<AxiosResponse> {

@@ -2,61 +2,114 @@ import { useState, FC } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { Field, Form } from 'react-final-form';
 import { DataGrid } from '@mui/x-data-grid';
-import { IEventReportListProps, IFormData } from './types';
-import { IReport } from '../../types/user.types';
+import {
+  IEventReportListProps, IFormData, IEventReportRowsTable, IOrganizerReportRowsTable,
+} from './types';
 import {
   TableContainer, Title, FormContainer, RowContainer, FieldWrapper,
   CustomForm, Container, CustomInput, /* CustomDatePicker, */
-  CustomCalendarForm, DatePickerWrapper,
+  CustomCalendarForm, DatePickerWrapper, TitleContainer,
+  EventWrapper, OrganizerWrapper,
 } from './styles';
+import { handleDate } from '../../helpers/time';
 
+/* eslint-disable */
 const EventReportList: FC<IEventReportListProps> = (props: IEventReportListProps) => {
-  const { reports, setEventName } = props;
+  const {
+    eventReports, userReports, setEventName, handleTableChange,
+    organizerTitleColor, eventTitleColor, showOrganizerTable,
+  } = props;
+
+  console.log(userReports, '00');
 
   const [formValues, setFormValues] = useState<any>({});
 
-  console.log(reports);
+  const setReserveDate = (data: any) => {
+    console.log(data);
+  };
+
+  const organizerColumns = [
+    {
+      field: 'id', headerName: 'id', width: 50,
+    },
+    {
+      field: 'name', headerName: 'Nombre', width: 200,
+    },
+    {
+      field: 'lastName', headerName: 'Apellido', width: 200,
+    },
+    {
+      field: 'reporterName', headerName: 'Denunciante', width: 250,
+    },
+    {
+      field: 'date', headerName: 'Fecha de denuncia', width: 250,
+    },
+    {
+      field: 'description', headerName: 'Detalle', width: 400,
+    },
+  ];
+
+  const eventColumns = [
+    {
+      field: 'id', headerName: 'id', width: 50,
+    },
+    {
+      field: 'title', headerName: 'Evento', width: 250,
+    },
+    {
+      field: 'reporterName', headerName: 'Denunciante', width: 250,
+    },
+    {
+      field: 'date', headerName: 'Fecha de denuncia', width: 250,
+    },
+    {
+      field: 'description', headerName: 'Detalle', width: 400,
+    },
+  ];
+
+  const eventReportRows: IEventReportRowsTable[] = eventReports.map(report => {
+    const { id, event, user, date, description } = report;
+    
+    const stringDate = handleDate(date);
+    const reporterNameString = user.name + ' ' + user.lastName;
+    
+    return { id, title: event.title, reporterName: reporterNameString, date: stringDate, description };
+  });
+
+  const organizerReportRows: IOrganizerReportRowsTable[] = userReports.map(report => {
+    const { id, organizer, user, date, description } = report;
+    
+    const stringDate = handleDate(date);    
+    const reporterNameString = user.name + ' ' + user.lastName;
+
+    return { 
+      id, name: organizer.name, lastName: organizer.lastName, date: stringDate, 
+      description, reporterName: reporterNameString, title: user.name
+    };
+  });
 
   const onSubmit = async (formData: IFormData) => {
-    console.log('================', formValues);
-    console.log(formData);
+    console.log('================', formValues, formData);
   };
 
   const onHandleSubmit = (formData: IFormData) => {
     onSubmit(formData);
   };
 
-  const setReserveDate = (data: any) => {
-    console.log(data);
-  };
-
-  const columns = [
-    {
-      field: 'userId', headerName: 'id', width: 50,
-    },
-    {
-      field: 'name', headerName: 'Nombre', width: 250,
-    },
-    {
-      field: 'lastName', headerName: 'Apellido', width: 250,
-    },
-    {
-      field: 'email', headerName: 'Correo electronico', width: 250,
-    },
-    {
-      field: 'reports_nr', headerName: 'Cantidad denuncias', width: 150,
-    },
-  ];
-
-  const rows: IReport[] = reports;
-  // const addRowIds = (r: IReport[]): IReport[] => r.map((row, index)
-  // => ({ ...row, id: index + 1 }));
-  // const rowsWithIds: IReport[] = addRowIds(rows);
-
-  /* eslint-disable */
   return (
       <TableContainer>
-        <Title>Eventos</Title>
+        <TitleContainer>
+          <OrganizerWrapper>
+            <Title onClick={() => handleTableChange('organizer')} color={organizerTitleColor}>
+              Organizadores
+            </Title>
+          </OrganizerWrapper>
+          <EventWrapper>
+            <Title onClick={() => handleTableChange('event')} color={eventTitleColor}>
+              Eventos
+            </Title>
+          </EventWrapper>
+        </TitleContainer>
         <FormContainer>
           <Form
             onSubmit={onHandleSubmit}
@@ -90,7 +143,9 @@ const EventReportList: FC<IEventReportListProps> = (props: IEventReportListProps
             }}
           />
       </FormContainer>
-      <DataGrid rows={rows} columns={columns} hideFooter={true}
+      <DataGrid rows={showOrganizerTable? organizerReportRows : eventReportRows} 
+                columns={showOrganizerTable? organizerColumns : eventColumns} 
+                getRowId={(row) => row.id} hideFooter={true}
                   localeText = {{ columnMenuSortDesc: 'Ordenar DESC',
                                 columnMenuSortAsc: 'Ordenar ASC',
                                 columnMenuFilter: 'Filtrar',

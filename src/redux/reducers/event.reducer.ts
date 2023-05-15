@@ -29,11 +29,10 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         loading: true,
       };
     case constants.ON_GET_ALL_EVENT_REPORTS_SUCCEEDED:
-      console.log('ACA ESTOY EN EL REDUCER BOLUDO', data.reports);
       return {
         ...state,
         loading: false,
-        events: data.reports,
+        reports: data.reports,
       };
     case constants.ON_GET_EVENTS_FILTERED_BY_SUCCEEDED:
       return {
