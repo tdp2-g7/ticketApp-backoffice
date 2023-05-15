@@ -2,6 +2,7 @@ import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import EventList from '../views/EventList';
+import EmptyPage from '../views/EmptyPage';
 import {
   onGetReportsById,
   onGetEventsFilteredBy,
@@ -57,20 +58,18 @@ const EventListContainer: FunctionComponent = () => {
     }
   };
 
+  const showTable = events.length > 0;
+
   return (
     <>
-      <Layout>
-        {
-          <EventList
-            events={events}
-            organizerData={organizerData}
-            onChangeBlock={onChangeBlockEvent}
-            getReportsById={getReportsById}
-            setShowModal={setShowModal}
-            showModal={showModal}
-          />
-        }
-      </Layout>
+    <Layout>
+      {showTable ? (
+        <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
+        setShowModal={setShowModal} onChangeBlock={onChangeBlockEvent} showModal={showModal}/>
+      ) : (
+        <EmptyPage/>
+      )}
+    </Layout>
     </>
   );
 };

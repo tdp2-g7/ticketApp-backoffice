@@ -20,6 +20,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
     email: organizer.email,
     isBlocked: organizer.isBlocked,
     stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+    state: organizer.state,
   }));
 
   const columns = [
@@ -31,12 +32,12 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 300,
+      width: 250,
     },
     {
       field: 'lastName',
       headerName: 'Apellido',
-      width: 300,
+      width: 250,
     },
     {
       field: 'email',
