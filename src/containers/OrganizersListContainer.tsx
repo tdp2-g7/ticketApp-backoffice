@@ -8,12 +8,12 @@ import Layout from '../views/Layout';
 
 const OrganizerListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { organizers } = useTypedSelector((state) => state.organizer);
+  const { organizers, organizerBlock } = useTypedSelector((state) => state.organizer);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(onGetAllOrganizers());
-  }, [dispatch]);
+  }, [dispatch, organizerBlock]);
 
   const onChangeBlock = (organizerId: string) => {
     if (organizerId) {
@@ -25,8 +25,12 @@ const OrganizerListContainer: FunctionComponent = () => {
     <>
       <Layout>
         {(
-          <OrganizersList organizers={organizers} onChangeBlock={onChangeBlock}
-          setShowModal={setShowModal} showModal={showModal}/>
+          <OrganizersList
+          organizers={organizers}
+          onChangeBlock={onChangeBlock}
+          setShowModal={setShowModal}
+          showModal={showModal}
+          />
         )}
       </Layout>
     </>

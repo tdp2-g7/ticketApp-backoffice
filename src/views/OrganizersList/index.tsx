@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { IOrganizersListProps } from './types';
-import { IOrganizer } from '../../types/user.types';
+import { IOrganizerTable } from '../../types/user.types';
 import { BlockButton, TableContainer, Title } from './styles';
 import { globalNavigate } from '../../helpers/history';
 import { Modal } from '../../components/Modal/Modal';
@@ -12,13 +12,21 @@ const OrganizersList: FC<IOrganizersListProps> = (
   const {
     organizers, onChangeBlock, showModal, setShowModal,
   } = props;
-  const rows: IOrganizer[] = organizers;
+
+  const rows: IOrganizerTable[] = organizers.map((organizer) => ({
+    userId: organizer.userId,
+    name: organizer.name,
+    lastName: organizer.lastName,
+    email: organizer.email,
+    isBlocked: organizer.isBlocked,
+    stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+  }));
 
   const columns = [
     {
       field: 'userId',
-      headerName: 'Id',
-      width: 50,
+      headerName: 'ID',
+      width: 100,
     },
     {
       field: 'name',
@@ -33,7 +41,12 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 350,
+      width: 250,
+    },
+    {
+      field: 'stateText',
+      headerName: 'Estado',
+      width: 100,
     },
     {
       field: 'block',
@@ -59,10 +72,6 @@ const OrganizersList: FC<IOrganizersListProps> = (
     },
   ];
 
-  const addIds = (r: IOrganizer[]): IOrganizer[] => r.map((row, idx) => ({ ...row, id: idx + 1 }));
-
-  const rowsWithIds: IOrganizer[] = addIds(rows);
-
   /* eslint-disable */
   return (
     <>
@@ -74,7 +83,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
     <TableContainer>
       <Title>Organizadores</Title>
       <DataGrid
-        rows={rowsWithIds}
+        rows={rows}
         columns={columns}
         getRowId={(row) => row.userId}
         hideFooter={true}
