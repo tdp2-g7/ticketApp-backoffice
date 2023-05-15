@@ -17,7 +17,7 @@ const EventListContainer: FunctionComponent = () => {
   const { events, eventBlock } = useTypedSelector((state) => state.event);
   const [searchParams] = useSearchParams();
   const organizerId = searchParams.get('organizerId');
-  const { organizers } = useTypedSelector((state) => state.organizer);
+  const { organizers, loading } = useTypedSelector((state) => state.organizer);
   const [showModal, setShowModal] = useState(false);
 
   let organizerData;
@@ -65,7 +65,8 @@ const EventListContainer: FunctionComponent = () => {
     <Layout>
       {showTable ? (
         <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
-        setShowModal={setShowModal} onChangeBlock={onChangeBlockEvent} showModal={showModal}/>
+        setShowModal={setShowModal} onChangeBlock={onChangeBlockEvent} showModal={showModal}
+        loading={loading}/>
       ) : (
         <EmptyPage/>
       )}
