@@ -11,8 +11,8 @@ const ReportsContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { reports } = useTypedSelector((state) => state.event);
   const { userReports } = useTypedSelector((state) => state.user);
-  const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.darkViolet);
-  const [eventTitleColor, setEventTitleColor] = useState(COLORS.gray);
+  const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.gray);
+  const [eventTitleColor, setEventTitleColor] = useState(COLORS.darkViolet);
   const [showOrganizerTable, setShowOrganizerTable] = useState(false);
   const [name, setName] = useState('');
   const [toDate, setToDate] = useState(new Date());
@@ -54,8 +54,8 @@ const ReportsContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
         name,
-        to_date: toDate.toISOString(),
-        from_date: fromDate.toISOString(),
+        to_date: toDate?.toISOString(),
+        from_date: fromDate?.toISOString(),
       };
       dispatch(onGetAllOrganizerReports(data));
     } else {
@@ -63,8 +63,8 @@ const ReportsContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
         title: name,
-        to_date: toDate.toISOString(),
-        from_date: fromDate.toISOString(),
+        to_date: toDate?.toISOString(),
+        from_date: fromDate?.toISOString(),
       };
       dispatch(onGetAllEventReports(data));
     }

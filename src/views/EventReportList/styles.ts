@@ -71,7 +71,7 @@ export const EventWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-left: 900px;
+  margin-left: 700px;
 `;
 
 export const FiltersButton = styled.button`

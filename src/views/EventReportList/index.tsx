@@ -207,7 +207,7 @@ const EventReportList: FC<IEventReportListProps> = (
                       name='name'
                       type='input'
                       placeholder='Buscar por nombre'
-                      onChange={(name: any) => setName(name)}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
                     />
                   </FieldWrapper>
                   <ButtonWrapper>
