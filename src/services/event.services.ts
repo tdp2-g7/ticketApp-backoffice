@@ -10,6 +10,7 @@ export async function getAllEvents(data: any): Promise<AxiosResponse> {
   data.from_date && (url += `&from_date=${data.from_date}`);
   data.to_date && (url += `&to_date=${data.to_date}`);
   /* eslint-enable */
+
   const response = await get(url);
 
   return response;

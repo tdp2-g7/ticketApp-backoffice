@@ -13,10 +13,14 @@ const organizerReducer: Reducer = (state = initialState, action = { type: '' }) 
   const { type, data } = action;
   switch (type) {
     case constants.ON_GET_ALL_ORGANIZERS_REQUESTED:
-    case constants.ON_CHANGE_BLOCK_REQUESTED:
       return {
         ...state,
         loading: true,
+      };
+    case constants.ON_CHANGE_BLOCK_REQUESTED:
+      return {
+        ...state,
+        loading: false,
       };
     case constants.ON_GET_ALL_ORGANIZERS_SUCCEEDED:
       return {

@@ -5,14 +5,15 @@ import useTypedSelector from '../hooks/useTypedSelector';
 import { onGetAllEventReports } from '../redux/actions/event.actions';
 import { onGetAllOrganizerReports } from '../redux/actions/user.actions';
 import Layout from '../views/Layout';
+import Loading from '../components/Loading/Loading';
 import COLORS from '../helpers/colors';
 
 const ReportsContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { reports } = useTypedSelector((state) => state.event);
-  const { userReports } = useTypedSelector((state) => state.user);
-  const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.darkViolet);
-  const [eventTitleColor, setEventTitleColor] = useState(COLORS.gray);
+  const { reports, loadingEvent } = useTypedSelector((state) => state.event);
+  const { userReports, loading } = useTypedSelector((state) => state.user);
+  const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.gray);
+  const [eventTitleColor, setEventTitleColor] = useState(COLORS.darkViolet);
   const [showOrganizerTable, setShowOrganizerTable] = useState(false);
   const [name, setName] = useState('');
   const [toDate, setToDate] = useState(new Date());
@@ -54,8 +55,8 @@ const ReportsContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
         name,
-        to_date: toDate.toISOString(),
-        from_date: fromDate.toISOString(),
+        to_date: toDate?.toISOString(),
+        from_date: fromDate?.toISOString(),
       };
       dispatch(onGetAllOrganizerReports(data));
     } else {
@@ -63,14 +64,20 @@ const ReportsContainer: FunctionComponent = () => {
         offset: 20,
         page: 1,
         title: name,
-        to_date: toDate.toISOString(),
-        from_date: fromDate.toISOString(),
+        to_date: toDate?.toISOString(),
+        from_date: fromDate?.toISOString(),
       };
       dispatch(onGetAllEventReports(data));
     }
   };
 
   return (
+    <>
+      {(loadingEvent || loading) ? (
+        <Layout>
+          <Loading/>
+        </Layout>
+      ) : (
     <>
       <Layout>
         {(
@@ -81,6 +88,8 @@ const ReportsContainer: FunctionComponent = () => {
           toDate={toDate} setToDate={setToDate} fromDate={fromDate} setFromDate={setFromDate}/>
         )}
       </Layout>
+    </>
+      )}
     </>
   );
 };
