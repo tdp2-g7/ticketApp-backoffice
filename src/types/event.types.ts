@@ -22,7 +22,7 @@ export interface IEvent {
 }
 
 export interface IEventDefaultState {
-  loading: boolean;
+  loadingEvent: boolean;
   events: IEvent[];
   data: any;
   eventBlock: boolean;

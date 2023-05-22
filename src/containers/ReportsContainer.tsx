@@ -5,12 +5,13 @@ import useTypedSelector from '../hooks/useTypedSelector';
 import { onGetAllEventReports } from '../redux/actions/event.actions';
 import { onGetAllOrganizerReports } from '../redux/actions/user.actions';
 import Layout from '../views/Layout';
+import Loading from '../components/Loading/Loading';
 import COLORS from '../helpers/colors';
 
 const ReportsContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { reports } = useTypedSelector((state) => state.event);
-  const { userReports } = useTypedSelector((state) => state.user);
+  const { reports, loadingEvent } = useTypedSelector((state) => state.event);
+  const { userReports, loading } = useTypedSelector((state) => state.user);
   const [organizerTitleColor, setOrganizerTitleColor] = useState(COLORS.gray);
   const [eventTitleColor, setEventTitleColor] = useState(COLORS.darkViolet);
   const [showOrganizerTable, setShowOrganizerTable] = useState(false);
@@ -72,6 +73,12 @@ const ReportsContainer: FunctionComponent = () => {
 
   return (
     <>
+      {(loadingEvent || loading) ? (
+        <Layout>
+          <Loading/>
+        </Layout>
+      ) : (
+    <>
       <Layout>
         {(
           <EventReportList eventReports={reports} userReports={userReports}
@@ -81,6 +88,8 @@ const ReportsContainer: FunctionComponent = () => {
           toDate={toDate} setToDate={setToDate} fromDate={fromDate} setFromDate={setFromDate}/>
         )}
       </Layout>
+    </>
+      )}
     </>
   );
 };
