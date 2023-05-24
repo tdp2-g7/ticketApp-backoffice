@@ -7,7 +7,7 @@ export const TableContainer = styled.div`
   margin-top: 1%;
   margin-left: 3%;
   height: 800px;
-  width: 90%;
+  width: 95%;
 `;
 
 export const Title = styled.p<ITitleProps>`
