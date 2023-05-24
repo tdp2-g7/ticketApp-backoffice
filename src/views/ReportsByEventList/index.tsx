@@ -23,15 +23,15 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       field: 'userId', headerName: 'ID', width: 100,
     },
     {
-      field: 'userName', headerName: 'Nombre denunciante', width: 350,
+      field: 'userName', headerName: 'Nombre denunciante', width: 200,
     },
     {
-      field: 'date', headerName: 'Fecha', width: 200,
+      field: 'date', headerName: 'Fecha', width: 130,
     },
     {
       field: 'actions',
       headerName: 'Descripcion',
-      width: 350,
+      width: 200,
       renderCell: (params: any) => (
         <ViewDescriptionButton onClick={() => { 
           setShowDescription(true);
@@ -42,7 +42,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       ),
     },
     {
-      field: 'reason', headerName: 'Razon', width: 200,
+      field: 'reason', headerName: 'Razon', width: 450,
     },
   ];
 
