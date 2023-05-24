@@ -33,7 +33,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     {
       field: 'date',
       headerName: 'Fecha',
-      width: 130,
+      width: 100,
     },
     {
       field: 'startTime',
@@ -49,7 +49,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     {
       field: 'actions',
       headerName: '',
-      width: 350,
+      width: 300,
       renderCell: (params: any) => (
         <>
           <ReportsButton
