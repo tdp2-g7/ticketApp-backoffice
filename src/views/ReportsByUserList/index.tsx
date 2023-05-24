@@ -26,7 +26,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       field: 'eventName', headerName: 'Nombre del evento', width: 400,
     },
     {
-      field: 'date', headerName: 'Fecha', width: 200,
+      field: 'date', headerName: 'Fecha', width: 130,
     },
     {
       field: 'actions',
@@ -42,7 +42,7 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       ),
     },
     {
-      field: 'reason', headerName: 'Razon', width: 350,
+      field: 'reason', headerName: 'Razon', width: 450,
     },
   ];
 
