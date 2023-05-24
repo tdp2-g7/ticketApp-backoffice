@@ -32,12 +32,12 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 250,
+      width: 190,
     },
     {
       field: 'lastName',
       headerName: 'Apellido',
-      width: 250,
+      width: 190,
     },
     {
       field: 'email',
