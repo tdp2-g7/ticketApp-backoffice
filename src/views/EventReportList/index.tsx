@@ -12,7 +12,6 @@ import {
   Title,
   FormContainer,
   RowContainer,
-  FieldWrapper,
   CustomForm,
   Container,
   CustomInput,
@@ -200,7 +199,6 @@ const EventReportList: FC<IEventReportListProps> = (
               render={({ handleSubmit }) => (
               <CustomForm onSubmit={handleSubmit}>
                 <Container>
-                  <FieldWrapper>
                     <Field
                       component={CustomInput}
                       label='Name'
@@ -209,7 +207,6 @@ const EventReportList: FC<IEventReportListProps> = (
                       placeholder='Buscar por nombre'
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
                     />
-                  </FieldWrapper>
                   <ButtonWrapper>
                     <FiltersButton type='submit'>Filtrar</FiltersButton>
                   </ButtonWrapper>

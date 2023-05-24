@@ -25,7 +25,6 @@ export const Title = styled.p<ITitleProps>`
 
 export const RowContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: flex-start; 
 `;
 
@@ -41,14 +40,14 @@ export const Container = styled.div`
 `;
 
 export const CustomDatePicker = styled(ReactDatePicker)`
-  width: 600%;
+  width: 200px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
 `;
 
 export const CustomInput = styled.input`
-  width: 1400%;
+  width: 250px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -71,12 +70,12 @@ export const EventWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-left: 50px;
+  margin-left: 10px;
 `;
 
 export const FiltersButton = styled.button`
   font-size: 20px;
-  width: 200%;
+  width: 150px;
   border-radius: 30px;
   margin-top: 10px;
   font-family: 'Poppins';
@@ -113,12 +112,7 @@ export const CustomCalendarForm = styled(Flex)`
 `;
 
 export const DatePickerWrapper = styled.div`
-  margin-right: 150px;
-  flex: 1;
-`;
-
-export const FieldWrapper = styled.div`
-  flex: 1;
+  margin-right: 30px;
 `;
 
 export const FormWrapper = styled.div`
