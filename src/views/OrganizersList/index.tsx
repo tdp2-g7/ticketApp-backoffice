@@ -89,6 +89,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
         getRowId={(row) => row.userId}
         hideFooter={true}
         localeText={{
+          noRowsLabel: 'Cargando organizadores...',
           columnMenuSortDesc: 'Ordenar DESC',
           columnMenuSortAsc: 'Ordenar ASC',
           columnMenuFilter: 'Filtrar',

@@ -10,11 +10,12 @@ import {
 } from '../redux/actions/event.actions';
 import useTypedSelector from '../hooks/useTypedSelector';
 import Layout from '../views/Layout';
+import Loading from '../components/Loading/Loading';
 import { IOrganizer } from '../types/user.types';
 
 const EventListContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { events, eventBlock } = useTypedSelector((state) => state.event);
+  const { events, eventBlock, loadingEvent } = useTypedSelector((state) => state.event);
   const [searchParams] = useSearchParams();
   const organizerId = searchParams.get('organizerId');
   const { organizers, loading } = useTypedSelector((state) => state.organizer);
@@ -62,15 +63,23 @@ const EventListContainer: FunctionComponent = () => {
 
   return (
     <>
-    <Layout>
-      {showTable ? (
-        <EventList events={events} getReportsById={getReportsById} organizerData={organizerData}
-        setShowModal={setShowModal} onChangeBlock={onChangeBlockEvent} showModal={showModal}
-        loading={loading}/>
+      { (loading || loadingEvent) ? (
+        <Layout>
+          <Loading/>
+        </Layout>
       ) : (
-        <EmptyPage/>
+        <>
+          <Layout>
+            {showTable ? (
+              <EventList events={events} getReportsById={getReportsById}
+              organizerData={organizerData} setShowModal={setShowModal}
+              onChangeBlock={onChangeBlockEvent} showModal={showModal} loading={loading}/>
+            ) : (
+              <EmptyPage/>
+            )}
+          </Layout>
+        </>
       )}
-    </Layout>
     </>
   );
 };

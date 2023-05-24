@@ -1,10 +1,11 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import redirectMiddleware from './middlewares/redirect.middleware';
+import storageMiddleware from './middlewares/storage.middleware';
+import notificationMiddleware from './middlewares/notifications.middleware';
 
 import reducers from './reducers';
 import rootSaga from './sagas';
-import redirectMiddleware from './middlewares/redirect.middleware';
-import storageMiddleware from './middlewares/storage.middleware';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +19,7 @@ const store = createStore(
       sagaMiddleware,
       redirectMiddleware,
       storageMiddleware,
+      notificationMiddleware,
     ),
   ),
 );

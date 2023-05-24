@@ -6,7 +6,7 @@ import {
   TableContainer, Title, ReportsButton, BlockButton,
 } from './styles';
 import { handleTime, handleDate } from '../../helpers/time';
-import { State, handleStateText } from '../../helpers/state';
+import { handleStateText } from '../../helpers/state';
 import { Modal } from '../../components/Modal/Modal';
 import Loading from '../../components/Loading/Loading';
 
@@ -65,7 +65,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
           </ReportsButton>
 
           <BlockButton onClick={() => onChangeBlock(params.row.eventId)}>
-            {params.row.state === State.BLOCKED ? 'Desbloquear' : 'Bloquear'}
+            {params.row.state === 'Activo' ? 'Bloquear' : 'Desbloquear'}
           </BlockButton>
         </>
       ),
