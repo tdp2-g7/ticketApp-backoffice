@@ -12,6 +12,14 @@ const COLORS = {
   violet: '#6638D1',
   darkViolet: '#242565',
   linkBlue: '#0000FF',
+  mineShaft: '#272727',
+  redMandy: '#E24F4F',
+  clementine: '#F06800',
+  greenLimeade: '#2CAA00',
+  electricViolet: '#BA00E0',
+  pink: '#FE53BB',
+  jordyBlue: '#84ACF0',
+
 };
 
 export default COLORS;

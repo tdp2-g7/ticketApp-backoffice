@@ -28,6 +28,7 @@ export interface IEventDefaultState {
   eventBlock: boolean;
   reports: IReport[];
   event: IEvent | null;
+  graphicsWithoutFinishDate: any;
 }
 
 export interface ISchedule {

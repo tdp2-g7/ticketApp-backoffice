@@ -3,7 +3,7 @@ import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import {
-  changeBlockEvent, getEventsFilteredBy, getAllReports, getAllEvents,
+  changeBlockEvent, getEventsFilteredBy, getAllReports, getAllEvents, getMetricsWithoutFinishDate,
 } from '../../services/event.services';
 import * as actions from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
@@ -44,11 +44,22 @@ export function* getAllReportsById(action: AnyAction): Generator {
   }
 }
 
+export function* onGetMetricsWithoutFinishDate(): Generator {
+  try {
+    const data : any = yield call(getMetricsWithoutFinishDate);
+    yield put(actions.onGetMetricsWithoutFinishDateSucceeded(data));
+  } catch (error) {
+    yield put(actions.onGetMetricsWithoutFinishDateFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_GET_ALL_EVENT_REPORTS_REQUESTED, onGetAllEventReports),
     takeLatest(constants.ON_GET_EVENTS_FILTERED_BY_REQUESTED, onGetEventsFilteredBy),
     takeLatest(constants.ON_CHANGE_BLOCK_EVENT_REQUESTED, onChangeBlockEvent),
     takeLatest(constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED, getAllReportsById),
+    // eslint-disable-next-line max-len
+    takeLatest(constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED, onGetMetricsWithoutFinishDate),
   ]);
 }

@@ -16,6 +16,7 @@ import PrivateRoute from './containers/PrivateRoute';
 import { onInitialize } from './redux/actions/user.actions';
 import { getCookie } from './helpers/cookies';
 import 'react-notifications/lib/notifications.css';
+import MetricsContainer from './containers/MetricsContainer';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -77,6 +78,14 @@ const App: FunctionComponent = () => {
             element={
               <PrivateRoute>
                 <ReportsContainer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/metrics'
+            element={
+              <PrivateRoute>
+                <MetricsContainer />
               </PrivateRoute>
             }
           />
