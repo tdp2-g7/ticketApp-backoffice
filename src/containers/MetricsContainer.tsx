@@ -31,15 +31,22 @@ const MetricsContainer: FunctionComponent = () => {
   );
 
   useEffect(() => {
-    dispatch(onGetMetricsWithoutFinishDateRequested());
-    dispatch(
-      onGetMetricsAccreditedClientsRequested({
-        startDate,
-        endDate,
-        visualizationType,
-      }),
-    );
-  }, [dispatch, startDate, endDate]);
+    if (startDate) {
+      dispatch(onGetMetricsWithoutFinishDateRequested(startDate));
+    }
+  }, [dispatch, startDate]);
+
+  useEffect(() => {
+    if (startDate && endDate && visualizationType) {
+      dispatch(
+        onGetMetricsAccreditedClientsRequested({
+          startDate,
+          endDate,
+          visualizationType,
+        }),
+      );
+    }
+  }, [dispatch, startDate, endDate, visualizationType]);
 
   return (
     <>
@@ -49,7 +56,9 @@ const MetricsContainer: FunctionComponent = () => {
             graphicsWithoutFinishDate={graphicsWithoutFinishDate}
             graphicsAccreditedClients={graphicsAccreditedClientsWithMonth}
             setStartDate={setStartDate}
+            startDate={startDate}
             setEndDate={setEndDate}
+            endDate={endDate}
             setVisualizationType={setVisualizationType}
             visualizationType={visualizationType}
           />

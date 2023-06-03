@@ -12,6 +12,7 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { EmptyContainer } from '../EmptyPage/styles';
 import { IMetricsProps } from './types';
 import {
@@ -21,9 +22,14 @@ import {
   Subtitle,
   Title,
   RowDiv,
+  StartCalendarContainer,
+  Calendar,
+  EndCalendarContainer,
+  InfoOutlinedIcon,
 } from './styles';
 import COLORS from '../../helpers/colors';
 import { visualizationTypes } from '../../helpers/visualizationTypes';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
   const {
@@ -31,8 +37,10 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     graphicsAccreditedClients,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setStartDate,
+    startDate,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setEndDate,
+    endDate,
     setVisualizationType,
     visualizationType,
   } = props;
@@ -81,20 +89,56 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
 
   return (
     <>
-      <Title>Metricas</Title>
+      <RowDiv style={{ marginTop: 18, marginBottom: 18 }}>
+        <Title>Metricas</Title>
+        <StartCalendarContainer>
+          <Calendar
+            selected={startDate}
+            onChange={(date: any) => setStartDate(date)}
+            dateFormat='dd/MM/yyyy'
+            placeholderText='Fecha de Inicio'
+            isClearable={true}
+            className='datePicker'
+          />
+        </StartCalendarContainer>
+        <EndCalendarContainer>
+          <Calendar
+            selected={endDate}
+            onChange={(date: any) => setEndDate(date)}
+            dateFormat='dd/MM/yyyy'
+            placeholderText='Fecha de Fin'
+            isClearable={true}
+            className='datePicker'
+            excludeDateIntervals={[
+              { start: new Date(), end: new Date('2100-06-3') },
+            ]}
+          />
+        </EndCalendarContainer>
+      </RowDiv>
+
       <GraphicsContainer>
         {!graphicsWithoutFinishDate?.pie ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>
-              Estado de todos los eventos creados en la plataforma
-            </Subtitle>
+            <RowDiv>
+              <Subtitle style={{ marginRight: 10 }}>
+                Estado de todos los eventos creados en la plataforma
+              </Subtitle>
+              <ReactTooltip id='my-tooltip' />
+              <a
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='Esta métrica no soporta el filtro de “Fecha de Fin”'
+              >
+                <InfoOutlinedIcon />
+              </a>
+            </RowDiv>
+
             <PieChart width={window.innerWidth / 3} height={380}>
               <Pie
                 data={graphicsWithoutFinishDate.pie}
                 cx={window.innerWidth / 6.4}
-                cy={200}
+                cy={180}
                 fill='#8884d8'
                 paddingAngle={1}
                 dataKey='value'
