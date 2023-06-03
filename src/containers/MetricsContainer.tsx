@@ -31,8 +31,13 @@ const MetricsContainer: FunctionComponent = () => {
   );
 
   useEffect(() => {
-    if (startDate && endDate && visualizationType) {
+    if (startDate) {
       dispatch(onGetMetricsWithoutFinishDateRequested(startDate));
+    }
+  }, [dispatch, startDate]);
+
+  useEffect(() => {
+    if (startDate && endDate && visualizationType) {
       dispatch(
         onGetMetricsAccreditedClientsRequested({
           startDate,
