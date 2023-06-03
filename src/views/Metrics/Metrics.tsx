@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { FC } from 'react';
+import { FC, FunctionComponent } from 'react';
 import {
   Cell,
   Pie,
@@ -11,6 +11,9 @@ import {
   Legend,
   BarChart,
   Bar,
+  LineChart,
+  Line,
+  LabelList,
 } from 'recharts';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { EmptyContainer } from '../EmptyPage/styles';
@@ -35,6 +38,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
   const {
     graphicsWithoutFinishDate,
     graphicsAccreditedClients,
+    graphicsFullInterval,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setStartDate,
     startDate,
@@ -86,6 +90,29 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
       </text>
     );
   };
+
+  const CustomizedLabel: FunctionComponent<any> = ({
+    x, y, stroke, value,
+  }) => (
+      <text x={x} y={y} dy={-4} fill={stroke} fontSize={15} textAnchor="middle">
+        {value}
+      </text>
+  );
+
+  const CustomizedAxisTick: FunctionComponent<any> = ({ x, y, payload }) => (
+      <g transform={`translate(${x},${y})`}>
+        <text
+          x={0}
+          y={0}
+          dy={16}
+          textAnchor="end"
+          fill="#666"
+          transform="rotate(-35)"
+        >
+          {payload.value}
+        </text>
+      </g>
+  );
 
   return (
     <>
@@ -207,30 +234,29 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsWithoutFinishDate?.pie ? (
+        {!graphicsFullInterval?.events_created ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <Subtitle>Cantidad de eventos creados a lo largo del tiempo</Subtitle>
+            <LineChart
+              width={window.innerWidth / 3.2}
+              height={380}
+              data={graphicsFullInterval.events_created}
+              margin={{
+                right: 30,
+                left: 20,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='name' height={50} tick={<CustomizedAxisTick />} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='cantidad' stroke='#8884d8'>
+                <LabelList content={<CustomizedLabel />} />
+              </Line>
+            </LineChart>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (

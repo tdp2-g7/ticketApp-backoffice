@@ -30,6 +30,7 @@ export interface IEventDefaultState {
   event: IEvent | null;
   graphicsWithoutFinishDate: any;
   graphicsAccreditedClients: any;
+  graphicsFullInterval: any;
 }
 
 export interface ISchedule {

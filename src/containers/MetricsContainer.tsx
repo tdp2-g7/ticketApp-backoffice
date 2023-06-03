@@ -5,6 +5,7 @@ import MetricsView from '../views/Metrics/Metrics';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
   onGetMetricsAccreditedClientsRequested,
+  onGetMetricsFullIntervalRequested,
   onGetMetricsWithoutFinishDateRequested,
 } from '../redux/actions/event.actions';
 import { visualizationTypes } from '../helpers/visualizationTypes';
@@ -12,7 +13,11 @@ import { numToMonth } from '../helpers/months';
 
 const MetricsContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { graphicsWithoutFinishDate, graphicsAccreditedClients } = useTypedSelector(
+  const {
+    graphicsWithoutFinishDate,
+    graphicsAccreditedClients,
+    graphicsFullInterval,
+  } = useTypedSelector(
     (state) => state.event,
   );
 
@@ -48,6 +53,12 @@ const MetricsContainer: FunctionComponent = () => {
     }
   }, [dispatch, startDate, endDate, visualizationType]);
 
+  useEffect(() => {
+    if (startDate && endDate) {
+      dispatch(onGetMetricsFullIntervalRequested({ startDate, endDate }));
+    }
+  }, [dispatch, startDate, endDate]);
+
   return (
     <>
       <Layout>
@@ -55,6 +66,7 @@ const MetricsContainer: FunctionComponent = () => {
           <MetricsView
             graphicsWithoutFinishDate={graphicsWithoutFinishDate}
             graphicsAccreditedClients={graphicsAccreditedClientsWithMonth}
+            graphicsFullInterval={graphicsFullInterval}
             setStartDate={setStartDate}
             startDate={startDate}
             setEndDate={setEndDate}

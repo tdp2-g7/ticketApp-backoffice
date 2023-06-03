@@ -123,3 +123,53 @@ export async function getMetricsAccreditedClients(data: any): Promise<any> {
   };
   return response;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function getMetricsFullInterval(data: any): Promise<any> {
+  // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
+  const response = {
+    events_created: [
+      {
+        name: '01/04',
+        cantidad: 76,
+      },
+      {
+        name: '06/04',
+        cantidad: 12,
+      },
+      {
+        name: '12/04',
+        cantidad: 43,
+      },
+      {
+        name: '18/04',
+        cantidad: 88,
+      },
+      {
+        name: '24/04',
+        cantidad: 5,
+      },
+      {
+        name: '30/04',
+        cantidad: 32,
+      },
+      {
+        name: '04/05',
+        cantidad: 71,
+      },
+      {
+        name: '10/05',
+        cantidad: 17,
+      },
+      {
+        name: '16/05',
+        cantidad: 94,
+      },
+      {
+        name: '22/05',
+        cantidad: 53,
+      },
+    ],
+  };
+  return response;
+}
