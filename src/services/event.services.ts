@@ -40,7 +40,8 @@ export async function getAllReports(eventId: string): Promise<AxiosResponse> {
   return response.data;
 }
 
-export async function getMetricsWithoutFinishDate(): Promise<any> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function getMetricsWithoutFinishDate(startDate: Date): Promise<any> {
   // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
   const response = {
     pie: [

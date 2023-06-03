@@ -57,8 +57,8 @@ export const onGetReportsByIdFailed = (error: unknown): AnyAction => ({
   error,
 });
 
-export function onGetMetricsWithoutFinishDateRequested(): AnyAction {
-  return { type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED };
+export function onGetMetricsWithoutFinishDateRequested(startDate: Date): AnyAction {
+  return { type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED, startDate };
 }
 
 export const onGetMetricsWithoutFinishDateSucceeded = (
