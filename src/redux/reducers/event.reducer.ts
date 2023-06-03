@@ -10,6 +10,7 @@ const initialState: IEventDefaultState = {
   reports: [],
   event: null,
   graphicsWithoutFinishDate: null,
+  graphicsAccreditedClients: null,
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -19,6 +20,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_GET_EVENTS_FILTERED_BY_REQUESTED:
     case constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED:
     case constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED:
+    case constants.ON_GET_METRICS_ACCREDITED_CLIENTS_REQUESTED:
       return {
         ...state,
         loadingEvent: true,
@@ -33,6 +35,12 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         ...state,
         loadingEvent: false,
         graphicsWithoutFinishDate: data,
+      };
+    case constants.ON_GET_METRICS_ACCREDITED_CLIENTS_SUCCEEDED:
+      return {
+        ...state,
+        loadingEvent: false,
+        graphicsAccreditedClients: data,
       };
     case constants.ON_GET_ALL_EVENT_REPORTS_SUCCEEDED:
       return {
@@ -64,6 +72,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_GET_ALL_EVENT_REPORTS_FAILED:
     case constants.ON_CHANGE_BLOCK_EVENT_FAILED:
     case constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED:
+    case constants.ON_GET_METRICS_ACCREDITED_CLIENTS_FAILED:
       return {
         ...state,
         loadingEvent: false,

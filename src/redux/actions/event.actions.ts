@@ -61,12 +61,34 @@ export function onGetMetricsWithoutFinishDateRequested(): AnyAction {
   return { type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED };
 }
 
-export const onGetMetricsWithoutFinishDateSucceeded = (data: unknown): AnyAction => ({
+export const onGetMetricsWithoutFinishDateSucceeded = (
+  data: unknown,
+): AnyAction => ({
   type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_SUCCEEDED,
   data,
 });
 
-export const onGetMetricsWithoutFinishDateFailed = (error: unknown): AnyAction => ({
+export const onGetMetricsWithoutFinishDateFailed = (
+  error: unknown,
+): AnyAction => ({
   type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_FAILED,
+  error,
+});
+
+export function onGetMetricsAccreditedClientsRequested(data: any): AnyAction {
+  return { type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_REQUESTED, data };
+}
+
+export const onGetMetricsAccreditedClientsSucceeded = (
+  data: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_SUCCEEDED,
+  data,
+});
+
+export const onGetMetricsAccreditedClientsFailed = (
+  error: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_FAILED,
   error,
 });

@@ -30,3 +30,26 @@ export const GraphicsContainer = styled.div`
   grid-column-gap: 10px;
   grid-row-gap: 20px;
 `;
+
+export const VisualizationTypeSelect = styled.select`
+  background-color: ${COLORS.greyZyrcon};
+  border-radius: 15px;
+  border: 1px solid ${COLORS.greyZyrcon};
+  padding: 4px 1px 4px 4px;
+  font-size: 18px;
+  font-family: 'Poppins';
+  width: 100px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #1d275f;
+
+  > option {
+    color: black;
+  }
+`;
+
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
