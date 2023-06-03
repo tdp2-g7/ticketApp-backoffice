@@ -29,6 +29,7 @@ export interface IEventDefaultState {
   reports: IReport[];
   event: IEvent | null;
   graphicsWithoutFinishDate: any;
+  graphicsAccreditedClients: any;
 }
 
 export interface ISchedule {

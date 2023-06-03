@@ -19,7 +19,7 @@ const COLORS = {
   electricViolet: '#BA00E0',
   pink: '#FE53BB',
   jordyBlue: '#84ACF0',
-
+  greyZyrcon: '#F2F4FF',
 };
 
 export default COLORS;

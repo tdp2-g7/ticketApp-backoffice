@@ -3,7 +3,12 @@ import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import {
-  changeBlockEvent, getEventsFilteredBy, getAllReports, getAllEvents, getMetricsWithoutFinishDate,
+  changeBlockEvent,
+  getEventsFilteredBy,
+  getAllReports,
+  getAllEvents,
+  getMetricsWithoutFinishDate,
+  getMetricsAccreditedClients,
 } from '../../services/event.services';
 import * as actions from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
@@ -53,6 +58,15 @@ export function* onGetMetricsWithoutFinishDate(): Generator {
   }
 }
 
+export function* onGetMetricsAccreditedClients(action: AnyAction): Generator {
+  try {
+    const data : any = yield call(getMetricsAccreditedClients, action.data);
+    yield put(actions.onGetMetricsAccreditedClientsSucceeded(data));
+  } catch (error) {
+    yield put(actions.onGetMetricsAccreditedClientsFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_GET_ALL_EVENT_REPORTS_REQUESTED, onGetAllEventReports),
@@ -61,5 +75,7 @@ export function* watchEvents(): Generator {
     takeLatest(constants.ON_GET_EVENT_REPORTS_BY_ID_REQUESTED, getAllReportsById),
     // eslint-disable-next-line max-len
     takeLatest(constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED, onGetMetricsWithoutFinishDate),
+    // eslint-disable-next-line max-len
+    takeLatest(constants.ON_GET_METRICS_ACCREDITED_CLIENTS_REQUESTED, onGetMetricsAccreditedClients),
   ]);
 }
