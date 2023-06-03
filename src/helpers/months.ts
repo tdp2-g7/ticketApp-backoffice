@@ -13,5 +13,5 @@ export const numToMonth = (num: number) => {
     'Nov',
     'Dic',
   ];
-  return months[num];
+  return months[num - 1];
 };
