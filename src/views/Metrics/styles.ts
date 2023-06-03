@@ -13,7 +13,7 @@ export const Title = styled.p`
 
 export const Subtitle = styled.p`
   font-size: 18px;
-  margin: 15px 0 15px 70px;
+  margin: 15px 0 15px 50px;
   font-weight: bold;
   color: ${COLORS.mineShaft};
   font-family: 'Poppins';
