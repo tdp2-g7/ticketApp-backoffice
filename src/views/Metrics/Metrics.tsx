@@ -49,7 +49,6 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     visualizationType,
     // esto deberia borrarse ya que va a estar incluído en lo otro.
     graphicsBlockedOrganizersByReports,
-    graphicsTop10Organizers,
     graphicsTwoLines,
   } = props;
 
@@ -306,18 +305,18 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsWithoutFinishDate?.pie ? (
+        {!graphicsFullInterval?.top10 ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
             <Subtitle>Top 10 organizadores con mas acreditados a lo largo del tiempo</Subtitle>
-            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsTop10Organizers} layout="vertical">
+            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsFullInterval.top10} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
               <YAxis dataKey="name" type="category" width={150} tickMargin={5} mirror={false}/>
               <Tooltip />
               <Legend />
-              <Bar dataKey="value" fill="#8884d8" />
+              <Bar dataKey="cantidad" fill="#8884d8" />
             </BarChart>
           </ColumnDiv>
         )}

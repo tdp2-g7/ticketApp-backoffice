@@ -46,19 +46,6 @@ const MetricsContainer: FunctionComponent = () => {
     { name: '29-32', value: 1 },
   ];
 
-  const graphicsTop10Organizers = [
-    { name: 'All Access', value: 40 },
-    { name: 'MalbaCine', value: 25 },
-    { name: 'Fi Eventos', value: 20 },
-    { name: 'Tuentrada', value: 17 },
-    { name: 'LucaPerez', value: 12 },
-    { name: 'ONUKids', value: 11 },
-    { name: 'IndieFest', value: 10 },
-    { name: 'TechLab', value: 4 },
-    { name: 'BACiencia', value: 2 },
-    { name: 'BACultura', value: 1 },
-  ];
-
   const graphicsTwoLines = [
     { name: '01/4', eventos: 40, usuarios: 1 },
     { name: '8/4', eventos: 25, usuarios: 8 },
@@ -87,7 +74,11 @@ const MetricsContainer: FunctionComponent = () => {
 
   useEffect(() => {
     if (startDate && endDate) {
-      dispatch(onGetMetricsFullIntervalRequested({ startDate, endDate }));
+      const data = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      };
+      dispatch(onGetMetricsFullIntervalRequested(data));
     }
   }, [dispatch, startDate, endDate]);
 
@@ -106,7 +97,6 @@ const MetricsContainer: FunctionComponent = () => {
             endDate={endDate}
             setVisualizationType={setVisualizationType}
             visualizationType={visualizationType}
-            graphicsTop10Organizers={graphicsTop10Organizers}
             graphicsTwoLines={graphicsTwoLines}
           />
         }

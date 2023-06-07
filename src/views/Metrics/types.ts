@@ -4,7 +4,6 @@ export interface IMetricsProps {
   graphicsFullInterval: any;
   // esto deberia borrarse
   graphicsBlockedOrganizersByReports: any;
-  graphicsTop10Organizers: any;
   graphicsTwoLines: any;
   // ---
   setStartDate: (date: Date) => void;
