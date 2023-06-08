@@ -29,6 +29,9 @@ import {
   Calendar,
   EndCalendarContainer,
   InfoOutlinedIcon,
+  EmptyMetric,
+  EmptyTitle,
+  DonutSmallIcon,
 } from './styles';
 import COLORS from '../../helpers/colors';
 import { visualizationTypes } from '../../helpers/visualizationTypes';
@@ -39,19 +42,14 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     graphicsWithoutFinishDate,
     graphicsAccreditedClients,
     graphicsFullInterval,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setStartDate,
     startDate,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setEndDate,
     endDate,
     setVisualizationType,
     visualizationType,
   } = props;
-
-  // TODO delete when implements filters
-  // setStartDate(new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000));
-  // setEndDate(new Date());
+  const filteredGraphicsWithoutFinishDate = graphicsWithoutFinishDate?.pie.filter((obj: any) => obj.value !== 0);
 
   const donutColors = [
     COLORS.redMandy,
@@ -85,7 +83,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline='central'
       >
-        {graphicsWithoutFinishDate.pie[index].name} - {value} (
+        {filteredGraphicsWithoutFinishDate[index].name} - {value} (
         {(percent * 100).toFixed(0)}%)
       </text>
     );
@@ -94,25 +92,27 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
   const CustomizedLabel: FunctionComponent<any> = ({
     x, y, stroke, value,
   }) => (
-      <text x={x} y={y} dy={-4} fill={stroke} fontSize={15} textAnchor="middle">
-        {value}
-      </text>
+    <text x={x} y={y} dy={-4} fill={stroke} fontSize={15} textAnchor='middle'>
+      {value}
+    </text>
   );
 
   const CustomizedAxisTick: FunctionComponent<any> = ({ x, y, payload }) => (
-      <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={16}
-          textAnchor="end"
-          fill="#666"
-          transform="rotate(-35)"
-        >
-          {payload.value}
-        </text>
-      </g>
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor='end'
+        fill='#666'
+        transform='rotate(-35)'
+      >
+        {payload.value}
+      </text>
+    </g>
   );
+
+  const isEmpty = (data: any, key: string) => data?.every((object: any) => object[key] === 0);
 
   return (
     <>
@@ -144,8 +144,11 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
       </RowDiv>
 
       <GraphicsContainer>
-        {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
+        {isEmpty(graphicsWithoutFinishDate?.pie, 'value') ? (
+          <EmptyMetric>
+            <DonutSmallIcon />
+            <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+          </EmptyMetric>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -163,7 +166,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
 
             <PieChart width={window.innerWidth / 3} height={380}>
               <Pie
-                data={graphicsWithoutFinishDate.pie}
+                data={filteredGraphicsWithoutFinishDate}
                 cx={window.innerWidth / 6.4}
                 cy={180}
                 fill='#8884d8'
@@ -172,12 +175,14 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
                 label={renderCustomizedLabel}
               >
                 <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
+                {filteredGraphicsWithoutFinishDate?.map(
+                  (entry: any, index: any) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={donutColors[index % donutColors.length]}
+                    />
+                  ),
+                )}
               </Pie>
             </PieChart>
           </ColumnDiv>
@@ -197,7 +202,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
                 <option value='' disabled>
                   Visualizar por
                 </option>
-                {visualizationTypes.map((option) => (
+                {visualizationTypes?.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -238,7 +243,9 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>Cantidad de eventos creados a lo largo del tiempo</Subtitle>
+            <Subtitle>
+              Cantidad de eventos ocurridos a lo largo del tiempo
+            </Subtitle>
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
@@ -263,78 +270,33 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <Subtitle>Proximamente</Subtitle>
+            <EmptyMetric>
+              <DonutSmallIcon />
+              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+            </EmptyMetric>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <Subtitle>Proximamente</Subtitle>
+            <EmptyMetric>
+              <DonutSmallIcon />
+              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+            </EmptyMetric>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <Subtitle>Proximamente</Subtitle>
+            <EmptyMetric>
+              <DonutSmallIcon />
+              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+            </EmptyMetric>
           </ColumnDiv>
         )}
       </GraphicsContainer>

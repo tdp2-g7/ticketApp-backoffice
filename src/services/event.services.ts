@@ -40,29 +40,8 @@ export async function getAllReports(eventId: string): Promise<AxiosResponse> {
   return response.data;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsWithoutFinishDate(startDate: Date): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
-  const response = {
-    pie: [
-      { name: 'Bloqueado', value: 3 },
-      { name: 'Cancelado', value: 9 },
-      { name: 'En curso', value: 20 },
-      { name: 'Finalizado', value: 25 },
-      { name: 'Activo', value: 40 },
-      { name: 'Borrador', value: 23 },
-    ],
-    blockedOrganizers: [
-      { name: '1-4', value: 2 },
-      { name: '5-8', value: 4 },
-      { name: '9-12', value: 8 },
-      { name: '13-16', value: 10 },
-      { name: '17-20', value: 12 },
-      { name: '21-24', value: 3 },
-      { name: '25-28', value: 2 },
-      { name: '29-32', value: 1 },
-    ],
-  };
+export async function getMetricsWithoutFinishDate(startDate: Date): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/events/events-metrics-by-initial-date?initialDate=${startDate}`);
   return response;
 }
 

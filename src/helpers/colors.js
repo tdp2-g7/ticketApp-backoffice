@@ -20,6 +20,7 @@ const COLORS = {
   pink: '#FE53BB',
   jordyBlue: '#84ACF0',
   greyZyrcon: '#F2F4FF',
+  dustyGray: '#949494',
 };
 
 export default COLORS;

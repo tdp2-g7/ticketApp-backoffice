@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
-import { InfoOutlined } from '@mui/icons-material';
+import { InfoOutlined, BarChart, DonutSmall } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
 export const Title = styled.p`
@@ -76,4 +76,33 @@ export const EndCalendarContainer = styled.div`
 
 export const InfoOutlinedIcon = styled(InfoOutlined)`
   margin-top: 4px;
+`;
+
+export const EmptyMetric = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  height: 100%;
+  width: 100%;
+`;
+
+export const EmptyTitle = styled.p`
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: ${COLORS.black};
+`;
+
+export const BarChartIcon = styled(BarChart)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 50px;
+`;
+
+export const DonutSmallIcon = styled(DonutSmall)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 80px;
+  color: ${COLORS.dustyGray};
 `;

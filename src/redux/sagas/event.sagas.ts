@@ -52,7 +52,7 @@ export function* getAllReportsById(action: AnyAction): Generator {
 
 export function* onGetMetricsWithoutFinishDate(action: AnyAction): Generator {
   try {
-    const data : any = yield call(getMetricsWithoutFinishDate, action.startDate);
+    const { data } : any = yield call(getMetricsWithoutFinishDate, action.startDate);
     yield put(actions.onGetMetricsWithoutFinishDateSucceeded(data));
   } catch (error) {
     yield put(actions.onGetMetricsWithoutFinishDateFailed(error));

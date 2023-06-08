@@ -65,7 +65,7 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
           </ReportsButton>
 
           <BlockButton onClick={() => onChangeBlock(params.row.eventId)}>
-            {params.row.state === 'Activo' ? 'Bloquear' : 'Desbloquear'}
+            {params.row.state === 'Bloqueado' ? 'Desbloquear' : 'Bloquear'}
           </BlockButton>
         </>
       ),
@@ -75,13 +75,13 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
   /* eslint-disable */
 
   const rows: IEventTable[] = events.map(event => {
-    const { eventId, title, date, startTime, reports_nr, state } = event;
+    const { eventId, title, date, startTime, reports_nr, state, endTime } = event;
     
     const stringDate = handleDate(date);
     let stringStartTime = ' - ';
     if (startTime) stringStartTime = handleTime(startTime);
 
-    const stringState = handleStateText(state);
+    const stringState = handleStateText(event);
     const reports_nrText = reports_nr.toString();
     
     return { eventId, title, date: stringDate, startTime: stringStartTime, reports_nr: reports_nrText, state: stringState};

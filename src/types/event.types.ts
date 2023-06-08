@@ -17,8 +17,8 @@ export interface IEvent {
   userId?: string;
   eventId: string;
   ticketsSold?: number;
+  state?: number;
   reports_nr: number;
-  state: number;
 }
 
 export interface IEventDefaultState {
