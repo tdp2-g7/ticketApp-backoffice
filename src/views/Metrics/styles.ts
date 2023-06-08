@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import ReactDatePicker from 'react-datepicker';
-import { InfoOutlined, BarChart, DonutSmall } from '@mui/icons-material';
+import {
+  InfoOutlined, BarChart, DonutSmall, Timeline,
+} from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
 export const Title = styled.p`
@@ -98,9 +100,17 @@ export const BarChartIcon = styled(BarChart)`
   margin-top: 100px;
   transform: scale(10);
   margin-bottom: 50px;
+  color: ${COLORS.dustyGray};
 `;
 
 export const DonutSmallIcon = styled(DonutSmall)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 80px;
+  color: ${COLORS.dustyGray};
+`;
+
+export const TimelineIcon = styled(Timeline)`
   margin-top: 100px;
   transform: scale(10);
   margin-bottom: 80px;

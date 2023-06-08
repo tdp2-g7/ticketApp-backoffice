@@ -45,74 +45,12 @@ export async function getMetricsWithoutFinishDate(startDate: Date): Promise<Axio
   return response;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsAccreditedClients(data: any): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
-  const response = {
-    bar_chart: [
-      {
-        name: 1,
-        cantidad: 75,
-      },
-      {
-        name: 2,
-        cantidad: 15,
-      },
-      {
-        name: 3,
-        cantidad: 40,
-      },
-      {
-        name: 4,
-        cantidad: 90,
-      },
-      {
-        name: 5,
-        cantidad: 10,
-      },
-      {
-        name: 6,
-        cantidad: 35,
-      },
-      {
-        name: 7,
-        cantidad: 70,
-      },
-      {
-        name: 8,
-        cantidad: 20,
-      },
-      {
-        name: 9,
-        cantidad: 80,
-      },
-      {
-        name: 10,
-        cantidad: 55,
-      },
-      {
-        name: 11,
-        cantidad: 25,
-      },
-      {
-        name: 12,
-        cantidad: 90,
-      },
-    ],
-  };
+export async function getMetricsAccreditedClients(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-reservations/accredited-clients-metrics?startDate=${data.startDate}&endDate=${data.endDate}&visualizationType=${data.visualizationType}`);
   return response;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsFullInterval(data: any): Promise<any> {
-  let url = `${EVENTS_API_URL}/metrics/time-interval-metrics?`;
-
-  /* eslint-disable */
-  data.startDate && (url += `&startDate=${data.startDate}`);
-  data.endDate && (url += `&endDate=${data.endDate}`);
-  /* eslint-enable */
-
-  const response = await get(url);
-
-  return response.data;
+export async function getMetricsFullInterval(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/metrics/time-interval-metrics?startDate=${data.startDate}&endDate=${data.endDate}`);
+  return response;
 }

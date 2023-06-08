@@ -32,6 +32,8 @@ import {
   EmptyMetric,
   EmptyTitle,
   DonutSmallIcon,
+  TimelineIcon,
+  BarChartIcon,
 } from './styles';
 import COLORS from '../../helpers/colors';
 import { visualizationTypes } from '../../helpers/visualizationTypes';
@@ -148,10 +150,15 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
 
       <GraphicsContainer>
         {isEmpty(graphicsWithoutFinishDate?.pie, 'value') ? (
-          <EmptyMetric>
-            <DonutSmallIcon />
-            <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
-          </EmptyMetric>
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Estado de todos los eventos creados en la plataforma
+            </Subtitle>
+            <EmptyMetric>
+              <DonutSmallIcon />
+              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -190,8 +197,19 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </PieChart>
           </ColumnDiv>
         )}
-        {!graphicsAccreditedClients ? (
-          <EmptyContainer />
+        {isEmpty(graphicsAccreditedClients, 'cantidad') ? (
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Cantidad de clientes acreditados
+            </Subtitle>
+            <EmptyMetric>
+              <BarChartIcon />
+              <EmptyTitle>
+                {' '}
+                Aún no hay clientes acreditados para estas fechas{' '}
+              </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -242,8 +260,19 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsFullInterval?.events_created ? (
-          <EmptyContainer />
+        {isEmpty(graphicsFullInterval?.eventsCreated, 'cantidad') ? (
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Cantidad de eventos ocurridos a lo largo del tiempo
+            </Subtitle>
+            <EmptyMetric>
+              <TimelineIcon />
+              <EmptyTitle>
+                {' '}
+                Aún no ocurrieron eventos para estas fechas{' '}
+              </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <Subtitle>
@@ -252,7 +281,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
-              data={graphicsFullInterval.events_created}
+              data={graphicsFullInterval?.eventsCreated}
               margin={{
                 right: 30,
                 left: 20,
@@ -316,22 +345,48 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>Top 10 organizadores con mas acreditados a lo largo del tiempo</Subtitle>
-            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsFullInterval.top10} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" type="category" width={150} tickMargin={5} mirror={false}/>
+            <Subtitle>
+              Top 10 organizadores con mas acreditados a lo largo del tiempo
+            </Subtitle>
+            <BarChart
+              width={window.innerWidth / 3.2}
+              height={340}
+              data={graphicsFullInterval.top10}
+              layout='vertical'
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis type='number' />
+              <YAxis
+                dataKey='name'
+                type='category'
+                width={150}
+                tickMargin={5}
+                mirror={false}
+              />
               <Tooltip />
               <Legend />
-              <Bar dataKey="cantidad" fill="#8884d8" />
+              <Bar dataKey='cantidad' fill='#8884d8' />
             </BarChart>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
+          <ColumnDiv>
+          <Subtitle style={{ marginRight: 10 }}>
+          Eventos y usuarios denunciados a lo largo del tiempo
+          </Subtitle>
+          <EmptyMetric>
+            <TimelineIcon />
+            <EmptyTitle>
+              {' '}
+              Aún no hubo denuncias a eventos y usuarios para estas fechas{' '}
+            </EmptyTitle>
+          </EmptyMetric>
+        </ColumnDiv>
         ) : (
           <ColumnDiv>
-            <Subtitle>Eventos y usuarios denunciados a lo largo del tiempo</Subtitle>
+            <Subtitle>
+              Eventos y usuarios denunciados a lo largo del tiempo
+            </Subtitle>
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
