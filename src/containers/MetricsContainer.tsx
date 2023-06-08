@@ -23,17 +23,22 @@ const MetricsContainer: FunctionComponent = () => {
 
   // Default es 15 dias antes de la fecha actual
   const [startDate, setStartDate] = useState(
-    new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000),
+    new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
   );
   const [endDate, setEndDate] = useState(new Date());
   const [visualizationType, setVisualizationType] = useState(visualizationTypes[0].value);
 
-  const graphicsAccreditedClientsWithMonth = graphicsAccreditedClients?.bar_chart.map(
-    (option: any) => ({
-      name: numToMonth(option.name),
-      cantidad: option.cantidad,
-    }),
-  );
+  let graphicsAccreditedClientsWithMonth;
+  if (Number(visualizationType) === visualizationTypes[1].value) {
+    graphicsAccreditedClientsWithMonth = graphicsAccreditedClients?.map(
+      (option: any) => ({
+        name: numToMonth(Number(option.name)),
+        cantidad: option.cantidad,
+      }),
+    );
+  } else {
+    graphicsAccreditedClientsWithMonth = graphicsAccreditedClients;
+  }
 
   const graphicsBlockedOrganizersByReports = [
     { name: '1-4', value: 2 },
@@ -64,8 +69,8 @@ const MetricsContainer: FunctionComponent = () => {
     if (startDate && endDate && visualizationType) {
       dispatch(
         onGetMetricsAccreditedClientsRequested({
-          startDate,
-          endDate,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
           visualizationType,
         }),
       );

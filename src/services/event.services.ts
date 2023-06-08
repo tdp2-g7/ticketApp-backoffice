@@ -40,100 +40,17 @@ export async function getAllReports(eventId: string): Promise<AxiosResponse> {
   return response.data;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsWithoutFinishDate(startDate: Date): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
-  const response = {
-    pie: [
-      { name: 'Bloqueado', value: 3 },
-      { name: 'Cancelado', value: 9 },
-      { name: 'En curso', value: 20 },
-      { name: 'Finalizado', value: 25 },
-      { name: 'Activo', value: 40 },
-      { name: 'Borrador', value: 23 },
-    ],
-    blockedOrganizers: [
-      { name: '1-4', value: 2 },
-      { name: '5-8', value: 4 },
-      { name: '9-12', value: 8 },
-      { name: '13-16', value: 10 },
-      { name: '17-20', value: 12 },
-      { name: '21-24', value: 3 },
-      { name: '25-28', value: 2 },
-      { name: '29-32', value: 1 },
-    ],
-  };
+export async function getMetricsWithoutFinishDate(startDate: Date): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/events/events-metrics-by-initial-date?initialDate=${startDate}`);
   return response;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsAccreditedClients(data: any): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
-  const response = {
-    bar_chart: [
-      {
-        name: 1,
-        cantidad: 75,
-      },
-      {
-        name: 2,
-        cantidad: 15,
-      },
-      {
-        name: 3,
-        cantidad: 40,
-      },
-      {
-        name: 4,
-        cantidad: 90,
-      },
-      {
-        name: 5,
-        cantidad: 10,
-      },
-      {
-        name: 6,
-        cantidad: 35,
-      },
-      {
-        name: 7,
-        cantidad: 70,
-      },
-      {
-        name: 8,
-        cantidad: 20,
-      },
-      {
-        name: 9,
-        cantidad: 80,
-      },
-      {
-        name: 10,
-        cantidad: 55,
-      },
-      {
-        name: 11,
-        cantidad: 25,
-      },
-      {
-        name: 12,
-        cantidad: 90,
-      },
-    ],
-  };
+export async function getMetricsAccreditedClients(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-reservations/accredited-clients-metrics?startDate=${data.startDate}&endDate=${data.endDate}&visualizationType=${data.visualizationType}`);
   return response;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getMetricsFullInterval(data: any): Promise<any> {
-  let url = `${EVENTS_API_URL}/metrics/time-interval-metrics?`;
-
-  /* eslint-disable */
-  data.startDate && (url += `&startDate=${data.startDate}`);
-  data.endDate && (url += `&endDate=${data.endDate}`);
-  /* eslint-enable */
-
-  const response = await get(url);
-
-  return response.data;
+export async function getMetricsFullInterval(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/metrics/time-interval-metrics?startDate=${data.startDate}&endDate=${data.endDate}`);
+  return response;
 }

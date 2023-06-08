@@ -52,7 +52,7 @@ export function* getAllReportsById(action: AnyAction): Generator {
 
 export function* onGetMetricsWithoutFinishDate(action: AnyAction): Generator {
   try {
-    const data : any = yield call(getMetricsWithoutFinishDate, action.startDate);
+    const { data } : any = yield call(getMetricsWithoutFinishDate, action.startDate);
     yield put(actions.onGetMetricsWithoutFinishDateSucceeded(data));
   } catch (error) {
     yield put(actions.onGetMetricsWithoutFinishDateFailed(error));
@@ -61,7 +61,7 @@ export function* onGetMetricsWithoutFinishDate(action: AnyAction): Generator {
 
 export function* onGetMetricsAccreditedClients(action: AnyAction): Generator {
   try {
-    const data : any = yield call(getMetricsAccreditedClients, action.data);
+    const { data } : any = yield call(getMetricsAccreditedClients, action.data);
     yield put(actions.onGetMetricsAccreditedClientsSucceeded(data));
   } catch (error) {
     yield put(actions.onGetMetricsAccreditedClientsFailed(error));
@@ -69,7 +69,7 @@ export function* onGetMetricsAccreditedClients(action: AnyAction): Generator {
 }
 export function* onGetMetricsFullInterval(action: AnyAction): Generator {
   try {
-    const data : any = yield call(getMetricsFullInterval, action.data);
+    const { data } : any = yield call(getMetricsFullInterval, action.data);
     yield put(actions.onGetMetricsFullIntervalSucceeded(data));
   } catch (error) {
     yield put(actions.onGetMetricsFullIntervalFailed(error));

@@ -29,6 +29,11 @@ import {
   Calendar,
   EndCalendarContainer,
   InfoOutlinedIcon,
+  EmptyMetric,
+  EmptyTitle,
+  DonutSmallIcon,
+  TimelineIcon,
+  BarChartIcon,
 } from './styles';
 import COLORS from '../../helpers/colors';
 import { visualizationTypes } from '../../helpers/visualizationTypes';
@@ -39,10 +44,8 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     graphicsWithoutFinishDate,
     graphicsAccreditedClients,
     graphicsFullInterval,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setStartDate,
     startDate,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setEndDate,
     endDate,
     setVisualizationType,
@@ -51,10 +54,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     graphicsBlockedOrganizersByReports,
     graphicsTwoLines,
   } = props;
-
-  // TODO delete when implements filters
-  // setStartDate(new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000));
-  // setEndDate(new Date());
+  const filteredGraphicsWithoutFinishDate = graphicsWithoutFinishDate?.pie.filter((obj: any) => obj.value !== 0);
 
   const donutColors = [
     COLORS.redMandy,
@@ -88,7 +88,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline='central'
       >
-        {graphicsWithoutFinishDate.pie[index].name} - {value} (
+        {filteredGraphicsWithoutFinishDate[index].name} - {value} (
         {(percent * 100).toFixed(0)}%)
       </text>
     );
@@ -97,25 +97,27 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
   const CustomizedLabel: FunctionComponent<any> = ({
     x, y, stroke, value,
   }) => (
-      <text x={x} y={y} dy={-4} fill={stroke} fontSize={15} textAnchor="middle">
-        {value}
-      </text>
+    <text x={x} y={y} dy={-4} fill={stroke} fontSize={15} textAnchor='middle'>
+      {value}
+    </text>
   );
 
   const CustomizedAxisTick: FunctionComponent<any> = ({ x, y, payload }) => (
-      <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={16}
-          textAnchor="end"
-          fill="#666"
-          transform="rotate(-35)"
-        >
-          {payload.value}
-        </text>
-      </g>
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor='end'
+        fill='#666'
+        transform='rotate(-35)'
+      >
+        {payload.value}
+      </text>
+    </g>
   );
+
+  const isEmpty = (data: any, key: string) => data?.every((object: any) => object[key] === 0);
 
   return (
     <>
@@ -147,8 +149,16 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
       </RowDiv>
 
       <GraphicsContainer>
-        {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
+        {isEmpty(graphicsWithoutFinishDate?.pie, 'value') ? (
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Estado de todos los eventos creados en la plataforma
+            </Subtitle>
+            <EmptyMetric>
+              <DonutSmallIcon />
+              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -158,7 +168,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               <ReactTooltip id='my-tooltip' />
               <a
                 data-tooltip-id='my-tooltip'
-                data-tooltip-content='Esta métrica no soporta el filtro de “Fecha de Fin”'
+                data-tooltip-content='La Fecha Fin corresponde a la fecha actual'
               >
                 <InfoOutlinedIcon />
               </a>
@@ -166,7 +176,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
 
             <PieChart width={window.innerWidth / 3} height={380}>
               <Pie
-                data={graphicsWithoutFinishDate.pie}
+                data={filteredGraphicsWithoutFinishDate}
                 cx={window.innerWidth / 6.4}
                 cy={180}
                 fill='#8884d8'
@@ -175,18 +185,31 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
                 label={renderCustomizedLabel}
               >
                 <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
+                {filteredGraphicsWithoutFinishDate?.map(
+                  (entry: any, index: any) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={donutColors[index % donutColors.length]}
+                    />
+                  ),
+                )}
               </Pie>
             </PieChart>
           </ColumnDiv>
         )}
-        {!graphicsAccreditedClients ? (
-          <EmptyContainer />
+        {isEmpty(graphicsAccreditedClients, 'cantidad') ? (
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Cantidad de clientes acreditados
+            </Subtitle>
+            <EmptyMetric>
+              <BarChartIcon />
+              <EmptyTitle>
+                {' '}
+                Aún no hay clientes acreditados para estas fechas{' '}
+              </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -200,7 +223,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
                 <option value='' disabled>
                   Visualizar por
                 </option>
-                {visualizationTypes.map((option) => (
+                {visualizationTypes?.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -237,15 +260,28 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsFullInterval?.events_created ? (
-          <EmptyContainer />
+        {isEmpty(graphicsFullInterval?.eventsCreated, 'cantidad') ? (
+          <ColumnDiv>
+            <Subtitle style={{ marginRight: 10 }}>
+              Cantidad de eventos ocurridos a lo largo del tiempo
+            </Subtitle>
+            <EmptyMetric>
+              <TimelineIcon />
+              <EmptyTitle>
+                {' '}
+                Aún no ocurrieron eventos para estas fechas{' '}
+              </EmptyTitle>
+            </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
-            <Subtitle>Cantidad de eventos creados a lo largo del tiempo</Subtitle>
+            <Subtitle>
+              Cantidad de eventos ocurridos a lo largo del tiempo
+            </Subtitle>
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
-              data={graphicsFullInterval.events_created}
+              data={graphicsFullInterval?.eventsCreated}
               margin={{
                 right: 30,
                 left: 20,
@@ -267,11 +303,11 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
         ) : (
           <ColumnDiv>
             <RowDiv>
-              <Subtitle>Organizadores bloqueados en base a denuncias</Subtitle>
+              <Subtitle style={{ marginRight: 10 }}>Organizadores bloqueados en base a denuncias</Subtitle>
               <ReactTooltip id='my-tooltip' />
               <a
                 data-tooltip-id='my-tooltip'
-                data-tooltip-content='La fecha fin corresponde a la fecha actual'
+                data-tooltip-content='La Fecha Fin corresponde a la fecha actual'
               >
                 <InfoOutlinedIcon />
               </a>
@@ -306,25 +342,62 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           </ColumnDiv>
         )}
         {!graphicsFullInterval?.top10 ? (
-          <EmptyContainer />
+          <ColumnDiv>
+          <Subtitle style={{ marginRight: 10 }}>
+          Top 10 organizadores con mas acreditados a lo largo del tiempo
+          </Subtitle>
+          <EmptyMetric>
+            <TimelineIcon />
+            <EmptyTitle>
+              {' '}
+              Aún no hay suficientes organizadores con acreditaciones{' '}
+            </EmptyTitle>
+          </EmptyMetric>
+        </ColumnDiv>
         ) : (
           <ColumnDiv>
-            <Subtitle>Top 10 organizadores con mas acreditados a lo largo del tiempo</Subtitle>
-            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsFullInterval.top10} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" type="category" width={150} tickMargin={5} mirror={false}/>
+            <Subtitle>
+              Top 10 organizadores con mas acreditados a lo largo del tiempo
+            </Subtitle>
+            <BarChart
+              width={window.innerWidth / 3.2}
+              height={340}
+              data={graphicsFullInterval.top10}
+              layout='vertical'
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis type='number' />
+              <YAxis
+                dataKey='name'
+                type='category'
+                width={150}
+                tickMargin={5}
+                mirror={false}
+              />
               <Tooltip />
               <Legend />
-              <Bar dataKey="cantidad" fill="#8884d8" />
+              <Bar dataKey='cantidad' fill='#8884d8' />
             </BarChart>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
+          <ColumnDiv>
+          <Subtitle style={{ marginRight: 10 }}>
+          Eventos y usuarios denunciados a lo largo del tiempo
+          </Subtitle>
+          <EmptyMetric>
+            <TimelineIcon />
+            <EmptyTitle>
+              {' '}
+              Aún no hubo denuncias a eventos y usuarios para estas fechas{' '}
+            </EmptyTitle>
+          </EmptyMetric>
+        </ColumnDiv>
         ) : (
           <ColumnDiv>
-            <Subtitle>Eventos y usuarios denunciados a lo largo del tiempo</Subtitle>
+            <Subtitle>
+              Eventos y usuarios denunciados a lo largo del tiempo
+            </Subtitle>
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
