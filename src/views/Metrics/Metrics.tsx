@@ -168,7 +168,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               <ReactTooltip id='my-tooltip' />
               <a
                 data-tooltip-id='my-tooltip'
-                data-tooltip-content='Esta métrica no soporta el filtro de “Fecha de Fin”'
+                data-tooltip-content='La Fecha Fin corresponde a la fecha actual'
               >
                 <InfoOutlinedIcon />
               </a>
@@ -303,11 +303,11 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
         ) : (
           <ColumnDiv>
             <RowDiv>
-              <Subtitle>Organizadores bloqueados en base a denuncias</Subtitle>
+              <Subtitle style={{ marginRight: 10 }}>Organizadores bloqueados en base a denuncias</Subtitle>
               <ReactTooltip id='my-tooltip' />
               <a
                 data-tooltip-id='my-tooltip'
-                data-tooltip-content='La fecha fin corresponde a la fecha actual'
+                data-tooltip-content='La Fecha Fin corresponde a la fecha actual'
               >
                 <InfoOutlinedIcon />
               </a>
@@ -342,7 +342,18 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           </ColumnDiv>
         )}
         {!graphicsFullInterval?.top10 ? (
-          <EmptyContainer />
+          <ColumnDiv>
+          <Subtitle style={{ marginRight: 10 }}>
+          Top 10 organizadores con mas acreditados a lo largo del tiempo
+          </Subtitle>
+          <EmptyMetric>
+            <TimelineIcon />
+            <EmptyTitle>
+              {' '}
+              Aún no hay suficientes organizadores con acreditaciones{' '}
+            </EmptyTitle>
+          </EmptyMetric>
+        </ColumnDiv>
         ) : (
           <ColumnDiv>
             <Subtitle>
