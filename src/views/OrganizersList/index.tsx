@@ -18,8 +18,8 @@ const OrganizersList: FC<IOrganizersListProps> = (
     name: organizer.name,
     lastName: organizer.lastName,
     email: organizer.email,
-    isBlocked: organizer.isBlocked,
-    stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+    blockedDate: organizer.blockedDate,
+    stateText: organizer.blockedDate ? 'Bloqueado' : 'Activo',
     state: organizer.state,
   }));
 
@@ -66,7 +66,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
           </BlockButton>
 
           <BlockButton onClick={() => onChangeBlock(params.row.userId)}>
-            {params.row.isBlocked ? 'Desbloquear' : 'Bloquear'}
+            {params.row.blockedDate ? 'Desbloquear' : 'Bloquear'}
           </BlockButton>
         </>
       ),
