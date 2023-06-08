@@ -15,7 +15,7 @@ export interface IOrganizer {
   email: string;
   description?: string;
   image?: any;
-  isBlocked?: boolean;
+  blockedDate?: Date;
   number_of_events?: number;
   state: string;
 }
@@ -25,7 +25,7 @@ export interface IOrganizerTable {
   name: string;
   lastName: string;
   email: string;
-  isBlocked?: boolean;
+  blockedDate?: Date;
   stateText: string;
   state: string;
 }

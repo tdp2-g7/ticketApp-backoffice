@@ -48,6 +48,9 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     endDate,
     setVisualizationType,
     visualizationType,
+    // esto deberia borrarse ya que va a estar incluído en lo otro.
+    graphicsBlockedOrganizersByReports,
+    graphicsTwoLines,
   } = props;
   const filteredGraphicsWithoutFinishDate = graphicsWithoutFinishDate?.pie.filter((obj: any) => obj.value !== 0);
 
@@ -270,33 +273,86 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>Proximamente</Subtitle>
-            <EmptyMetric>
-              <DonutSmallIcon />
-              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
-            </EmptyMetric>
+            <RowDiv>
+              <Subtitle>Organizadores bloqueados en base a denuncias</Subtitle>
+              <ReactTooltip id='my-tooltip' />
+              <a
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='La fecha fin corresponde a la fecha actual'
+              >
+                <InfoOutlinedIcon />
+              </a>
+            </RowDiv>
+            <BarChart
+              width={window.innerWidth / 3.2}
+              height={380}
+              data={graphicsBlockedOrganizersByReports}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+              barSize={20}
+            >
+              <XAxis
+                dataKey='name'
+                scale='point'
+                padding={{ left: 10, right: 10 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <CartesianGrid strokeDasharray='3 3' />
+              <Bar
+                dataKey='value'
+                fill='#8884d8'
+                background={{ fill: '#eee' }}
+              />
+            </BarChart>
+          </ColumnDiv>
+        )}
+        {!graphicsFullInterval?.top10 ? (
+          <EmptyContainer />
+        ) : (
+          <ColumnDiv>
+            <Subtitle>Top 10 organizadores con mas acreditados a lo largo del tiempo</Subtitle>
+            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsFullInterval.top10} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" width={150} tickMargin={5} mirror={false}/>
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="cantidad" fill="#8884d8" />
+            </BarChart>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>Proximamente</Subtitle>
-            <EmptyMetric>
-              <DonutSmallIcon />
-              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
-            </EmptyMetric>
-          </ColumnDiv>
-        )}
-        {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
-        ) : (
-          <ColumnDiv>
-            <Subtitle>Proximamente</Subtitle>
-            <EmptyMetric>
-              <DonutSmallIcon />
-              <EmptyTitle> No hay eventos para este gráfico </EmptyTitle>
-            </EmptyMetric>
+            <Subtitle>Eventos y usuarios denunciados a lo largo del tiempo</Subtitle>
+            <LineChart
+              width={window.innerWidth / 3.2}
+              height={380}
+              data={graphicsTwoLines}
+              margin={{
+                right: 30,
+                left: 20,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='name' height={50} tick={<CustomizedAxisTick />} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='eventos' stroke='#8884d8'>
+                <LabelList content={<CustomizedLabel />} />
+              </Line>
+              <Line type='monotone' dataKey='usuarios' stroke='#86FEAE'>
+                <LabelList content={<CustomizedLabel />} />
+              </Line>
+            </LineChart>
           </ColumnDiv>
         )}
       </GraphicsContainer>
