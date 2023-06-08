@@ -47,6 +47,9 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     endDate,
     setVisualizationType,
     visualizationType,
+    // esto deberia borrarse ya que va a estar incluído en lo otro.
+    graphicsBlockedOrganizersByReports,
+    graphicsTwoLines,
   } = props;
 
   // TODO delete when implements filters
@@ -263,78 +266,86 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
+            <RowDiv>
+              <Subtitle>Organizadores bloqueados en base a denuncias</Subtitle>
+              <ReactTooltip id='my-tooltip' />
+              <a
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='La fecha fin corresponde a la fecha actual'
               >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+                <InfoOutlinedIcon />
+              </a>
+            </RowDiv>
+            <BarChart
+              width={window.innerWidth / 3.2}
+              height={380}
+              data={graphicsBlockedOrganizersByReports}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+              barSize={20}
+            >
+              <XAxis
+                dataKey='name'
+                scale='point'
+                padding={{ left: 10, right: 10 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <CartesianGrid strokeDasharray='3 3' />
+              <Bar
+                dataKey='value'
+                fill='#8884d8'
+                background={{ fill: '#eee' }}
+              />
+            </BarChart>
+          </ColumnDiv>
+        )}
+        {!graphicsFullInterval?.top10 ? (
+          <EmptyContainer />
+        ) : (
+          <ColumnDiv>
+            <Subtitle>Top 10 organizadores con mas acreditados a lo largo del tiempo</Subtitle>
+            <BarChart width={window.innerWidth / 3.2 } height={340} data={graphicsFullInterval.top10} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" width={150} tickMargin={5} mirror={false}/>
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="cantidad" fill="#8884d8" />
+            </BarChart>
           </ColumnDiv>
         )}
         {!graphicsWithoutFinishDate?.pie ? (
           <EmptyContainer />
         ) : (
           <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ColumnDiv>
-        )}
-        {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
-        ) : (
-          <ColumnDiv>
-            <Subtitle>CAMBIAR GRAFICO</Subtitle>
-            <PieChart width={window.innerWidth / 3.1} height={380}>
-              <Pie
-                data={graphicsWithoutFinishDate.pie}
-                cx={window.innerWidth / 6.4}
-                cy={200}
-                fill='#8884d8'
-                paddingAngle={1}
-                dataKey='value'
-                label={renderCustomizedLabel}
-              >
-                <XAxis dataKey='name' />
-                {graphicsWithoutFinishDate.pie.map((entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={donutColors[index % donutColors.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <Subtitle>Eventos y usuarios denunciados a lo largo del tiempo</Subtitle>
+            <LineChart
+              width={window.innerWidth / 3.2}
+              height={380}
+              data={graphicsTwoLines}
+              margin={{
+                right: 30,
+                left: 20,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='name' height={50} tick={<CustomizedAxisTick />} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='eventos' stroke='#8884d8'>
+                <LabelList content={<CustomizedLabel />} />
+              </Line>
+              <Line type='monotone' dataKey='usuarios' stroke='#86FEAE'>
+                <LabelList content={<CustomizedLabel />} />
+              </Line>
+            </LineChart>
           </ColumnDiv>
         )}
       </GraphicsContainer>
