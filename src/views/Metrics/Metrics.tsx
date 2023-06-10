@@ -16,7 +16,6 @@ import {
   LabelList,
 } from 'recharts';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { EmptyContainer } from '../EmptyPage/styles';
 import { IMetricsProps } from './types';
 import {
   ColumnDiv,
@@ -50,9 +49,6 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
     endDate,
     setVisualizationType,
     visualizationType,
-    // esto deberia borrarse ya que va a estar incluído en lo otro.
-    graphicsBlockedOrganizersByReports,
-    graphicsTwoLines,
   } = props;
   const filteredGraphicsWithoutFinishDate = graphicsWithoutFinishDate?.pie.filter((obj: any) => obj.value !== 0);
 
@@ -118,6 +114,11 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
   );
 
   const isEmpty = (data: any, key: string) => data?.every((object: any) => object[key] === 0);
+
+  const blockedOrganizerData: any[] = graphicsWithoutFinishDate?.blockedOrganizers.map((e: { name: any; value: any; }) => {
+    const { name, value } = e;
+    return { name, cantidad: value };
+  });
 
   return (
     <>
@@ -298,8 +299,20 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </LineChart>
           </ColumnDiv>
         )}
-        {!graphicsWithoutFinishDate?.pie ? (
-          <EmptyContainer />
+        {!graphicsWithoutFinishDate?.blockedOrganizers.length ? (
+           <ColumnDiv>
+             <Subtitle style={{ marginRight: 10 }}>
+              Organizadores bloqueados en base a denuncias
+             </Subtitle>
+             <EmptyMetric>
+               <BarChartIcon />
+               <EmptyTitle>
+                 {' '}
+                 Aún no hay organizadores bloqueados para estas fechas
+                 {' '}
+               </EmptyTitle>
+             </EmptyMetric>
+          </ColumnDiv>
         ) : (
           <ColumnDiv>
             <RowDiv>
@@ -315,7 +328,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             <BarChart
               width={window.innerWidth / 3.2}
               height={380}
-              data={graphicsBlockedOrganizersByReports}
+              data={blockedOrganizerData}
               margin={{
                 top: 5,
                 right: 30,
@@ -334,14 +347,14 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               <Legend />
               <CartesianGrid strokeDasharray='3 3' />
               <Bar
-                dataKey='value'
+                dataKey='cantidad'
                 fill='#8884d8'
                 background={{ fill: '#eee' }}
               />
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsFullInterval?.top10 ? (
+        {!graphicsFullInterval?.top10.length ? (
           <ColumnDiv>
           <Subtitle style={{ marginRight: 10 }}>
           Top 10 organizadores con mas acreditados a lo largo del tiempo
@@ -380,7 +393,8 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </BarChart>
           </ColumnDiv>
         )}
-        {!graphicsWithoutFinishDate?.pie ? (
+        {(isEmpty(graphicsFullInterval?.twoLines, 'eventos')
+        && isEmpty(graphicsFullInterval?.twoLines, 'usuarios')) ? (
           <ColumnDiv>
           <Subtitle style={{ marginRight: 10 }}>
           Eventos y usuarios denunciados a lo largo del tiempo
@@ -393,7 +407,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             </EmptyTitle>
           </EmptyMetric>
         </ColumnDiv>
-        ) : (
+          ) : (
           <ColumnDiv>
             <Subtitle>
               Eventos y usuarios denunciados a lo largo del tiempo
@@ -401,7 +415,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             <LineChart
               width={window.innerWidth / 3.2}
               height={380}
-              data={graphicsTwoLines}
+              data={graphicsFullInterval?.twoLines}
               margin={{
                 right: 30,
                 left: 20,
@@ -420,7 +434,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               </Line>
             </LineChart>
           </ColumnDiv>
-        )}
+          )}
       </GraphicsContainer>
     </>
   );
