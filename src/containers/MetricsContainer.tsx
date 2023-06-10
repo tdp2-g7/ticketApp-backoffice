@@ -68,8 +68,6 @@ const MetricsContainer: FunctionComponent = () => {
     }
   }, [dispatch, startDate, endDate]);
 
-  console.log(graphicsFullInterval);
-
   return (
     <>
       <Layout>

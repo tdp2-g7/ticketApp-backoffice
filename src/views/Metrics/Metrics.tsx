@@ -115,6 +115,11 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
 
   const isEmpty = (data: any, key: string) => data?.every((object: any) => object[key] === 0);
 
+  const blockedOrganizerData: any[] = graphicsWithoutFinishDate?.blockedOrganizers.map((e: { name: any; value: any; }) => {
+    const { name, value } = e;
+    return { name, cantidad: value };
+  });
+
   return (
     <>
       <RowDiv style={{ marginTop: 18, marginBottom: 18 }}>
@@ -323,7 +328,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
             <BarChart
               width={window.innerWidth / 3.2}
               height={380}
-              data={graphicsWithoutFinishDate?.blockedOrganizers}
+              data={blockedOrganizerData}
               margin={{
                 top: 5,
                 right: 30,
@@ -333,7 +338,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               barSize={20}
             >
               <XAxis
-                dataKey='organizerId'
+                dataKey='name'
                 scale='point'
                 padding={{ left: 10, right: 10 }}
               />
@@ -342,7 +347,7 @@ const MetricsView: FC<IMetricsProps> = (props: IMetricsProps) => {
               <Legend />
               <CartesianGrid strokeDasharray='3 3' />
               <Bar
-                dataKey='reportsCount'
+                dataKey='cantidad'
                 fill='#8884d8'
                 background={{ fill: '#eee' }}
               />
