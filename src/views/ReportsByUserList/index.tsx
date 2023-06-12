@@ -26,12 +26,12 @@ const ReportsByUserList: FC<IReportsByUserListProps> = (props: IReportsByUserLis
       field: 'eventName', headerName: 'Nombre del evento', width: 400,
     },
     {
-      field: 'date', headerName: 'Fecha', width: 130,
+      field: 'date', headerName: 'Fecha', width: 150,
     },
     {
       field: 'actions',
       headerName: 'Descripcion',
-      width: 250,
+      width: 500,
       renderCell: (params: any) => (
         <ViewDescriptionButton onClick={() => { 
           setShowDescription(true);

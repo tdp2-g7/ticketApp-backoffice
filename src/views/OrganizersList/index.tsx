@@ -27,27 +27,22 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'userId',
       headerName: 'ID',
-      width: 100,
+      width: 250,
     },
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 190,
-    },
-    {
-      field: 'lastName',
-      headerName: 'Apellido',
-      width: 190,
+      width: 250,
     },
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 250,
+      width: 400,
     },
     {
       field: 'stateText',
       headerName: 'Estado',
-      width: 100,
+      width: 200,
     },
     {
       field: 'block',

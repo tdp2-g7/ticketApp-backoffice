@@ -12,16 +12,16 @@ const UsersList: FC<IUsersListProps> = (props: IUsersListProps) => {
 
   const columns = [
     {
-      field: 'userId', headerName: 'ID', width: 100,
+      field: 'userId', headerName: 'ID', width: 250,
     },
     {
-      field: 'name', headerName: 'Nombre', width: 190,
+      field: 'name', headerName: 'Nombre', width: 250,
     },
     {
-      field: 'lastName', headerName: 'Apellido', width: 190,
+      field: 'lastName', headerName: 'Apellido', width: 250,
     },
     {
-      field: 'email', headerName: 'Correo electronico', width: 275,
+      field: 'email', headerName: 'Correo electronico', width: 400,
     },
     {
       field: 'reports_nr', headerName: 'Cantidad denuncias', width: 175,

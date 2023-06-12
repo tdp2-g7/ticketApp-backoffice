@@ -25,26 +25,26 @@ const EventList: FC<IEventListProps> = (props: IEventListProps) => {
     {
       field: 'eventId',
       headerName: 'ID',
-      width: 100,
+      width: 200,
     },
     {
-      field: 'title', headerName: 'Titulo', width: 270,
+      field: 'title', headerName: 'Titulo', width: 400,
     },
     {
       field: 'date',
       headerName: 'Fecha',
-      width: 100,
+      width: 200,
     },
     {
       field: 'startTime',
       headerName: 'Hora de inicio',
-      width: 130,
+      width: 200,
     },
     {
       field: 'reports_nr', headerName: 'Cantidad de denuncias', width: 200,
     },
     {
-      field: 'state', headerName: 'Estado', width: 100,
+      field: 'state', headerName: 'Estado', width: 200,
     },
     {
       field: 'actions',
