@@ -21,7 +21,7 @@ const ReportsContainer: FunctionComponent = () => {
 
   useEffect(() => {
     const data = {
-      offset: 20,
+      offset: 1000,
       page: 1,
     };
     dispatch(onGetAllEventReports(data));
@@ -33,7 +33,7 @@ const ReportsContainer: FunctionComponent = () => {
       setEventTitleColor(COLORS.gray);
       setShowOrganizerTable(true);
       const data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
       };
       dispatch(onGetAllOrganizerReports(data));
@@ -42,7 +42,7 @@ const ReportsContainer: FunctionComponent = () => {
       setEventTitleColor(COLORS.darkViolet);
       setShowOrganizerTable(false);
       const data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
       };
       dispatch(onGetAllEventReports(data));
@@ -52,7 +52,7 @@ const ReportsContainer: FunctionComponent = () => {
   const handleFilters = (organizer: boolean) => {
     if (organizer) {
       const data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
         name,
         to_date: toDate?.toISOString(),
@@ -61,7 +61,7 @@ const ReportsContainer: FunctionComponent = () => {
       dispatch(onGetAllOrganizerReports(data));
     } else {
       const data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
         title: name,
         to_date: toDate?.toISOString(),

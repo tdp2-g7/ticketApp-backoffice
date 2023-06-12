@@ -27,14 +27,14 @@ const EventListContainer: FunctionComponent = () => {
     let data;
     if (organizerId) {
       data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
         organizerId,
       };
       dispatch(onGetEventsFilteredBy(data));
     } else {
       data = {
-        offset: 20,
+        offset: 1000,
         page: 1,
       };
       dispatch(onGetEventsFilteredBy(data));
