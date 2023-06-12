@@ -56,3 +56,60 @@ export const onGetReportsByIdFailed = (error: unknown): AnyAction => ({
   type: constants.ON_GET_EVENT_REPORTS_BY_ID_FAILED,
   error,
 });
+
+export function onGetMetricsWithoutFinishDateRequested(
+  startDate: Date,
+): AnyAction {
+  return {
+    type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_REQUESTED,
+    startDate,
+  };
+}
+
+export const onGetMetricsWithoutFinishDateSucceeded = (
+  data: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_SUCCEEDED,
+  data,
+});
+
+export const onGetMetricsWithoutFinishDateFailed = (
+  error: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_WITHOUT_FINISH_DATE_FAILED,
+  error,
+});
+
+export function onGetMetricsAccreditedClientsRequested(data: any): AnyAction {
+  return { type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_REQUESTED, data };
+}
+
+export const onGetMetricsAccreditedClientsSucceeded = (
+  data: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_SUCCEEDED,
+  data,
+});
+
+export const onGetMetricsAccreditedClientsFailed = (
+  error: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_ACCREDITED_CLIENTS_FAILED,
+  error,
+});
+
+export function onGetMetricsFullIntervalRequested(data: any): AnyAction {
+  return { type: constants.ON_GET_METRICS_FULL_INTERVAL_REQUESTED, data };
+}
+
+export const onGetMetricsFullIntervalSucceeded = (
+  data: unknown,
+): AnyAction => ({
+  type: constants.ON_GET_METRICS_FULL_INTERVAL_SUCCEEDED,
+  data,
+});
+
+export const onGetMetricsFullIntervalFailed = (error: unknown): AnyAction => ({
+  type: constants.ON_GET_METRICS_FULL_INTERVAL_FAILED,
+  error,
+});

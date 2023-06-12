@@ -26,12 +26,31 @@ export async function getEventsFilteredBy(data: any): Promise<AxiosResponse> {
   return response;
 }
 
-export async function changeBlockEvent(eventId: string): Promise<AxiosResponse> {
+export async function changeBlockEvent(
+  eventId: string,
+): Promise<AxiosResponse> {
   const response = await patch(`${EVENTS_API_URL}/events/block/${eventId}`);
   return response;
 }
 
 export async function getAllReports(eventId: string): Promise<AxiosResponse> {
-  const response = await get(`${EVENTS_API_URL}/event-report/event/${eventId}/users`);
+  const response = await get(
+    `${EVENTS_API_URL}/event-report/event/${eventId}/users`,
+  );
   return response.data;
+}
+
+export async function getMetricsWithoutFinishDate(startDate: Date): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/events/events-metrics-by-initial-date?initialDate=${startDate}`);
+  return response;
+}
+
+export async function getMetricsAccreditedClients(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-reservations/accredited-clients-metrics?startDate=${data.startDate}&endDate=${data.endDate}&visualizationType=${data.visualizationType}`);
+  return response;
+}
+
+export async function getMetricsFullInterval(data: any): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/metrics/time-interval-metrics?startDate=${data.startDate}&endDate=${data.endDate}`);
+  return response;
 }

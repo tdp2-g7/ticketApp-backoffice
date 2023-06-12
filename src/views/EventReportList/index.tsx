@@ -50,27 +50,27 @@ const EventReportList: FC<IEventReportListProps> = (
     {
       field: 'id',
       headerName: 'id',
-      width: 50,
+      width: 250,
     },
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 100,
+      width: 250,
     },
     {
       field: 'lastName',
       headerName: 'Apellido',
-      width: 100,
+      width: 250,
     },
     {
       field: 'reporterName',
       headerName: 'Denunciante',
-      width: 150,
+      width: 250,
     },
     {
       field: 'date',
       headerName: 'Fecha de denuncia',
-      width: 150,
+      width: 250,
     },
     {
       field: 'description',
@@ -83,22 +83,22 @@ const EventReportList: FC<IEventReportListProps> = (
     {
       field: 'id',
       headerName: 'id',
-      width: 50,
+      width: 250,
     },
     {
       field: 'title',
       headerName: 'Evento',
-      width: 250,
+      width: 300,
     },
     {
       field: 'reporterName',
       headerName: 'Denunciante',
-      width: 150,
+      width: 250,
     },
     {
       field: 'date',
       headerName: 'Fecha de denuncia',
-      width: 250,
+      width: 300,
     },
     {
       field: 'description',

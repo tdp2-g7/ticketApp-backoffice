@@ -18,8 +18,8 @@ const OrganizersList: FC<IOrganizersListProps> = (
     name: organizer.name,
     lastName: organizer.lastName,
     email: organizer.email,
-    isBlocked: organizer.isBlocked,
-    stateText: organizer.isBlocked ? 'Bloqueado' : 'Activo',
+    blockedDate: organizer.blockedDate,
+    stateText: organizer.blockedDate ? 'Bloqueado' : 'Activo',
     state: organizer.state,
   }));
 
@@ -27,27 +27,22 @@ const OrganizersList: FC<IOrganizersListProps> = (
     {
       field: 'userId',
       headerName: 'ID',
-      width: 100,
+      width: 250,
     },
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 190,
-    },
-    {
-      field: 'lastName',
-      headerName: 'Apellido',
-      width: 190,
+      width: 250,
     },
     {
       field: 'email',
       headerName: 'Correo electronico',
-      width: 250,
+      width: 400,
     },
     {
       field: 'stateText',
       headerName: 'Estado',
-      width: 100,
+      width: 200,
     },
     {
       field: 'block',
@@ -66,7 +61,7 @@ const OrganizersList: FC<IOrganizersListProps> = (
           </BlockButton>
 
           <BlockButton onClick={() => onChangeBlock(params.row.userId)}>
-            {params.row.isBlocked ? 'Desbloquear' : 'Bloquear'}
+            {params.row.blockedDate ? 'Desbloquear' : 'Bloquear'}
           </BlockButton>
         </>
       ),
