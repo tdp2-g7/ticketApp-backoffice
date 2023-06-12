@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Layout from '../views/Layout';
+import Loading from '../components/Loading/Loading';
 import MetricsView from '../views/Metrics/Metrics';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
@@ -17,6 +18,7 @@ const MetricsContainer: FunctionComponent = () => {
     graphicsWithoutFinishDate,
     graphicsAccreditedClients,
     graphicsFullInterval,
+    loadingEvent,
   } = useTypedSelector(
     (state) => state.event,
   );
@@ -70,6 +72,12 @@ const MetricsContainer: FunctionComponent = () => {
 
   return (
     <>
+      { loadingEvent ? (
+        <Layout>
+          <Loading/>
+        </Layout>
+      ) : (
+    <>
       <Layout>
         {
           <MetricsView
@@ -85,6 +93,8 @@ const MetricsContainer: FunctionComponent = () => {
           />
         }
       </Layout>
+    </>
+      )}
     </>
   );
 };
